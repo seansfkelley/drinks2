@@ -19,6 +19,10 @@
 		78A9396F1847C52A00B6784B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939571847C52A00B6784B /* UIKit.framework */; };
 		78A939771847C52A00B6784B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 78A939751847C52A00B6784B /* InfoPlist.strings */; };
 		78A939791847C52A00B6784B /* drinksTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A939781847C52A00B6784B /* drinksTests.m */; };
+		78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78A9398A1847CB9C00B6784B /* Main.storyboard */; };
+		78A939911847D3F300B6784B /* IngredientsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A939901847D3F300B6784B /* IngredientsViewController.m */; };
+		78A939941847D45700B6784B /* RecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A939931847D45700B6784B /* RecipesViewController.m */; };
+		78A939971847D9E700B6784B /* IngredientItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A939961847D9E700B6784B /* IngredientItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,13 @@
 		78A939741847C52A00B6784B /* drinksTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "drinksTests-Info.plist"; sourceTree = "<group>"; };
 		78A939761847C52A00B6784B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		78A939781847C52A00B6784B /* drinksTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = drinksTests.m; sourceTree = "<group>"; };
+		78A9398A1847CB9C00B6784B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		78A9398F1847D3F300B6784B /* IngredientsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngredientsViewController.h; sourceTree = "<group>"; };
+		78A939901847D3F300B6784B /* IngredientsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngredientsViewController.m; sourceTree = "<group>"; };
+		78A939921847D45700B6784B /* RecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipesViewController.h; sourceTree = "<group>"; };
+		78A939931847D45700B6784B /* RecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipesViewController.m; sourceTree = "<group>"; };
+		78A939951847D9E700B6784B /* IngredientItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IngredientItem.h; sourceTree = "<group>"; };
+		78A939961847D9E700B6784B /* IngredientItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IngredientItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +88,13 @@
 		78A939471847C52A00B6784B = {
 			isa = PBXGroup;
 			children = (
+				78A9398F1847D3F300B6784B /* IngredientsViewController.h */,
+				78A939901847D3F300B6784B /* IngredientsViewController.m */,
+				78A9398A1847CB9C00B6784B /* Main.storyboard */,
+				78A939951847D9E700B6784B /* IngredientItem.h */,
+				78A939961847D9E700B6784B /* IngredientItem.m */,
+				78A939921847D45700B6784B /* RecipesViewController.h */,
+				78A939931847D45700B6784B /* RecipesViewController.m */,
 				78A939591847C52A00B6784B /* drinks */,
 				78A939721847C52A00B6784B /* drinksTests */,
 				78A939521847C52A00B6784B /* Frameworks */,
@@ -219,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
 				78A939661847C52A00B6784B /* Images.xcassets in Resources */,
 			);
@@ -239,7 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78A939941847D45700B6784B /* RecipesViewController.m in Sources */,
 				78A939641847C52A00B6784B /* AppDelegate.m in Sources */,
+				78A939911847D3F300B6784B /* IngredientsViewController.m in Sources */,
+				78A939971847D9E700B6784B /* IngredientItem.m in Sources */,
 				78A939601847C52A00B6784B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

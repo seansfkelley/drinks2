@@ -14,5 +14,6 @@
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
 + (NSArray *)loadRecipesFromFile:(NSString *)path;
++ (NSArray *)loadIngredientsFromFile:(NSString *)path;
 
 @end

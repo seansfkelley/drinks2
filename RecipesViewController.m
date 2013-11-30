@@ -53,30 +53,11 @@
 {
     [super viewDidLoad];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
+    NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
+    self.recipesList = [RecipeIndex loadRecipesFromFile:recipesPath];
     
-    [RecipeIndex loadRecipesFromFile:path];
-    
-    IngredientItem *grandMarnier = [[IngredientItem alloc] initWithDisplayName:@"Grand Marnier" withTag:@"grand marnier" withGenericTag:@"triple sec"];
-    
-    IngredientItem *tripleSec = [[IngredientItem alloc] initWithDisplayName:@"Triple Sec" withTag:@"triple sec"];
-    tripleSec.selected = YES;
-    
-    IngredientItem *tequila = [[IngredientItem alloc] initWithDisplayName:@"Tequila" withTag:@"tequila"];
-    tequila.selected = YES;
-    
-    IngredientItem *limeJuice = [[IngredientItem alloc] initWithDisplayName:@"Lime Juice" withTag:@"lime juice"];
-    limeJuice.selected = YES;
-    
-    RecipeItem *margarita = [[RecipeItem alloc] initWithName:@"Margarita" withMeasuredIngredients:@[
-        [[MeasuredIngredientItem alloc] initWithIngredientTag:@"triple sec" withDisplayString:@"1 oz triple sec"],
-        [[MeasuredIngredientItem alloc] initWithIngredientTag:@"tequila"    withDisplayString:@"1 oz tequila"],
-        [[MeasuredIngredientItem alloc] initWithIngredientTag:@"lime juice" withDisplayString:@"1 oz lime juice"]
-    ]];
-    
-    self.ingredientsList = [NSArray arrayWithObjects:grandMarnier, tripleSec, tequila, limeJuice, nil];
-    
-    self.recipesList = [NSArray arrayWithObject:margarita];
+    NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
+    self.ingredientsList = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
 
     self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList];
     

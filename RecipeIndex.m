@@ -45,14 +45,29 @@
     return missing;
 }
 
-+ (NSArray *)loadRecipesFromFile:(NSString *)path {
++ (id)loadJsonFromFile:(NSString *)path {
     NSError *error;
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
     
-    NSArray *list = [NSJSONSerialization
-                     JSONObjectWithData:data
-                     options:0
-                     error:&error];
+    id object = [NSJSONSerialization
+                 JSONObjectWithData:data
+                 options:0
+                 error:&error];
+    
+    if (error) {
+        NSLog(@"Error loading '%@': %@", path, error);
+        return nil;
+    } else {
+        return object;
+    }
+}
+
++ (NSArray *)loadRecipesFromFile:(NSString *)path {
+    NSArray *list = [RecipeIndex loadJsonFromFile:path];
+    if (!list) {
+        return nil;
+    }
+    
     NSMutableArray *parsedRecipes = [[NSMutableArray alloc] init];
     for (NSDictionary *jsonRecipe in list) {
         NSMutableArray *parsedIngredients = [[NSMutableArray alloc] init];
@@ -70,9 +85,38 @@
     return parsedRecipes;
 }
 
++ (NSArray *)loadIngredientsFromFile:(NSString *)path {
+    NSArray *list = [RecipeIndex loadJsonFromFile:path];
+    if (!list) {
+        return nil;
+    }
+    
+    NSMutableArray *parsedIngredients = [[NSMutableArray alloc] init];
+    for (NSDictionary *jsonIngredient in list) {
+        NSString *tag = [jsonIngredient objectForKey:@"tag"];
+        if (!tag) {
+            tag = [[jsonIngredient objectForKey:@"display"] lowercaseString];
+        }
+        IngredientItem *i = [[IngredientItem alloc]
+                             initWithDisplayName:[jsonIngredient objectForKey:@"display"]
+                             withTag:tag
+                             withGenericTag:[jsonIngredient objectForKey:@"generic"]]; // May be nil.
+        [parsedIngredients addObject:i];
+    }
+    return parsedIngredients;
+}
+
 - (NSArray *)resolveMeasuredIngredients:(RecipeItem *)recipe {
     NSMutableArray *resolved = [[NSMutableArray alloc] init];
     for (MeasuredIngredientItem *m in recipe.ingredients) {
+        if (!m.ingredientTag) {
+            continue; // Ignore display-only ingredients?
+        }
+        IngredientItem *i = [self.tagToIngredient objectForKey:m.ingredientTag];
+        if (!i) {
+            NSLog(@"Unknown ingredient tag '%@' in recipe '%@'.", m.ingredientTag, recipe.name);
+            return nil; // This recipe is invalid.
+        }
         [resolved addObject:[self.tagToIngredient objectForKey:m.ingredientTag]];
     }
     return resolved;
@@ -81,17 +125,23 @@
 - (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients {
     self = [super init];
     
-    self.recipes = [recipes copy];
-    
     self.tagToIngredient = [[NSMutableDictionary alloc] init];
     for (IngredientItem *i in ingredients) {
         [self.tagToIngredient setObject:i forKey:i.tag];
     }
     
+    NSMutableArray *validRecipes = [[NSMutableArray alloc] init];
     self.recipeNameToGenericTags = [[NSMutableDictionary alloc] init];
-    for (RecipeItem *r in self.recipes) {
-        [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:[self resolveMeasuredIngredients:r]] forKey:r.name];
+    for (RecipeItem *r in recipes) {
+        NSArray * ingredients = [self resolveMeasuredIngredients:r];
+        if (ingredients) {
+            [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:r.name];
+            [validRecipes addObject:r];
+        } else {
+            NSLog(@"Skipping invalid recipe '%@'", r.name);
+        }
     }
+    self.recipes = [[NSArray alloc] initWithArray:validRecipes];
     
     return self;
 }
@@ -104,7 +154,9 @@
     }
     for (RecipeItem *r in self.recipes) {
         int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
-        [[grouped objectAtIndex:missing] addObject:r];
+        if (missing < FUDGE_FACTOR) {
+            [[grouped objectAtIndex:missing] addObject:r];
+        }
     }
     return grouped;
 }

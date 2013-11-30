@@ -1,0 +1,151 @@
+ [
+  {
+    "display" : "Absinthe"
+  },
+  {
+    "display" : "Agave Nectar"
+  },
+  {
+    "display" : "Amaretto"
+  },
+  {
+    "display" : "Angostura Bitters",
+    "generic" : "bitters"
+  },
+  {
+    "display" : "Applejack"
+  },
+  {
+    "display" : "Benedictine"
+  },
+  {
+    "display" : "Bourbon",
+    "generic" : "whiskey"
+  },
+  {
+    "display" : "Cachaca"
+  },
+  {
+    "display" : "Chartreuse"
+  },
+  {
+    "display" : "Coffee Liqueur"
+  },
+  {
+    "display" : "Cola"
+  },
+  {
+    "display" : "Cynar"
+  },
+  {
+    "display" : "Dark Rum",
+    "generic" : "rum"
+  },
+  {
+    "display" : "Dry Gin",
+    "generic" : "gin"
+  },
+  {
+    "display" : "Dry Vermouth"
+  },
+  {
+    "display" : "Egg White"
+  },
+  {
+    "display" : "Elderflower Liqueur"
+  },
+  {
+    "display" : "Genever"
+  },
+  {
+    "display" : "Gin"
+  },
+  {
+    "display" : "Ginger Beer"
+  },
+  {
+    "display" : "Ginger Liqueur"
+  },
+  {
+    "display" : "Green Chartreuse",
+    "generic" : "chartreuse"
+  },
+  {
+    "display" : "Grenadine"
+  },
+  {
+    "display" : "Honey Syrup"
+  },
+  {
+    "display" : "Honey Whiskey",
+    "generic" : "whiskey"
+  },
+  {
+    "display" : "Irish Cream"
+  },
+  {
+    "display" : "Lemon Juice"
+  },
+  {
+    "display" : "Lillet"
+  },
+  {
+    "display" : "Lime"
+  },
+  {
+    "display" : "Lime Juice"
+  },
+  {
+    "display" : "Maraschino Liqueur"
+  },
+  {
+    "display" : "Mezcal",
+    "generic" : "tequila"
+  },
+  {
+    "display" : "Milk"
+  },
+  {
+    "display" : "Mint"
+  },
+  {
+    "display" : "Noisette"
+  },
+  {
+    "display" : "Rum"
+  },
+  {
+    "display" : "Simple Syrup"
+  },
+  {
+    "display" : "Sparkling Wine"
+  },
+  {
+    "display" : "Sugar"
+  },
+  {
+    "display" : "Sweet Vermouth"
+  },
+  {
+    "display" : "Tequila"
+  },
+  {
+    "display" : "Tonic"
+  },
+  {
+    "display" : "Triple Sec"
+  },
+  {
+    "display" : "Vodka"
+  },
+  {
+    "display" : "Whiskey"
+  },
+  {
+    "display" : "White Rum",
+    "generic" : "rum"
+  },
+  {
+    "display" : "White Vermouth"
+  }
+]

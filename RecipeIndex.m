@@ -62,25 +62,42 @@
     }
 }
 
-+ (NSArray *)loadRecipesFromFile:(NSString *)path {
++ (NSArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients {
     NSArray *list = [RecipeIndex loadJsonFromFile:path];
     if (!list) {
         return nil;
     }
     
+    NSMutableDictionary *tagToIngredient = [[NSMutableDictionary alloc] init];
+    for (IngredientItem *i in ingredients) {
+        [tagToIngredient setObject:i forKey:i.tag];
+    }
+    
     NSMutableArray *parsedRecipes = [[NSMutableArray alloc] init];
     for (NSDictionary *jsonRecipe in list) {
+        
         NSMutableArray *parsedIngredients = [[NSMutableArray alloc] init];
+        BOOL fail = NO;
         for (NSDictionary *jsonIngredient in [jsonRecipe objectForKey:@"ingredients"]) {
-            MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc]
-                                         initWithIngredientTag:[jsonIngredient objectForKey:@"tag"]
-                                         withDisplayString:[jsonIngredient objectForKey:@"display"]];
-            [parsedIngredients addObject:m];
+            NSString *tag = [jsonIngredient objectForKey:@"tag"];
+            // nil is a valid tag (for display-only ingredients), but not missing references.
+            if (tag && ![tagToIngredient objectForKey:tag]) {
+                NSLog(@"Unknown ingredient tag '%@' for recipe '%@', skipping recipe.", tag, [jsonRecipe objectForKey:@"name"]);
+                fail = YES;
+                break;
+            } else {
+                MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc]
+                                             initWithIngredient:[tagToIngredient objectForKey:tag]
+                                             withDisplayString:[jsonIngredient objectForKey:@"display"]];
+                [parsedIngredients addObject:m];
+            }
         }
-        RecipeItem *r = [[RecipeItem alloc]
-                         initWithName:[jsonRecipe objectForKey:@"name"]
-                         withMeasuredIngredients:parsedIngredients];
-        [parsedRecipes addObject:r];
+        if (!fail) {
+            RecipeItem *r = [[RecipeItem alloc]
+                             initWithName:[jsonRecipe objectForKey:@"name"]
+                             withMeasuredIngredients:parsedIngredients];
+            [parsedRecipes addObject:r];
+        }
     }
     return parsedRecipes;
 }
@@ -106,22 +123,6 @@
     return parsedIngredients;
 }
 
-- (NSArray *)resolveMeasuredIngredients:(RecipeItem *)recipe {
-    NSMutableArray *resolved = [[NSMutableArray alloc] init];
-    for (MeasuredIngredientItem *m in recipe.ingredients) {
-        if (!m.ingredientTag) {
-            continue; // Ignore display-only ingredients?
-        }
-        IngredientItem *i = [self.tagToIngredient objectForKey:m.ingredientTag];
-        if (!i) {
-            NSLog(@"Unknown ingredient tag '%@' in recipe '%@'.", m.ingredientTag, recipe.name);
-            return nil; // This recipe is invalid.
-        }
-        [resolved addObject:[self.tagToIngredient objectForKey:m.ingredientTag]];
-    }
-    return resolved;
-}
-
 - (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients withFudgeFactor:(int)f {
     self = [super init];
     
@@ -132,18 +133,17 @@
         [self.tagToIngredient setObject:i forKey:i.tag];
     }
     
-    NSMutableArray *validRecipes = [[NSMutableArray alloc] init];
     self.recipeNameToGenericTags = [[NSMutableDictionary alloc] init];
     for (RecipeItem *r in recipes) {
-        NSArray * ingredients = [self resolveMeasuredIngredients:r];
-        if (ingredients) {
-            [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:r.name];
-            [validRecipes addObject:r];
-        } else {
-            NSLog(@"Skipping invalid recipe '%@'", r.name);
+        NSMutableArray *ingredients = [[NSMutableArray alloc] init];
+        for (MeasuredIngredientItem *m in r.measuredIngredients) {
+            if (m.ingredient) {
+                [ingredients addObject:m.ingredient];
+            }
         }
+        [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:r.name];
     }
-    self.recipes = [[NSArray alloc] initWithArray:validRecipes];
+    self.recipes = [recipes copy];
     
     return self;
 }

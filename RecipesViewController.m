@@ -57,11 +57,11 @@
 {
     [super viewDidLoad];
     
-    NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
-    self.recipesList = [RecipeIndex loadRecipesFromFile:recipesPath];
-    
     NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
     self.ingredientsList = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
+    
+    NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
+    self.recipesList = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:self.ingredientsList];
     
     // For testing.
     for (int i = 0; i < [self.ingredientsList count]; ++i) {

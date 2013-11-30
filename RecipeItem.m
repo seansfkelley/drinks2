@@ -11,7 +11,7 @@
 @interface RecipeItem ()
 
 @property (readwrite) NSString *name;
-@property (readwrite) NSArray *ingredients;
+@property (readwrite) NSArray *measuredIngredients;
 
 @end
 
@@ -20,7 +20,7 @@
 - (id)initWithName:(NSString *)name withMeasuredIngredients:(NSArray *)ingredients {
     self = [super init];
     self.name = [name copy];
-    self.ingredients = [ingredients copy];
+    self.measuredIngredients = [ingredients copy];
     return self;
 }
 

@@ -13,6 +13,6 @@
 - (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)ingredients;
 
 @property (readonly) NSString *name;
-@property (readonly) NSArray *ingredients; // MeasuredIngredientItems - how to enforce this?
+@property (readonly) NSArray *measuredIngredients;
 
 @end

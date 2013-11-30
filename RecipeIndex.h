@@ -15,7 +15,7 @@
 - (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients withFudgeFactor:(int)f;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
-+ (NSArray *)loadRecipesFromFile:(NSString *)path;
++ (NSArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients;
 + (NSArray *)loadIngredientsFromFile:(NSString *)path;
 
 @end

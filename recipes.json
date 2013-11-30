@@ -1,0 +1,398 @@
+[
+  {
+    "name": "Caipirinha",
+    "ingredients": [
+      { "tag": "cachaca", "display": "{q2}{uoz} cachaça" },
+      { "tag": "lime", "display": "{q1} {ulime}, cut into eighths" },
+      { "tag": "sugar", "display": "{q1} {utsp} sugar" }
+    ],
+    "instructions": "Muddle lime and sugar in a {glowball glass} until the lime is juiced. Fill to brim with crushed ice and add cachaça. Garnish with sugar cane.",
+    "notes": "Proper Brazilian Caipirinhas are unmeasured. The glass is simply filled with cachaça after the ice is added."
+  },
+  {
+    "name": "Gin and Tonic",
+    "ingredients": [
+      { "tag": "gin", "display": "{q1.5}{uoz} gin" },
+      { "tag": "tonic", "display": "{q3}{uoz} tonic water" }
+    ],
+    "instructions": "Mix ingredients {ghighball glass} filled with ice. Garnish with a wedge of lime."
+  },
+  {
+    "name": "The Last Word",
+    "ingredients": [
+      { "tag": "gin", "display": "{q3/4}{uoz} gin" },
+      { "tag": "green chartreuse", "display": "{q3/4}{uoz} green Chartreuse" },
+      { "tag": "maraschino liqueur", "display": "{q3/4}{uoz} maraschino liqueur" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" }
+    ],
+    "instructions": "Shake vigorously with ice. Strain into a {gcocktail glass} and garnish with a twist of lime.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/The-Last-Word-Cocktail"
+  },
+  {
+    "name": "Ivy",
+    "ingredients": [
+      { "tag": "dry gin", "display": "{q1.5}{uoz} dry gin" },
+      { "tag": "dry vermouth", "display": "{q0.5}{uoz} dry vermouth" },
+      { "tag": "green chartreuse", "display": "{q0.5}{uoz} green Chartreuse" },
+      { "tag": "absinthe", "display": "{q1}{utsp} absinthe" },
+      { "display": "{q1-2} {udashes} orange bitters" }
+    ],
+    "instructions": "Shake with ice for a long time. Strain into a chilled {gcocktail glass}.",
+    "source": "clover-club"
+  },
+  {
+    "name": "Rum & Coke",
+    "ingredients": [
+      { "tag": "white rum", "display": "{q2}{uoz} white rum" },
+      { "tag": "cola", "display": "{q4}{uoz} cola" }
+    ],
+    "instructions": "Build ingredients in a {glowball glass} filled with ice."
+  },
+  {
+    "name": "Dark & Stormy",
+    "ingredients": [
+      { "tag": "dark rum", "display": "{q1.5}{uoz} dark rum" },
+      { "tag": "ginger beer", "display": "{q3}{uoz} ginger beer" }
+    ],
+    "instructions": "Pour ginger beer into a {ghighball glass} filled with ice. Top off with rum."
+  },
+  {
+    "name": "Long Island Iced Tea",
+    "ingredients": [
+      { "tag": "vodka", "display": "{q1} {upart} vodka" },
+      { "tag": "tequila", "display": "{q1} {upart} tequila" },
+      { "tag": "gin", "display": "{q1} {upart} gin" },
+      { "tag": "white rum", "display": "{q1} {upart} white rum" },
+      { "tag": "triple sec", "display": "{q1} {upart} triple sec" },
+      { "tag": "lemon juice", "display": "{q2} {uparts} lemon juice" },
+      { "tag": "simple syrup", "display": "{q1} {upart} simple syrup" },
+      { "tag": "cola", "display": "splash of cola" }
+    ],
+    "instructions": "Mix ingredients in a {ghighball glass} over ice."
+  },
+  {
+    "name": "Chateau Romani",
+    "ingredients": [
+      { "tag": "honey whiskey", "display": "{q1} {upart} honey whiskey" },
+      { "tag": "amaretto", "display": "{q1} {upart} amaretto" },
+      { "tag": "noisette", "display": "{q1} {upart} Frangelico" },
+      { "tag": "milk", "display": "milk" }
+    ],
+    "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",
+    "source": "drunken-moogle",
+    "url": "http://www.thedrunkenmoogle.com/post/28337609182/expbaronline-chateau-romani-the-legend-of-zelda"
+  },
+  {
+    "name": "Brinstar",
+    "ingredients": [
+      { "tag": "cachaca", "display": "{q1} {upart} cachaça" },
+      { "tag": "absinthe", "display": "{q1} {upart} absinthe" },
+      { "tag": "simple syrup", "display": "{q1} {upart} simple syrup" },
+      { "tag": "lime", "display": "{q1/2} {ulime}, cut into quarters" },
+      { "display": "sprig of mint" }
+    ],
+    "instructions": "Muddle the lime, simple syrup, and mint together in a shaker. Add ice and the alcohol and shake well. Pour the mixture into a {glowball glass}.",
+    "notes": "Brinstar is a zone overgrown with vegetation. Having very recently been introduced to a lime-y cocktail known as a caipirinha, I decided to try combining it with another leafy drink - namely, a mojito. The resulting combination, plus a little extra, wound up being a tasty creation that I’m rather proud of.",
+    "source": "drunken-moogle",
+    "url": "http://www.thedrunkenmoogle.com/post/36070643600/drinks-brinstar"
+  },
+  {
+    "name": "Vesper Martini",
+    "ingredients": [
+      { "tag": "gin", "display": "{q3} {uparts} gin" },
+      { "tag": "vodka", "display": "{q1} {upart} vodka" },
+      { "tag": "lillet", "display": "{q1/2} {upart} Lillet" },
+      { "display": "thin slice of lemon peel" }
+    ],
+    "instructions": "Shake over ice until well chilled, then strain into a deep {ggoblet} and garnish with lemon peel.",
+    "notes": "This is what James Bond used to drink before he switched to vodka martinis."
+  },
+  {
+    "name": "Corpse Reviver #2",
+    "ingredients": [
+      { "tag": "gin", "display": "{q3/4}{uoz} gin" },
+      { "tag": "lemon juice", "display": "{q3/4}{uoz} lemon juice" },
+      { "tag": "triple sec", "display": "{q3/4}{uoz} Cointreau" },
+      { "tag": "lillet", "display": "{q3/4}{uoz} Lillet" },
+      { "tag": "absinthe", "display": "dash of absinthe" }
+    ],
+    "instructions": "Shake ingredients together in a mixer with ice. Strain into chilled {gcocktail glass}."
+  },
+  {
+    "name": "Improved Whiskey Cocktail",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q2}{uoz} bourbon" },
+      { "tag": "simple syrup", "display": "{q1}{utsp} simple syrup" },
+      { "tag": "maraschino liqueur", "display": "{q1/2}{utsp} maraschino liqueur" },
+      { "display": "{q2} {udashes} Angostura bitters" },
+      { "tag": "absinthe", "display": "{q1} {udash} absinthe" }
+    ],
+    "instructions": "Combine liquid ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled {gcocktail glass}. Cut a thin slice of lemon zest over the surface of the drink and drop it into the glass.",
+    "source": "cocktalia",
+    "url": "http://www.cocktailia.com/cocktail-recipes/improved-whiskey-cocktail"
+  },
+  {
+    "name": "Mudslide",
+    "ingredients": [
+      { "tag": "irish cream", "display": "{q1} {upart} Baileys" },
+      { "tag": "coffee liqueur", "display": "{q1} {upart} Kahlua" },
+      { "tag": "vodka", "display": "{q1} {upart} vodka" },
+      { "tag": "milk", "display": "{q1} {upart} milk" }
+    ],
+    "instructions": "Shake all ingredients with ice and pour over ice in a {gcocktail glass}. Garnish with a little chocolate syrup on the inside of the glass."
+  },
+  {
+    "name": "Lumière",
+    "ingredients": [
+      { "tag": "gin", "display": "{q1.5}{uoz} gin" },
+      { "tag": "elderflower liqueur", "display": "{q1}{uoz} St. Germain" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} fresh lime juice" },
+      { "tag": "green chartreuse", "display": "{q3/4}{uoz} green Chartreuse" },
+      { "display": "{udash} of orange bitters" }
+    ],
+    "instructions": "Combine all ingredients in a large glass filled with ice. Stir thoroughly and strain the mixture into a {gcoupe}. Garnish with a lime twist.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/The-Lumiere"
+  },
+  {
+    "name": "Margarita",
+    "ingredients": [
+      { "tag": "tequila", "display": "{q1} {upart} blanco tequila" },
+      { "tag": "triple sec", "display": "{q1} {upart} triple sec" },
+      { "tag": "lime juice", "display": "{q1} {upart} lime juice" },
+      { "tag": "simple syrup", "display": "{q1/2} {upart} simple syrup" },
+      { "display": "salt" }
+    ],
+    "instructions": "Rim a {gmargarita glass} with salt. Shake all ingredients with ice and strain into the glass. Garnish with a wheel of lime."
+  },
+  {
+    "name": "Bee's Knees",
+    "ingredients": [
+      { "tag": "gin", "display": "{q1.5}{uoz} gin" },
+      { "tag": "lemon juice", "display": "{q0.5}{uoz} lemon juice" },
+      { "tag": "honey syrup", "display": "{q0.75}{uoz} honey syrup" }
+    ],
+    "instructions": "Shake ingredients well with ice. Strain into a chilled {gcocktail glass} and garnish with a wedge of lemon."
+  },
+  {
+    "name": "Death in the Afternoon",
+    "ingredients": [
+      { "tag": "absinthe", "display": "{q1} {ushot} absinthe" },
+      { "tag": "sparkling wine", "display": "Champagne" }
+    ],
+    "instructions": "Pour one jigger absinthe into a Champagne glass. Add iced Champagne until it attains the proper opalescent milkiness. Drink three to five of these slowly."
+  },
+  {
+    "name": "Angostura Sour",
+    "ingredients": [
+      { "tag": "egg white", "display": "{q1} egg white" },
+      { "tag": "angostura bitters", "display": "{q1.5}{uoz} Angostura bitters" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" },
+      { "tag": "simple syrup", "display": "{q1}{uoz} simple syrup" }
+    ],
+    "instructions": "Pour the egg white and lime juice into a cocktail shaker and shake for 30 seconds. Add the bitters and syrup, fill with ice and shake hard for another 30 seconds. Strain into a chilled {gcocktail glass}.",
+    "source": "nytimes",
+    "url": "http://www.nytimes.com/2010/12/01/dining/01partiesrex3.html"
+  },
+  {
+    "name": "Manhattan",
+    "ingredients": [
+      { "tag": "whiskey", "display": "{q2 1/2}{uoz} whiskey" },
+      { "tag": "sweet vermouth", "display": "{q1}{uoz} sweet vermouth" },
+      { "display": "{q1} {udash} Angostura bitters" }
+    ],
+    "instructions": "Stir gently over ice. Strain into a chilled {gcocktail glass} and garnish with a Maraschino cherry."
+  },
+  {
+    "name": "Brooklyn",
+    "ingredients": [
+      { "tag": "whiskey", "display": "{q2}{uoz} whiskey" },
+      { "tag": "dry vermouth", "display": "{q1}{uoz} dry vermouth" },
+      { "tag": "maraschino liqueur", "display": "{q1/4}{uoz} Maraschino liqueur" },
+      { "display": "{q2-3} {udashes} Angostura bitters" }
+    ],
+    "instructions": "Stir gently over ice. Strain into a chilled {gcocktail glass}.",
+    "notes": "The bitters may be replaced with 1/4oz Amer Picon, a French version of Italy's Amaro."
+  },
+  {
+    "name": "White Lady",
+    "ingredients": [
+      { "tag": "dry gin", "display": "{q2}{uoz} London dry gin" },
+      { "tag": "triple sec", "display": "{q1/2}{uoz} Cointreau" },
+      { "tag": "lemon juice", "display": "{q1/2}{uoz} lemon juice" },
+      { "tag": "egg white", "display": "{q1} egg white" }
+    ],
+    "instructions": "Shake well with cracked ice, then strain into a chilled {gcocktail glass}."
+  },
+  {
+    "name": "B-52",
+    "ingredients": [
+      { "tag": "coffee liqueur", "display": "{q1} {upart} Kahlua" },
+      { "tag": "irish cream", "display": "{q1} {upart} Baileys" },
+      { "tag": "triple sec", "display": "{q1} {upart} Grand Marnier" }
+    ],
+    "instructions": "Layer ingredients into a shot glass (Kahlua, then Baileys, then Grand Marnier)."
+  },
+  {
+    "name": "La Palabra",
+    "ingredients": [
+      { "tag": "mezcal", "display": "{q1}{uoz} mezcal" },
+      { "tag": "green chartreuse", "display": "{q1 1/4}{uoz} green Chartreuse" },
+      { "tag": "triple sec", "display": "{q1}{uoz} Combier" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" }
+    ],
+    "instructions": "Shake ingredients with ice, then strain into a {gcocktail glass}.",
+    "notes": "A variant on the Last Word.",
+    "source": "serious-eats",
+    "url": "http://www.seriouseats.com/recipes/2011/07/la-palabra-no-9-park-cocktail-recipe.html"
+  },
+  {
+    "name": "Revolver",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q2}{uoz} Bourbon" },
+      { "tag": "coffee liqueur", "display": "{q1/2}{uoz} coffee liqueur" },
+      { "display": "{q2} {udashes} orange bitters" }
+    ],
+    "instructions": "Combine bourbon, coffee liqueur, and orange bitters in a mixing glass and fill with ice. Stir well until chilled, about 30 seconds. Strain into chilled {gcocktail glass}. Twist orange peel to express oils over drink and use as garnish.",
+    "notes": "A rye-heavy bourbon such as Bulleit, Buffalo Trace or Basil Hayden is recommended.",
+    "source": "serious-eats",
+    "url": "http://www.seriouseats.com/recipes/2011/03/time-for-a-drink-the-revolver-bourbon-cocktail-tia-maria-kahlua-orange.html"
+  },
+  {
+    "name": "Geek Squad",
+    "ingredients": [
+      { "tag": "mezcal", "display": "{q4} {uparts} mezcal" },
+      { "tag": "green chartreuse", "display": "{q2} {uparts} green Chartreuse" },
+      { "tag": "lime juice", "display": "{q4} {upart} lime juice" },
+      { "tag": "simple syrup", "display": "{q1} {upart} simple syrup" },
+      { "tag": "cynar", "display": "{q?} {upart} Cynar" }
+    ],
+    "notes": "Work in progress.",
+    "instructions": "",
+    "source": "clover-club"
+  },
+  {
+    "name": "Chrysanthemum",
+    "ingredients": [
+      { "tag": "dry vermouth", "display": "{q2}{uoz} dry vermouth" },
+      { "tag": "benedictine", "display": "{q1}{uoz} Bénédictine" },
+      { "tag": "absinthe", "display": "{q3} {udashes} absinthe" }
+    ],
+    "instructions": "Stir ingredients with ice until well chilled, then strain into a chilled {gcocktail glass} and garnish with an orange peel."
+  },
+  {
+    "name": "El Presidente",
+    "ingredients": [
+      { "tag": "white rum", "display": "{q1 1/2}{uoz} white rum" },
+      { "tag": "white vermouth", "display": "{q1}{uoz} white vermouth" },
+      { "tag": "triple sec", "display": "{q1/2} {uoz} orange curaçao" },
+      { "tag": "grenadine", "display": "{q1} {ubarspoon} grenadine" },
+      { "display": "{q1} {udash} orange bitters" }
+    ],
+    "instructions": "Combine ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled {gcocktail glass}. Optionally garnish with an orange zest and piece of pineapple.",
+    "notes": "Dry vermouth also works. When using dry vermouth, the drink benefits from increasing the amount of rum by 1/4 ounce or so, but it works well either way.",
+    "source": "cocktalia",
+    "url": "http://www.cocktailia.com/cocktail-recipes/el-presidente"
+  },
+  {
+    "name": "Derby",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q1}{uoz} bourbon" },
+      { "tag": "lime juice", "display": "{q3/4}{uoz} lime juice" },
+      { "tag": "sweet vermouth", "display": "{q1/2}{uoz} sweet vermouth" },
+      { "tag": "triple sec", "display": "{q1/2}{uoz} Grand Marnier" }
+    ],
+    "instructions": "Shake ingredients over ice and strain into a chilled {gcocktail glass}. Garnish with lime wedge or mint leaf.",
+    "source": "serious-eats",
+    "url": "http://www.seriouseats.com/recipes/2011/10/derby-cocktail-bourbon-vermouth-grand-marnier-lime-recipe.html"
+  },
+  {
+    "name": "Ginger Gold Rush",
+    "ingredients": [
+      { "tag": "bourbon", "display": "{q3} {uparts} bourbon" },
+      { "tag": "ginger liqueur", "display": "{q2} {uparts} Domaine de Canton" },
+      { "tag": "lemon juice", "display": "{q1} {upart} lemon juice" }
+    ],
+    "instructions": "Put a brandied cherry in the bottom of a {gmartini glass}. Combine all ingredients in a cocktail shaker filled with ice. Shake vigorously and strain over the cherry into the glass.",
+    "notes": "The original recipe has the reverse proportions for the ginger and bourbon, which makes for a significantly sweeter drink.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/Ginger-Gold-Rush-Cocktail"
+  },
+  {
+    "name": "Alamagoozlum",
+    "ingredients": [
+      { "tag": "genever", "display": "{q1}{uoz} genever" },
+      { "display": "{q1}{uoz} water" },
+      { "tag": "rum", "display": "{q3/4}{uoz} Jamacian rum" },
+      { "tag": "chartreuse", "display": "{q3/4}{uoz} yellow or green Chartreuse" },
+      { "tag": "simple syrup", "display": "{q3/4}{uoz} simple syrup" },
+      { "tag": "triple sec", "display": "{q1/4}{uoz} orange curaçao" },
+      { "tag": "angostura bitters", "display": "{q1/4}{uoz} Angostura bitters" },
+      { "tag": "egg white", "display": "{q1/4} egg white" }
+    ],
+    "instructions": "Shake very hard over ice and strain into a chilled {gcocktail glass}.",
+    "source": "sloshed",
+    "url": "http://sloshed.hyperkinetic.org/2009/10/23/alamagoozlum-cocktail/"
+  },
+  {
+    "name": "Martinez",
+    "ingredients": [
+      { "tag": "gin", "display": "{q2}{uoz} Old Tom gin" },
+      { "tag": "sweet vermouth", "display": "{q1}{uoz} sweet vermouth" },
+      { "tag": "maraschino liqueur", "display": "{q1} {uteaspoon} Maraschino liqueur" },
+      { "display": "{q2} {udashes} orange bitters" }
+    ],
+    "instructions": "Stir with ice until very cold and strain into a chilled {gcocktail glass}. Garnish with a twist of lemon.",
+    "notes": "Predecessor to the Martini."
+  },
+  {
+    "name": "Chartreuse Smash",
+    "ingredients": [
+      { "tag": "mint", "display": "{q10} mint leaves" },
+      { "tag": "lemon juice", "display": "{q1}{uoz} lemon juice" },
+      { "tag": "sugar", "display": "{q2}{utsp.} turbinado sugar" },
+      { "tag": "green chartreuse", "display": "{q2}{uoz} green Chartreuse" }
+    ],
+    "instructions": "Place mint, lemon and sugar in a cocktail shaker and muddle. Add Chartreuse and fill with ice. Shake thoroughly, and strain into a glass filled with crushed ice. Garnish with mint sprig.",
+    "source": "saveur",
+    "url": "http://www.saveur.com/article/Recipes/Chartreuse-Smash"
+  },
+  {
+    "name": "Perfect Margarita",
+    "ingredients": [
+      { "tag": "tequila", "display": "{q1} {upart} reposado tequila" },
+      { "tag": "tequila", "display": "{q1} {upart} jalapeño tequila" },
+      { "tag": "mezcal", "display": "{q1} {upart} mezcal" },
+      { "tag": "triple sec", "display": "{q3} {uparts} Grand Marnier" },
+      { "tag": "lime juice", "display": "{q3} {uparts} fresh squeezed lime juice" },
+      { "tag": "agave nectar", "display": "{q1} {upart} agave nectar" },
+      { "display": "high-quality salt" }
+    ],
+    "instructions": "Rim a {gmargarita glass} with salt. Briefly shake all ingredients with ice and strain with a fine mesh strainer into the glass. Garnish with lime or a slice of jalapeño."
+  },
+  {
+    "name": "Improved Holland Gin Cocktail",
+    "ingredients": [
+      { "tag": "genever", "display": "{q2}{uoz} genever" },
+      { "tag": "absinthe", "display": "{q1/8} {utsp} absinthe" },
+      { "tag": "simple syrup", "display": "{q1/4}{uoz} simple syrup" },
+      { "tag": "maraschino liqueur", "display": "{q1/4}{uoz} maraschino liqueur" },
+      { "display": "{q2} {udashes} Angostura bitters" }
+    ],
+    "instructions": "Combine ingredients in bar glass, add good solid ice and stir until well chilled. Strain the mixture over a 2\" square ice cube in a frosted {gold fashioned glass}. Garnish with fresh lemon peel.",
+    "source": "loungerati",
+    "url": "http://loungerati.blogspot.com/2010/10/what-were-drinking-do-dutch-with-bols.html"
+  },
+  {
+    "name": "Diamondback",
+    "ingredients": [
+      { "tag": "whiskey", "display": "{q2} {uparts} rye whiskey" },
+      { "tag": "applejack", "display": "{q1} {upart} applejack" },
+      { "tag": "chartreuse", "display": "{q1} {upart} Chartreuse" }
+    ],
+    "instructions": "Add all ingredients to a mixing glass filled with ice. Stir well, strain into a chilled cocktail glass and serve.",
+    "source": "sloshed",
+    "url": "http://sloshed.hyperkinetic.org/2011/10/21/diamondback/"
+  }
+]

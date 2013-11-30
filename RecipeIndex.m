@@ -45,6 +45,31 @@
     return missing;
 }
 
++ (NSArray *)loadRecipesFromFile:(NSString *)path {
+    NSError *error;
+    NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    
+    NSArray *list = [NSJSONSerialization
+                     JSONObjectWithData:data
+                     options:0
+                     error:&error];
+    NSMutableArray *parsedRecipes = [[NSMutableArray alloc] init];
+    for (NSDictionary *jsonRecipe in list) {
+        NSMutableArray *parsedIngredients = [[NSMutableArray alloc] init];
+        for (NSDictionary *jsonIngredient in [jsonRecipe objectForKey:@"ingredients"]) {
+            MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc]
+                                         initWithIngredientTag:[jsonIngredient objectForKey:@"tag"]
+                                         withDisplayString:[jsonIngredient objectForKey:@"display"]];
+            [parsedIngredients addObject:m];
+        }
+        RecipeItem *r = [[RecipeItem alloc]
+                         initWithName:[jsonRecipe objectForKey:@"name"]
+                         withMeasuredIngredients:parsedIngredients];
+        [parsedRecipes addObject:r];
+    }
+    return parsedRecipes;
+}
+
 - (NSArray *)resolveMeasuredIngredients:(RecipeItem *)recipe {
     NSMutableArray *resolved = [[NSMutableArray alloc] init];
     for (MeasuredIngredientItem *m in recipe.ingredients) {

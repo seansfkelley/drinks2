@@ -53,6 +53,10 @@
 {
     [super viewDidLoad];
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
+    
+    [RecipeIndex loadRecipesFromFile:path];
+    
     IngredientItem *grandMarnier = [[IngredientItem alloc] initWithDisplayName:@"Grand Marnier" withTag:@"grand marnier" withGenericTag:@"triple sec"];
     
     IngredientItem *tripleSec = [[IngredientItem alloc] initWithDisplayName:@"Triple Sec" withTag:@"triple sec"];

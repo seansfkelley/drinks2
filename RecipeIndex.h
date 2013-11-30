@@ -13,4 +13,6 @@
 - (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
++ (NSArray *)loadRecipesFromFile:(NSString *)path;
+
 @end

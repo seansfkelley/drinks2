@@ -11,8 +11,6 @@
 
 @interface IngredientsViewController ()
 
-@property NSArray *ingredientItems;
-
 @end
 
 @implementation IngredientsViewController
@@ -29,12 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    IngredientItem *grandMarnier = [[IngredientItem alloc] initWithDisplayName:@"Grand Marnier" withTag:@"grand marnier" withGenericTag:@"triple sec"];
-    
-    IngredientItem *tripleSec = [[IngredientItem alloc] initWithDisplayName:@"Triple Sec" withTag:@"triple sec"];
-    
-    self.ingredientItems = [NSArray arrayWithObjects:grandMarnier, tripleSec, nil];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -59,14 +51,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.ingredientItems count];
+    return [self.ingredientsList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"IngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    IngredientItem *ingredient = [self.ingredientItems objectAtIndex:indexPath.row];
+    IngredientItem *ingredient = [self.ingredientsList objectAtIndex:indexPath.row];
     cell.textLabel.text = ingredient.displayName;
     if (ingredient.selected) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -131,7 +123,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    IngredientItem *ingredient = [self.ingredientItems objectAtIndex:indexPath.row];
+    IngredientItem *ingredient = [self.ingredientsList objectAtIndex:indexPath.row];
     ingredient.selected = !ingredient.selected;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }

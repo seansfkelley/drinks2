@@ -7,8 +7,17 @@
 //
 
 #import "RecipesViewController.h"
+#import "RecipeItem.h"
+#import "RecipeIndex.h"
+#import "IngredientItem.h"
+#import "IngredientsViewController.h"
 
 @interface RecipesViewController ()
+
+@property NSArray *ingredientsList;
+@property NSArray *recipesList;
+@property NSArray *availableRecipesList;
+@property RecipeIndex *index;
 
 @end
 
@@ -16,7 +25,16 @@
 
 - (IBAction)unwindToRecipes:(UIStoryboardSegue *)segue
 {
-    
+    [self recomputeAvailableRecipes];
+    [self.tableView reloadData];
+}
+
+- (void)recomputeAvailableRecipes
+{
+    NSArray *availableIngredients = [self.ingredientsList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
+        return ingredient.selected;
+    }]];
+    self.availableRecipesList = [[self.index groupByMissingIngredients:availableIngredients] objectAtIndex:0];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -31,7 +49,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    IngredientItem *grandMarnier = [[IngredientItem alloc] initWithDisplayName:@"Grand Marnier" withTag:@"grand marnier" withGenericTag:@"triple sec"];
+    
+    IngredientItem *tripleSec = [[IngredientItem alloc] initWithDisplayName:@"Triple Sec" withTag:@"triple sec"];
+    
+    IngredientItem *tequila = [[IngredientItem alloc] initWithDisplayName:@"Tequila" withTag:@"tequila"];
+    
+    IngredientItem *limeJuice = [[IngredientItem alloc] initWithDisplayName:@"Lime Juice" withTag:@"lime juice"];
+    
+    RecipeItem *margarita = [[RecipeItem alloc] initWithName:@"Margarita" withIngredients:@[tripleSec, tequila, limeJuice]];
+    
+    self.ingredientsList = [NSArray arrayWithObjects:grandMarnier, tripleSec, tequila, limeJuice, nil];
+    
+    self.recipesList = [NSArray arrayWithObject:margarita];
 
+    self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -49,25 +83,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.availableRecipesList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    RecipeItem *recipe = [self.availableRecipesList objectAtIndex:indexPath.row];
+    cell.textLabel.text = recipe.name;
     return cell;
 }
 
@@ -110,16 +139,17 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UINavigationController *navigation = [segue destinationViewController];
+    // TODO: This is ultra-sketchy; there's got to be a more correct way to grab the actual destination controller
+    // or otherwise share data between two controllers.
+    // http://stackoverflow.com/questions/10858939/segue-destination-view-controller-weirdness
+    IngredientsViewController * ingredients = [[navigation viewControllers] objectAtIndex:0];
+    ingredients.ingredientsList = self.ingredientsList;
 }
-
- */
 
 @end

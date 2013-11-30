@@ -10,4 +10,6 @@
 
 @interface IngredientsViewController : UITableViewController
 
+@property NSArray *ingredientsList;
+
 @end

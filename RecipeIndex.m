@@ -17,9 +17,9 @@
 @property NSMutableDictionary *tagToIngredient;
 @property NSMutableDictionary *recipeNameToGenericTags;
 
-@end
+@property (readwrite) int fudgeFactor;
 
-#define FUDGE_FACTOR 3
+@end
 
 @implementation RecipeIndex
 
@@ -122,8 +122,10 @@
     return resolved;
 }
 
-- (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients {
+- (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients withFudgeFactor:(int)f {
     self = [super init];
+    
+    self.fudgeFactor = f;
     
     self.tagToIngredient = [[NSMutableDictionary alloc] init];
     for (IngredientItem *i in ingredients) {
@@ -149,14 +151,19 @@
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients {
     NSSet *genericIngredients = [RecipeIndex pluckGenericTags:ingredients];
     NSMutableArray *grouped = [[NSMutableArray alloc] init];
-    for (int i = 0; i < FUDGE_FACTOR; ++i) {
+    for (int i = 0; i < self.fudgeFactor; ++i) {
         [grouped addObject:[[NSMutableArray alloc] init]];
     }
     for (RecipeItem *r in self.recipes) {
         int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
-        if (missing < FUDGE_FACTOR) {
+        if (missing < self.fudgeFactor) {
             [[grouped objectAtIndex:missing] addObject:r];
         }
+    }
+    for (int i = 0; i < self.fudgeFactor; ++i) {
+        [(NSMutableArray *)[grouped objectAtIndex:i] sortUsingComparator:^NSComparisonResult(RecipeItem *one, RecipeItem *two) {
+            return [one.name compare:two.name];
+        }];
     }
     return grouped;
 }

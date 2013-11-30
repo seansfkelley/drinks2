@@ -14,12 +14,16 @@
 #import "MeasuredIngredientItem.h"
 #import "IngredientsViewController.h"
 
+#include <stdlib.h>
+
+#define FUDGE_FACTOR 3
+
 @interface RecipesViewController ()
 
 @property NSArray *ingredientsList;
 @property NSArray *availableIngredientsList;
 @property NSArray *recipesList;
-@property NSArray *availableRecipesList;
+@property NSArray *missingCountToAvailableRecipes;
 @property RecipeIndex *index;
 
 @end
@@ -37,7 +41,7 @@
     self.availableIngredientsList = [self.ingredientsList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
         return ingredient.selected;
     }]];
-    self.availableRecipesList = [[self.index groupByMissingIngredients:self.availableIngredientsList] objectAtIndex:0];
+    self.missingCountToAvailableRecipes = [self.index groupByMissingIngredients:self.availableIngredientsList];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -58,8 +62,15 @@
     
     NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
     self.ingredientsList = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
+    
+    // For testing.
+    for (int i = 0; i < [self.ingredientsList count]; ++i) {
+        if (arc4random_uniform(4) < 3) {
+            ((IngredientItem *)[self.ingredientsList objectAtIndex:i]).selected = true;
+        }
+    }
 
-    self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList];
+    self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList withFudgeFactor:FUDGE_FACTOR];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -78,61 +89,38 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [self.missingCountToAvailableRecipes count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.availableRecipesList count];
+    NSArray *availableWithNMissing = [self.missingCountToAvailableRecipes objectAtIndex:section];
+    return [availableWithNMissing count];
+}
+
+- (RecipeItem *)recipeForIndexPath:(NSIndexPath *)indexPath {
+    NSArray *section = [self.missingCountToAvailableRecipes objectAtIndex:indexPath.section];
+    return [section objectAtIndex:indexPath.row];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    RecipeItem *recipe = [self.availableRecipesList objectAtIndex:indexPath.row];
-    cell.textLabel.text = recipe.name;
+    cell.textLabel.text = [self recipeForIndexPath:indexPath].name;
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"Mixable Drinks";
+        case 1:
+            return @"...With Another Ingredient";
+        default:
+            return [NSString stringWithFormat:@"...With %d More Ingredients", (int) section];
+    }
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Navigation
 
@@ -154,7 +142,7 @@
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        detail.recipe = [self.availableRecipesList objectAtIndex:indexPath.row];
+        detail.recipe = [self recipeForIndexPath:indexPath];
         detail.availableIngredients = [self.availableIngredientsList copy];
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");

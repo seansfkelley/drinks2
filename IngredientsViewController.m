@@ -11,6 +11,9 @@
 
 @interface IngredientsViewController ()
 
+@property NSDictionary *ingredientListSections;
+@property NSArray *sectionOrdering;
+
 @end
 
 @implementation IngredientsViewController
@@ -28,11 +31,23 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSMutableDictionary *sections = [[NSMutableDictionary alloc] init];
+    for (IngredientItem *i in self.ingredientsList) {
+        NSString *first = [NSString stringWithFormat:@"%C", [i.displayName characterAtIndex:0]];
+        NSMutableArray *s = [sections objectForKey:first];
+        if (!s) {
+            s = [[NSMutableArray alloc] init];
+            [sections setObject:s forKey:first];
+        }
+        [s addObject:i];
+    }
+    for (NSMutableArray *s in [sections objectEnumerator]) {
+        [s sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
+    }
+    self.ingredientListSections = [[NSDictionary alloc] initWithDictionary:sections];
+    self.sectionOrdering = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *one, NSString *two) {
+        return [one compare:two];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,22 +58,27 @@
 
 #pragma mark - Table view data source
 
-// TODO: One section for each letter of the alphabet?
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [self.sectionOrdering count];
+}
+
+- (IngredientItem *)ingredientForIndexPath:(NSIndexPath *)indexPath {
+    NSArray *section = [self.ingredientListSections objectForKey:[self.sectionOrdering objectAtIndex:indexPath.section]];
+    return [section objectAtIndex:indexPath.row];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.ingredientsList count];
+    NSArray *s = [self.ingredientListSections objectForKey:[self.sectionOrdering objectAtIndex:section]];
+    return [s count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"IngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    IngredientItem *ingredient = [self.ingredientsList objectAtIndex:indexPath.row];
+    IngredientItem *ingredient = [self ingredientForIndexPath:indexPath];
     cell.textLabel.text = ingredient.displayName;
     if (ingredient.selected) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -68,62 +88,23 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.sectionOrdering objectAtIndex:section];
 }
 
- */
+//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+//    
+//}
+//
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+//    return [@"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" componentsSeparatedByString:@" "];
+//}
 
 #pragma mark - Table view delegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    IngredientItem *ingredient = [self.ingredientsList objectAtIndex:indexPath.row];
+    IngredientItem *ingredient = [self ingredientForIndexPath:indexPath];
     ingredient.selected = !ingredient.selected;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }

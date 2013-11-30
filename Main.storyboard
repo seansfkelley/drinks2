@@ -8,18 +8,21 @@
         <scene sceneID="fi1-3a-rrO">
             <objects>
                 <tableViewController title="Recipes" id="xCo-fM-gwK" customClass="RecipesViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Oa3-0x-gOB">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Oa3-0x-gOB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecipePrototypeCell" id="d5x-Qh-Xuw">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecipePrototypeCell" id="d5x-Qh-Xuw">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d5x-Qh-Xuw" id="79C-a0-Xu3">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="GX0-fU-EZA" kind="push" identifier="openRecipeDetail" id="nx5-aG-Zab"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -27,17 +30,36 @@
                             <outlet property="delegate" destination="xCo-fM-gwK" id="hZK-aO-AHg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="FUI-zF-0KQ">
+                    <navigationItem key="navigationItem" title="Recipes" id="FUI-zF-0KQ">
                         <barButtonItem key="rightBarButtonItem" title="Ingredients" id="U4Z-uz-d0l">
                             <connections>
-                                <segue destination="0Od-bA-I9q" kind="modal" id="Jmg-rP-vof"/>
+                                <segue destination="0Od-bA-I9q" kind="modal" identifier="openIngredientNavigation" id="Jmg-rP-vof"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2c-YU-uTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="35" y="53"/>
+            <point key="canvasLocation" x="-9" y="-441"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fzi-nL-xcJ">
+            <objects>
+                <viewController id="GX0-fU-EZA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6tR-Lk-gZs"/>
+                        <viewControllerLayoutGuide type="bottom" id="v0x-Au-byK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yYS-Cv-9IS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="viA-L2-bdl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bb6-2t-Ait" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="523" y="-751"/>
         </scene>
         <!--Ingredients View Controller - Ingredients-->
         <scene sceneID="y6f-jz-csE">
@@ -62,7 +84,7 @@
                             <outlet property="delegate" destination="Whg-TS-949" id="Fr1-co-sId"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="d4u-O1-eIK">
+                    <navigationItem key="navigationItem" title="Ingredients" id="d4u-O1-eIK">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JZ2-W1-qkk">
                             <connections>
                                 <segue destination="WjM-RQ-d4D" kind="unwind" unwindAction="unwindToRecipes:" id="6PU-wH-ZPH"/>
@@ -96,7 +118,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JiS-mh-BLk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-434" y="53"/>
+            <point key="canvasLocation" x="-476" y="-441"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jvq-1N-mbw">

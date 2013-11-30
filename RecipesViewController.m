@@ -144,12 +144,14 @@
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UINavigationController *navigation = [segue destinationViewController];
-    // TODO: This is ultra-sketchy; there's got to be a more correct way to grab the actual destination controller
-    // or otherwise share data between two controllers.
-    // http://stackoverflow.com/questions/10858939/segue-destination-view-controller-weirdness
-    IngredientsViewController * ingredients = [[navigation viewControllers] objectAtIndex:0];
-    ingredients.ingredientsList = self.ingredientsList;
+    if ([segue.identifier isEqualToString:@"openIngredientNavigation"]) {
+        UINavigationController *navigation = [segue destinationViewController];
+        // TODO: This is ultra-sketchy; there's got to be a more correct way to grab the actual destination controller
+        // or otherwise share data between two controllers.
+        // http://stackoverflow.com/questions/10858939/segue-destination-view-controller-weirdness
+        IngredientsViewController *ingredients = [[navigation viewControllers] objectAtIndex:0];
+        ingredients.ingredientsList = self.ingredientsList;
+    }
 }
 
 @end

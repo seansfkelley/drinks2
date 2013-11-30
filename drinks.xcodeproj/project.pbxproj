@@ -101,24 +101,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		785CBBEE184A71F400EB2D57 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				78A939981849649700B6784B /* RecipeItem.h */,
+				78A939991849649700B6784B /* RecipeItem.m */,
+				78A939951847D9E700B6784B /* IngredientItem.h */,
+				78A939961847D9E700B6784B /* IngredientItem.m */,
+				785CBBE41849992000EB2D57 /* MeasuredIngredientItem.h */,
+				785CBBE51849992000EB2D57 /* MeasuredIngredientItem.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		785CBBEF184A720600EB2D57 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
+				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
+				78A9398F1847D3F300B6784B /* IngredientsViewController.h */,
+				78A939901847D3F300B6784B /* IngredientsViewController.m */,
+				78A939921847D45700B6784B /* RecipesViewController.h */,
+				78A939931847D45700B6784B /* RecipesViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		785CBBF0184A720F00EB2D57 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				78ECED5B184971C100B7BD5A /* RecipeIndex.h */,
+				78ECED5C184971C100B7BD5A /* RecipeIndex.m */,
+			);
+			name = search;
+			sourceTree = "<group>";
+		};
 		78A939471847C52A00B6784B = {
 			isa = PBXGroup;
 			children = (
-				785CBBE41849992000EB2D57 /* MeasuredIngredientItem.h */,
-				785CBBE51849992000EB2D57 /* MeasuredIngredientItem.m */,
 				78A9398A1847CB9C00B6784B /* Main.storyboard */,
-				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
-				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
-				78A939981849649700B6784B /* RecipeItem.h */,
-				78A939991849649700B6784B /* RecipeItem.m */,
-				78A9398F1847D3F300B6784B /* IngredientsViewController.h */,
-				78A939901847D3F300B6784B /* IngredientsViewController.m */,
-				78A939951847D9E700B6784B /* IngredientItem.h */,
-				78A939961847D9E700B6784B /* IngredientItem.m */,
-				78A939921847D45700B6784B /* RecipesViewController.h */,
-				78A939931847D45700B6784B /* RecipesViewController.m */,
-				78ECED5B184971C100B7BD5A /* RecipeIndex.h */,
-				78ECED5C184971C100B7BD5A /* RecipeIndex.m */,
+				785CBBEE184A71F400EB2D57 /* models */,
+				785CBBEF184A720600EB2D57 /* controllers */,
+				785CBBF0184A720F00EB2D57 /* search */,
 				78A939591847C52A00B6784B /* drinks */,
 				78A939721847C52A00B6784B /* drinksTests */,
 				78A939521847C52A00B6784B /* Frameworks */,

@@ -9,7 +9,7 @@
 #import "IngredientsViewController.h"
 #import "IngredientItem.h"
 
-@interface IngredientsViewController ()
+@interface IngredientsViewController () <UIActionSheetDelegate>
 
 @property NSDictionary *ingredientListSections;
 @property NSArray *sectionOrdering;
@@ -18,13 +18,27 @@
 
 @implementation IngredientsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+- (IBAction)resetIngredients:(id)sender {
+    UIActionSheet *confirm = [[UIActionSheet alloc]
+                              initWithTitle:nil
+                              delegate:self
+                              cancelButtonTitle:@"Cancel"
+                              destructiveButtonTitle:@"Reset Ingredients"
+                              otherButtonTitles:nil];
+    [confirm showInView:self.tableView];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != [actionSheet cancelButtonIndex]) {
+        [self deselectAll];
     }
-    return self;
+}
+
+- (void) deselectAll {
+    for (IngredientItem *i in self.ingredientsList) {
+        i.selected = NO;
+    }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad

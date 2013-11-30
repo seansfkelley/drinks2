@@ -105,9 +105,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Ingredients" id="d4u-O1-eIK">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="JZ2-W1-qkk">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="JZ2-W1-qkk">
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="WjM-RQ-d4D" kind="unwind" unwindAction="unwindToRecipes:" id="6PU-wH-ZPH"/>
+                                <action selector="resetIngredients:" destination="Whg-TS-949" id="s1u-d3-F0I"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="hRH-4Z-2lG">

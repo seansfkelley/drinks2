@@ -10,9 +10,9 @@
 
 @interface RecipeItem : NSObject
 
-- (id)initWithName:(NSString*)name withIngredients:(NSArray*)ingredients;
+- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)ingredients;
 
 @property (readonly) NSString *name;
-@property (readonly) NSArray *ingredients; // IngredientItems - how to enforce this?
+@property (readonly) NSArray *ingredients; // MeasuredIngredientItems - how to enforce this?
 
 @end

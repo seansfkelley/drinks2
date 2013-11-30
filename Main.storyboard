@@ -21,7 +21,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="GX0-fU-EZA" kind="push" identifier="openRecipeDetail" id="nx5-aG-Zab"/>
+                                    <segue destination="GX0-fU-EZA" kind="push" identifier="" id="nx5-aG-Zab"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -33,7 +33,7 @@
                     <navigationItem key="navigationItem" title="Recipes" id="FUI-zF-0KQ">
                         <barButtonItem key="rightBarButtonItem" title="Ingredients" id="U4Z-uz-d0l">
                             <connections>
-                                <segue destination="0Od-bA-I9q" kind="modal" identifier="openIngredientNavigation" id="Jmg-rP-vof"/>
+                                <segue destination="0Od-bA-I9q" kind="modal" identifier="" id="Jmg-rP-vof"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="-9" y="-441"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe Detail View Controller-->
         <scene sceneID="fzi-nL-xcJ">
             <objects>
-                <viewController id="GX0-fU-EZA" sceneMemberID="viewController">
+                <viewController id="GX0-fU-EZA" customClass="RecipeDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6tR-Lk-gZs"/>
                         <viewControllerLayoutGuide type="bottom" id="v0x-Au-byK"/>
@@ -53,9 +53,29 @@
                     <view key="view" contentMode="scaleToFill" id="yYS-Cv-9IS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goB-w5-UV7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="viA-L2-bdl"/>
+                    <connections>
+                        <outlet property="textView" destination="goB-w5-UV7" id="CaK-Dt-d2g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb6-2t-Ait" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,6 +143,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Jvq-1N-mbw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Iy-T7-LLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Od-bA-I9q" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AXE-oD-mj4">
@@ -134,7 +155,6 @@
                         <segue destination="Whg-TS-949" kind="relationship" relationship="rootViewController" id="yz2-QT-0cB"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Iy-T7-LLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="523" y="53"/>
         </scene>

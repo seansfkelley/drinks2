@@ -7,14 +7,17 @@
 //
 
 #import "RecipesViewController.h"
+#import "RecipeDetailViewController.h"
 #import "RecipeItem.h"
 #import "RecipeIndex.h"
 #import "IngredientItem.h"
+#import "MeasuredIngredientItem.h"
 #import "IngredientsViewController.h"
 
 @interface RecipesViewController ()
 
 @property NSArray *ingredientsList;
+@property NSArray *availableIngredientsList;
 @property NSArray *recipesList;
 @property NSArray *availableRecipesList;
 @property RecipeIndex *index;
@@ -31,10 +34,10 @@
 
 - (void)recomputeAvailableRecipes
 {
-    NSArray *availableIngredients = [self.ingredientsList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
+    self.availableIngredientsList = [self.ingredientsList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
         return ingredient.selected;
     }]];
-    self.availableRecipesList = [[self.index groupByMissingIngredients:availableIngredients] objectAtIndex:0];
+    self.availableRecipesList = [[self.index groupByMissingIngredients:self.availableIngredientsList] objectAtIndex:0];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -53,12 +56,19 @@
     IngredientItem *grandMarnier = [[IngredientItem alloc] initWithDisplayName:@"Grand Marnier" withTag:@"grand marnier" withGenericTag:@"triple sec"];
     
     IngredientItem *tripleSec = [[IngredientItem alloc] initWithDisplayName:@"Triple Sec" withTag:@"triple sec"];
+    tripleSec.selected = YES;
     
     IngredientItem *tequila = [[IngredientItem alloc] initWithDisplayName:@"Tequila" withTag:@"tequila"];
+    tequila.selected = YES;
     
     IngredientItem *limeJuice = [[IngredientItem alloc] initWithDisplayName:@"Lime Juice" withTag:@"lime juice"];
+    limeJuice.selected = YES;
     
-    RecipeItem *margarita = [[RecipeItem alloc] initWithName:@"Margarita" withIngredients:@[tripleSec, tequila, limeJuice]];
+    RecipeItem *margarita = [[RecipeItem alloc] initWithName:@"Margarita" withMeasuredIngredients:@[
+        [[MeasuredIngredientItem alloc] initWithIngredientTag:@"triple sec" withDisplayString:@"1 oz triple sec"],
+        [[MeasuredIngredientItem alloc] initWithIngredientTag:@"tequila"    withDisplayString:@"1 oz tequila"],
+        [[MeasuredIngredientItem alloc] initWithIngredientTag:@"lime juice" withDisplayString:@"1 oz lime juice"]
+    ]];
     
     self.ingredientsList = [NSArray arrayWithObjects:grandMarnier, tripleSec, tequila, limeJuice, nil];
     
@@ -144,13 +154,25 @@
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"openIngredientNavigation"]) {
-        UINavigationController *navigation = [segue destinationViewController];
-        // TODO: This is ultra-sketchy; there's got to be a more correct way to grab the actual destination controller
-        // or otherwise share data between two controllers.
-        // http://stackoverflow.com/questions/10858939/segue-destination-view-controller-weirdness
-        IngredientsViewController *ingredients = [[navigation viewControllers] objectAtIndex:0];
+    // http://stackoverflow.com/questions/15414146/uitableview-prepareforsegue-assigning-indexpath-to-sender
+    UIViewController *controller;
+    if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        controller = [navController.viewControllers objectAtIndex:0];
+    } else {
+        controller = segue.destinationViewController;
+    }
+    
+    if ([controller isKindOfClass:[IngredientsViewController class]]) {
+        IngredientsViewController *ingredients = (IngredientsViewController *)controller;
         ingredients.ingredientsList = self.ingredientsList;
+    } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
+        RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        detail.recipe = [self.availableRecipesList objectAtIndex:indexPath.row];
+        detail.availableIngredients = [self.availableIngredientsList copy];
+    } else {
+        NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }
 }
 

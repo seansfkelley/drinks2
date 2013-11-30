@@ -9,11 +9,13 @@
 #import "RecipeIndex.h"
 #import "RecipeItem.h"
 #import "IngredientItem.h"
+#import "MeasuredIngredientItem.h"
 
 @interface RecipeIndex ()
 
 @property NSArray *recipes;
-@property NSMutableDictionary *genericTagsByRecipe;
+@property NSMutableDictionary *tagToIngredient;
+@property NSMutableDictionary *recipeNameToGenericTags;
 
 @end
 
@@ -43,13 +45,27 @@
     return missing;
 }
 
+- (NSArray *)resolveMeasuredIngredients:(RecipeItem *)recipe {
+    NSMutableArray *resolved = [[NSMutableArray alloc] init];
+    for (MeasuredIngredientItem *m in recipe.ingredients) {
+        [resolved addObject:[self.tagToIngredient objectForKey:m.ingredientTag]];
+    }
+    return resolved;
+}
+
 - (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients {
     self = [super init];
     
     self.recipes = [recipes copy];
-    self.genericTagsByRecipe = [[NSMutableDictionary alloc] init];
+    
+    self.tagToIngredient = [[NSMutableDictionary alloc] init];
+    for (IngredientItem *i in ingredients) {
+        [self.tagToIngredient setObject:i forKey:i.tag];
+    }
+    
+    self.recipeNameToGenericTags = [[NSMutableDictionary alloc] init];
     for (RecipeItem *r in self.recipes) {
-        [self.genericTagsByRecipe setObject:[RecipeIndex pluckGenericTags:r.ingredients] forKey:r.name];
+        [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:[self resolveMeasuredIngredients:r]] forKey:r.name];
     }
     
     return self;
@@ -62,7 +78,7 @@
         [grouped addObject:[[NSMutableArray alloc] init]];
     }
     for (RecipeItem *r in self.recipes) {
-        int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.genericTagsByRecipe objectForKey:r.name]];
+        int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
         [[grouped objectAtIndex:missing] addObject:r];
     }
     return grouped;

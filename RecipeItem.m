@@ -17,7 +17,7 @@
 
 @implementation RecipeItem
 
-- (id)initWithName:(NSString *)name withIngredients:(NSArray *)ingredients {
+- (id)initWithName:(NSString *)name withMeasuredIngredients:(NSArray *)ingredients {
     self = [super init];
     self.name = [name copy];
     self.ingredients = [ingredients copy];

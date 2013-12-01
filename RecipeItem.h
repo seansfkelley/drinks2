@@ -14,6 +14,7 @@
 
 @property (readonly) NSString *name;
 @property (readonly) NSArray *measuredIngredients;
+@property (readonly) NSArray *rawIngredients;
 @property (readonly) NSString *instructions;
 @property (readonly) NSString *notes;
 

@@ -23,7 +23,8 @@
     "generic" : "whiskey"
   },
   {
-    "display" : "Cachaca"
+    "display" : "Cacha\u00e7a",
+    "tag"     : "cachaca"
   },
   {
     "display" : "Chartreuse"

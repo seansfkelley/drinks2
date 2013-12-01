@@ -7,6 +7,7 @@
 //
 
 #import "RecipeItem.h"
+#import "MeasuredIngredientItem.h"
 
 @interface RecipeItem ()
 
@@ -26,6 +27,14 @@
     self.instructions = [instructions copy];
     self.notes = [notes copy];
     return self;
+}
+
+- (NSArray *)getRawIngredients {
+    NSMutableArray *raw = [[NSMutableArray alloc] init];
+    for (MeasuredIngredientItem *m in self.measuredIngredients) {
+        [raw addObject:m.ingredient];
+    }
+    return [[NSArray alloc] initWithArray:raw];
 }
 
 @end

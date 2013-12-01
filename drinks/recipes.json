@@ -9,7 +9,7 @@
       },
       {
         "tag": "lime",
-        "displayMeasure": "1 whole",
+        "displayMeasure": "1",
         "displayIngredient": "lime, cut into eighths"
       },
       {
@@ -220,8 +220,8 @@
       },
       {
         "tag": "lime",
-        "displayMeasure": "1\/2 lime",
-        "displayIngredient": ", cut into quarters"
+        "displayMeasure": "1\/2",
+        "displayIngredient": "lime, cut into quarters"
       },
       {
         "displayIngredient": "sprig of mint"

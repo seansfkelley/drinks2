@@ -159,7 +159,8 @@
     }
     for (RecipeItem *r in self.recipes) {
         int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
-        if (missing < self.fudgeFactor) {
+        // Exclude recipes for which we have no significant ingredients, even if it's technically only "with two more".
+        if (missing < self.fudgeFactor && missing != [[self.recipeNameToGenericTags objectForKey:r.name] count]) {
             [[grouped objectAtIndex:missing] addObject:r];
         }
     }

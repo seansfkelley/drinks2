@@ -33,7 +33,7 @@
 	// Do any additional setup after loading the view.
     
     self.navigationItem.title = self.recipe.name;
-    self.instructionsView.text = self.recipe.instructions;
+    self.instructionsView.text = [NSString stringWithFormat:@"%@\n\n%@", self.recipe.instructions, self.recipe.notes];
     [self.instructionsView sizeToFit]; // TODO: Nonideal, but better than cutting everything off.
     [self.ingredientsView reloadData];
 }

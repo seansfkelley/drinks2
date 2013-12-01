@@ -95,7 +95,8 @@
         if (!fail) {
             RecipeItem *r = [[RecipeItem alloc]
                              initWithName:[jsonRecipe objectForKey:@"name"]
-                             withMeasuredIngredients:parsedIngredients];
+                             withMeasuredIngredients:parsedIngredients
+                             withInstructions:[jsonRecipe objectForKey:@"instructions"]];
             [parsedRecipes addObject:r];
         }
     }

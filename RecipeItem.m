@@ -12,15 +12,17 @@
 
 @property (readwrite) NSString *name;
 @property (readwrite) NSArray *measuredIngredients;
+@property (readwrite) NSString *instructions;
 
 @end
 
 @implementation RecipeItem
 
-- (id)initWithName:(NSString *)name withMeasuredIngredients:(NSArray *)ingredients {
+- (id)initWithName:(NSString *)name withMeasuredIngredients:(NSArray *)ingredients withInstructions:(NSString *)instructions {
     self = [super init];
     self.name = [name copy];
     self.measuredIngredients = [ingredients copy];
+    self.instructions = [instructions copy];
     return self;
 }
 

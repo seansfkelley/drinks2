@@ -10,9 +10,10 @@
 
 @interface RecipeItem : NSObject
 
-- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)ingredients;
+- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)ingredients withInstructions:(NSString *)instructions;
 
 @property (readonly) NSString *name;
 @property (readonly) NSArray *measuredIngredients;
+@property (readonly) NSString *instructions;
 
 @end

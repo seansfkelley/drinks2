@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecipeIndex.h"
 
 @interface IngredientsViewController : UITableViewController
 
-@property NSArray *ingredientsList;
+@property RecipeIndex *index;
 
 @end

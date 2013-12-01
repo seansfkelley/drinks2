@@ -8,6 +8,7 @@
 
 #import "IngredientsViewController.h"
 #import "IngredientItem.h"
+#import "RecipeIndex.h"
 
 @interface IngredientsViewController () <UIActionSheetDelegate>
 
@@ -35,7 +36,7 @@
 }
 
 - (void) deselectAll {
-    for (IngredientItem *i in self.ingredientsList) {
+    for (IngredientItem *i in self.index.ingredients) {
         i.selected = NO;
     }
     [self.tableView reloadData];
@@ -46,7 +47,7 @@
     [super viewDidLoad];
 
     NSMutableDictionary *sections = [[NSMutableDictionary alloc] init];
-    for (IngredientItem *i in self.ingredientsList) {
+    for (IngredientItem *i in self.index.ingredients) {
         NSString *first = [NSString stringWithFormat:@"%C", [i.displayName characterAtIndex:0]];
         NSMutableArray *s = [sections objectForKey:first];
         if (!s) {

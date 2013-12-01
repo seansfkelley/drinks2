@@ -13,15 +13,36 @@
 
 @interface RecipeIndex ()
 
-@property NSArray *recipes;
+@property (readwrite) int fudgeFactor;
+@property (readwrite) NSArray *ingredients;
+@property (readwrite) NSArray *recipes;
+
 @property NSMutableDictionary *tagToIngredient;
 @property NSMutableDictionary *recipeNameToGenericTags;
-
-@property (readwrite) int fudgeFactor;
 
 @end
 
 @implementation RecipeIndex
+
++ (RecipeIndex *)instance {
+    static RecipeIndex *index;
+    @synchronized(self) {
+        if (!index) {
+            index = [[RecipeIndex alloc] init];
+            
+            NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
+            index.ingredients = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
+            
+            NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
+            index.recipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients];
+            
+            index.fudgeFactor = 3;
+            
+            [index index];
+        }
+        return index;
+    }
+}
 
 + (NSSet *)pluckTags:(NSArray *)ingredients {
     NSMutableSet *tags = [[NSMutableSet alloc] init];
@@ -134,18 +155,14 @@
     return parsedIngredients;
 }
 
-- (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients withFudgeFactor:(int)f {
-    self = [super init];
-    
-    self.fudgeFactor = f;
-    
+- (void)index {
     self.tagToIngredient = [[NSMutableDictionary alloc] init];
-    for (IngredientItem *i in ingredients) {
+    for (IngredientItem *i in self.ingredients) {
         [self.tagToIngredient setObject:i forKey:i.tag];
     }
     
     self.recipeNameToGenericTags = [[NSMutableDictionary alloc] init];
-    for (RecipeItem *r in recipes) {
+    for (RecipeItem *r in self.recipes) {
         NSMutableArray *ingredients = [[NSMutableArray alloc] init];
         for (MeasuredIngredientItem *m in r.measuredIngredients) {
             if (m.ingredient) {
@@ -154,9 +171,6 @@
         }
         [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:r.name];
     }
-    self.recipes = [recipes copy];
-    
-    return self;
 }
 
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients {

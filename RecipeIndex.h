@@ -10,16 +10,15 @@
 
 @interface RecipeIndex : NSObject
 
-@property(readonly)  int fudgeFactor;
+@property (readonly) int fudgeFactor;
+@property (readonly) NSArray *ingredients;
+@property (readonly) NSArray *recipes;
 
-- (id)initWithRecipes:(NSArray *)recipes withIngredients:(NSArray *)ingredients withFudgeFactor:(int)f;
++ (RecipeIndex *)instance;
 
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
 + (NSSet *)pluckTags:(NSArray *)ingredients;
 + (NSSet *)pluckGenericTags:(NSArray *)ingredients;
-
-+ (NSArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients;
-+ (NSArray *)loadIngredientsFromFile:(NSString *)path;
 
 @end

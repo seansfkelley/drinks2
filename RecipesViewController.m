@@ -16,13 +16,9 @@
 
 #include <stdlib.h>
 
-#define FUDGE_FACTOR 3
-
 @interface RecipesViewController ()
 
-@property NSArray *ingredientsList;
 @property NSArray *availableIngredientsList;
-@property NSArray *recipesList;
 @property NSArray *missingCountToAvailableRecipes;
 @property RecipeIndex *index;
 
@@ -38,37 +34,22 @@
 
 - (void)recomputeAvailableRecipes
 {
-    self.availableIngredientsList = [self.ingredientsList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
+    self.availableIngredientsList = [self.index.ingredients filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
         return ingredient.selected;
     }]];
     self.missingCountToAvailableRecipes = [self.index groupByMissingIngredients:self.availableIngredientsList];
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
-    self.ingredientsList = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
-    
-    NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
-    self.recipesList = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:self.ingredientsList];
-
-    self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList withFudgeFactor:FUDGE_FACTOR];
+    self.index = [RecipeIndex instance];
     
     // For testing.
-    for (int i = 0; i < [self.ingredientsList count]; ++i) {
+    for (IngredientItem *i in self.index.ingredients) {
         if (arc4random_uniform(4) < 3) {
-            ((IngredientItem *)[self.ingredientsList objectAtIndex:i]).selected = true;
+            i.selected = true;
         }
     }
     
@@ -134,7 +115,7 @@
     
     if ([controller isKindOfClass:[IngredientsViewController class]]) {
         IngredientsViewController *ingredients = (IngredientsViewController *)controller;
-        ingredients.ingredientsList = self.ingredientsList;
+        ingredients.index = self.index;
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];

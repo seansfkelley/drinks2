@@ -16,6 +16,8 @@
 
 + (RecipeIndex *)instance;
 
+- (void)save;
+- (void)load;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
 + (NSSet *)pluckTags:(NSArray *)ingredients;

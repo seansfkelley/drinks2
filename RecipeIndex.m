@@ -24,6 +24,8 @@
 
 @implementation RecipeIndex
 
+NSString * const SELECTED_KEY = @"selected-ingredients";
+
 + (RecipeIndex *)instance {
     static RecipeIndex *index;
     @synchronized(self) {
@@ -192,6 +194,23 @@
         }];
     }
     return grouped;
+}
+
+- (void)save {
+    NSMutableArray *selectedTags = [[NSMutableArray alloc] init];
+    for (IngredientItem *i in self.ingredients) {
+        if (i.selected) {
+            [selectedTags addObject:i.tag];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:selectedTags forKey:SELECTED_KEY];
+}
+
+- (void)load {
+    NSSet *selectedTags = [[NSSet alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:SELECTED_KEY]];
+    for (IngredientItem *i in self.ingredients) {
+        i.selected = [selectedTags containsObject:i.tag];
+    }
 }
 
 @end

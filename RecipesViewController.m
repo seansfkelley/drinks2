@@ -45,14 +45,6 @@
     [super viewDidLoad];
     
     self.index = [RecipeIndex instance];
-    
-    // For testing.
-    for (IngredientItem *i in self.index.ingredients) {
-        if (arc4random_uniform(4) < 3) {
-            i.selected = true;
-        }
-    }
-    
     [self recomputeAvailableRecipes];
 }
 

@@ -68,6 +68,10 @@
     "display" : "Ginger Liqueur"
   },
   {
+    "display" : "Grand Marnier",
+    "generic" : "triple sec"
+  },
+  {
     "display" : "Green Chartreuse",
     "generic" : "chartreuse"
   },

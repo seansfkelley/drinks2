@@ -35,8 +35,8 @@
 }
 
 - (void)groupIngredientsByType {
-    NSMutableSet *allAvailable = [[NSMutableSet alloc] initWithSet:[RecipeIndex pluckGenericTags:self.availableIngredients]];
-    [allAvailable unionSet:[RecipeIndex pluckTags:self.availableIngredients]];
+    NSMutableSet *allAvailable = [[NSMutableSet alloc] initWithSet:[RecipeIndex pluckTags:self.availableIngredients]];
+    [allAvailable unionSet:[RecipeIndex pluckGenericTags:self.availableIngredients]];
     
     NSMutableArray *missingIngredients = [[NSMutableArray alloc] init];
     NSMutableArray *subtituteIngredients = [[NSMutableArray alloc] init];

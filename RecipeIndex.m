@@ -23,6 +23,14 @@
 
 @implementation RecipeIndex
 
++ (NSSet *)pluckTags:(NSArray *)ingredients {
+    NSMutableSet *tags = [[NSMutableSet alloc] init];
+    for (IngredientItem *i in ingredients) {
+        [tags addObject:i.tag];
+    }
+    return [[NSSet alloc] initWithSet:tags];
+}
+
 + (NSSet *)pluckGenericTags:(NSArray *)ingredients {
     NSMutableSet *genericTags = [[NSMutableSet alloc] init];
     for (IngredientItem *i in ingredients) {

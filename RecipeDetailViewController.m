@@ -44,21 +44,25 @@
 }
 
 - (void)groupIngredientsByType {
-    NSSet *available = [RecipeIndex pluckGenericTags:self.availableIngredients];
+    NSMutableSet *allAvailable = [[NSMutableSet alloc] initWithSet:[RecipeIndex pluckGenericTags:self.availableIngredients]];
+    [allAvailable unionSet:[RecipeIndex pluckTags:self.availableIngredients]];
     
     NSMutableArray *missingIngredients = [[NSMutableArray alloc] init];
+    NSMutableArray *subtituteIngredients = [[NSMutableArray alloc] init];
     NSMutableArray *haveIngredients = [[NSMutableArray alloc] init];
     
     for (MeasuredIngredientItem *m in self.recipe.measuredIngredients) {
         // m.ingredient may be nil if it's something like "bitters", which we don't treat as a proper ingredient.
-        if (!m.ingredient || [available containsObject:m.ingredient.tag] || [available containsObject:m.ingredient.genericTag]) {
+        if (!m.ingredient || [allAvailable containsObject:m.ingredient.tag]) {
             [haveIngredients addObject:m];
+        } else if ([allAvailable containsObject:m.ingredient.genericTag]) {
+            [subtituteIngredients addObject:m];
         } else {
             [missingIngredients addObject:m];
         }
     }
     
-    NSArray *possibleSectionIngredients = @[missingIngredients, @[], haveIngredients];
+    NSArray *possibleSectionIngredients = @[missingIngredients, subtituteIngredients, haveIngredients];
     NSArray *possibleSectionTitles = @[@"Missing Ingredients", @"Ingredients (Substitutions)", @"Ingredients"];
     
     self.sectionTitles = [[NSMutableArray alloc] init];

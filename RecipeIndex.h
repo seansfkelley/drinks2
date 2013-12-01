@@ -16,6 +16,7 @@
 
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
++ (NSSet *)pluckTags:(NSArray *)ingredients;
 + (NSSet *)pluckGenericTags:(NSArray *)ingredients;
 
 + (NSArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients;

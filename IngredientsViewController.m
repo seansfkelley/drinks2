@@ -19,29 +19,6 @@
 
 @implementation IngredientsViewController
 
-- (IBAction)resetIngredients:(id)sender {
-    UIActionSheet *confirm = [[UIActionSheet alloc]
-                              initWithTitle:nil
-                              delegate:self
-                              cancelButtonTitle:@"Cancel"
-                              destructiveButtonTitle:@"Reset Ingredients"
-                              otherButtonTitles:nil];
-    [confirm showInView:self.tableView];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != [actionSheet cancelButtonIndex]) {
-        [self deselectAll];
-    }
-}
-
-- (void) deselectAll {
-    for (IngredientItem *i in self.index.ingredients) {
-        i.selected = NO;
-    }
-    [self.tableView reloadData];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -65,10 +42,29 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Reset ingredients button delegate
+
+- (IBAction)resetIngredients:(id)sender {
+    UIActionSheet *confirm = [[UIActionSheet alloc]
+                              initWithTitle:nil
+                              delegate:self
+                              cancelButtonTitle:@"Cancel"
+                              destructiveButtonTitle:@"Reset Ingredients"
+                              otherButtonTitles:nil];
+    [confirm showInView:self.tableView];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != [actionSheet cancelButtonIndex]) {
+        [self deselectAll];
+    }
+}
+
+- (void) deselectAll {
+    for (IngredientItem *i in self.index.ingredients) {
+        i.selected = NO;
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

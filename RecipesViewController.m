@@ -14,8 +14,6 @@
 #import "MeasuredIngredientItem.h"
 #import "IngredientsViewController.h"
 
-#include <stdlib.h>
-
 @interface RecipesViewController ()
 
 @property NSArray *availableIngredientsList;

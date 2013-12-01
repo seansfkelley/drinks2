@@ -11,6 +11,7 @@
 		785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBBE51849992000EB2D57 /* MeasuredIngredientItem.m */; };
 		785CBBEB1849A96400EB2D57 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 785CBBEA1849A96400EB2D57 /* recipes.json */; };
 		785CBBED1849AE4400EB2D57 /* ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 785CBBEC1849AE4400EB2D57 /* ingredients.json */; };
+		785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */; };
 		78A939541847C52A00B6784B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939531847C52A00B6784B /* Foundation.framework */; };
 		78A939561847C52A00B6784B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939551847C52A00B6784B /* CoreGraphics.framework */; };
 		78A939581847C52A00B6784B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939571847C52A00B6784B /* UIKit.framework */; };
@@ -48,6 +49,7 @@
 		785CBBE51849992000EB2D57 /* MeasuredIngredientItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasuredIngredientItem.m; sourceTree = "<group>"; };
 		785CBBEA1849A96400EB2D57 /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
 		785CBBEC1849AE4400EB2D57 /* ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ingredients.json; path = ../ingredients.json; sourceTree = "<group>"; };
+		785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyRecipeResultsView.xib; sourceTree = "<group>"; };
 		78A939501847C52A00B6784B /* drinks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drinks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A939531847C52A00B6784B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		78A939551847C52A00B6784B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,12 +119,12 @@
 		785CBBEF184A720600EB2D57 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
-				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
 				78A9398F1847D3F300B6784B /* IngredientsViewController.h */,
 				78A939901847D3F300B6784B /* IngredientsViewController.m */,
 				78A939921847D45700B6784B /* RecipesViewController.h */,
 				78A939931847D45700B6784B /* RecipesViewController.m */,
+				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
+				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				78A9398A1847CB9C00B6784B /* Main.storyboard */,
+				785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */,
 				785CBBEE184A71F400EB2D57 /* models */,
 				785CBBEF184A720600EB2D57 /* controllers */,
 				785CBBF0184A720F00EB2D57 /* search */,
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,
+				785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */,
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
 				78A939661847C52A00B6784B /* Images.xcassets in Resources */,
 				785CBBED1849AE4400EB2D57 /* ingredients.json in Resources */,

@@ -17,8 +17,11 @@
 @interface RecipesViewController ()
 
 @property NSArray *availableIngredientsList;
-@property NSArray *missingCountToAvailableRecipes;
+@property NSMutableArray *sectionTitles;
+@property NSMutableArray *sectionRecipes;
 @property RecipeIndex *index;
+
+@property UIView *tableBackground;
 
 @end
 
@@ -28,6 +31,7 @@
 {
     [self recomputeAvailableRecipes];
     [self.tableView reloadData];
+    [self showEmptyViewIfNecessary];
 }
 
 - (void)recomputeAvailableRecipes
@@ -35,38 +39,63 @@
     self.availableIngredientsList = [self.index.ingredients filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
         return ingredient.selected;
     }]];
-    self.missingCountToAvailableRecipes = [self.index groupByMissingIngredients:self.availableIngredientsList];
+    
+    self.sectionTitles = [[NSMutableArray alloc] init];
+    self.sectionRecipes = [[NSMutableArray alloc] init];
+    NSArray *groups = [self.index groupByMissingIngredients:self.availableIngredientsList];
+    for (int i = 0; i < self.index.fudgeFactor; ++i) {
+        NSArray *g = [groups objectAtIndex:i];
+        if ([g count] > 0) {
+            NSString *title;
+            switch (i) {
+                case 0:  title = @"Mixable Drinks"; break;
+                case 1:  title = @"...With Another Ingredient"; break;
+                default: title = [NSString stringWithFormat:@"...With %d More Ingredients", i];
+            }
+            [self.sectionTitles addObject:title];
+            [self.sectionRecipes addObject:g];
+        }
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"EmptyRecipeResultsView" owner:self options:nil];
+    UIView *view = [nibs objectAtIndex:0];
+    
+    self.tableBackground = view;
+    
     self.index = [RecipeIndex instance];
     [self recomputeAvailableRecipes];
+    [self showEmptyViewIfNecessary];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)showEmptyViewIfNecessary {
+    if ([self.sectionRecipes count] > 0) {
+        self.tableView.backgroundView = nil;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    } else {
+        self.tableView.backgroundView = self.tableBackground;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.missingCountToAvailableRecipes count];
+    return [self.sectionRecipes count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *availableWithNMissing = [self.missingCountToAvailableRecipes objectAtIndex:section];
-    return [availableWithNMissing count];
+    return [[self.sectionRecipes objectAtIndex:section] count];
 }
 
 - (RecipeItem *)recipeForIndexPath:(NSIndexPath *)indexPath {
-    NSArray *section = [self.missingCountToAvailableRecipes objectAtIndex:indexPath.section];
+    NSArray *section = [self.sectionRecipes objectAtIndex:indexPath.section];
     return [section objectAtIndex:indexPath.row];
 }
 
@@ -79,14 +108,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"Mixable Drinks";
-        case 1:
-            return @"...With Another Ingredient";
-        default:
-            return [NSString stringWithFormat:@"...With %d More Ingredients", (int) section];
-    }
+    return [self.sectionTitles objectAtIndex:section];
 }
 
 #pragma mark - Navigation

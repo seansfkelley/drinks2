@@ -61,7 +61,12 @@
     static NSString *CellIdentifier = @"MeasuredIngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     MeasuredIngredientItem *ingredient = [self.recipe.measuredIngredients objectAtIndex:indexPath.row];
-    cell.textLabel.text = ingredient.displayString;
+    if (ingredient.measurementDisplay) {
+        cell.textLabel.text = ingredient.measurementDisplay;
+    } else {
+        cell.textLabel.text = @" "; // Trick the layout into lining up the ingredient without a measure.
+    }
+    cell.detailTextLabel.text = ingredient.ingredientDisplay;
     return cell;
 }
 

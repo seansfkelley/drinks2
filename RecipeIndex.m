@@ -86,9 +86,10 @@
                 fail = YES;
                 break;
             } else {
-                MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc]
-                                             initWithIngredient:[tagToIngredient objectForKey:tag]
-                                             withDisplayString:[jsonIngredient objectForKey:@"display"]];
+                MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc] init];
+                m.ingredient = [tagToIngredient objectForKey:tag];
+                m.measurementDisplay = [jsonIngredient objectForKey:@"displayMeasure"];
+                m.ingredientDisplay = [jsonIngredient objectForKey:@"displayIngredient"];
                 [parsedIngredients addObject:m];
             }
         }

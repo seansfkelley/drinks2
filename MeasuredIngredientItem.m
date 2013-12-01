@@ -10,20 +10,8 @@
 
 @interface MeasuredIngredientItem ()
 
-@property (readwrite) IngredientItem *ingredient;
-@property (readwrite) NSString *displayString;
-
 @end
 
 @implementation MeasuredIngredientItem
-
-- (id)initWithIngredient:(IngredientItem *)ingredient withDisplayString:(NSString *)displayString {
-    self = [super init];
-    
-    self.ingredient = ingredient;
-    self.displayString = displayString;
-    
-    return self;
-}
 
 @end

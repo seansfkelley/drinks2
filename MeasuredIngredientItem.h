@@ -10,9 +10,8 @@
 
 @interface MeasuredIngredientItem : NSObject
 
-- (id) initWithIngredient:(IngredientItem *)ingredient withDisplayString:(NSString *)displayString;
-
-@property (readonly) IngredientItem *ingredient;
-@property (readonly) NSString *displayString;
+@property IngredientItem *ingredient;
+@property NSString *measurementDisplay;
+@property NSString *ingredientDisplay;
 
 @end

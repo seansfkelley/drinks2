@@ -62,6 +62,8 @@
     
     NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
     self.recipesList = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:self.ingredientsList];
+
+    self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList withFudgeFactor:FUDGE_FACTOR];
     
     // For testing.
     for (int i = 0; i < [self.ingredientsList count]; ++i) {
@@ -69,8 +71,8 @@
             ((IngredientItem *)[self.ingredientsList objectAtIndex:i]).selected = true;
         }
     }
-
-    self.index = [[RecipeIndex alloc] initWithRecipes:self.recipesList withIngredients:self.ingredientsList withFudgeFactor:FUDGE_FACTOR];
+    
+    [self recomputeAvailableRecipes];
 }
 
 - (void)didReceiveMemoryWarning

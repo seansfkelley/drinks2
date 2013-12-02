@@ -133,6 +133,10 @@
     "hidden"  : true
   },
   {
+    "display" : "Rye Whiskey",
+    "generic" : "whiskey"
+  },
+  {
     "display" : "Simple Syrup"
   },
   {

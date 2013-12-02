@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Sean Kelley. All rights reserved.
 //
 
-#import "RecipesViewController.h"
+#import "MixableRecipesViewController.h"
 #import "RecipeDetailViewController.h"
 #import "RecipeItem.h"
 #import "RecipeIndex.h"
@@ -15,7 +15,7 @@
 #import "IngredientsViewController.h"
 #import "RecipeSearchResultItem.h"
 
-@interface RecipesViewController ()
+@interface MixableRecipesViewController ()
 
 @property NSMutableArray *sectionTitles;
 @property NSMutableArray *sectionRecipeResults;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation RecipesViewController
+@implementation MixableRecipesViewController
 
 - (IBAction)unwindToRecipes:(UIStoryboardSegue *)segue
 {

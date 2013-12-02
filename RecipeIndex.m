@@ -7,10 +7,8 @@
 //
 
 #import "RecipeIndex.h"
-#import "RecipeItem.h"
 #import "IngredientItem.h"
 #import "MeasuredIngredientItem.h"
-#import "RecipeSearchResultItem.h"
 
 @interface RecipeIndex ()
 
@@ -18,6 +16,7 @@
 @property (readwrite) NSArray *ingredients;
 @property (readwrite) NSArray *recipes;
 
+@property NSSet *allIngredientTags;
 @property NSMutableDictionary *tagToIngredient;
 @property NSMutableDictionary *recipeNameToGenericTags;
 
@@ -185,6 +184,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         }
         [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:r.name];
     }
+    
+    self.allIngredientTags = [[NSSet alloc] initWithArray:[self.tagToIngredient allKeys]];
 }
 
 - (RecipeSearchResultItem *)generateRecipeSearchResult:(RecipeItem *)recipe withIngredientTags:(NSSet *)allTags {
@@ -209,6 +210,10 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     result.substituteIngredients = [[NSArray alloc] initWithArray:substituteIngredients];
     result.availableIngredients = [[NSArray alloc] initWithArray:availableIngredients];
     return result;
+}
+
+- (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe {
+    return [self generateRecipeSearchResult:recipe withIngredientTags:self.allIngredientTags];
 }
 
 

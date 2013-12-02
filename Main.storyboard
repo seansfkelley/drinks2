@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ztg-tk-JKT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vds-23-HY3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Recipes View Controller - Recipes-->
+        <!--Recipes View Controller - Mixable-->
         <scene sceneID="fi1-3a-rrO">
             <objects>
-                <tableViewController title="Recipes" id="xCo-fM-gwK" customClass="RecipesViewController" sceneMemberID="viewController">
+                <tableViewController id="xCo-fM-gwK" customClass="RecipesViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Oa3-0x-gOB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                             <outlet property="delegate" destination="xCo-fM-gwK" id="hZK-aO-AHg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recipes" id="FUI-zF-0KQ">
+                    <navigationItem key="navigationItem" title="Mixable" id="FUI-zF-0KQ">
                         <barButtonItem key="rightBarButtonItem" title="Ingredients" id="U4Z-uz-d0l">
                             <connections>
                                 <segue destination="0Od-bA-I9q" kind="modal" identifier="" id="Jmg-rP-vof"/>
@@ -40,7 +40,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2c-YU-uTb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="-441"/>
+            <point key="canvasLocation" x="50" y="-441"/>
         </scene>
         <!--Recipe Detail View Controller-->
         <scene sceneID="fzi-nL-xcJ">
@@ -62,7 +62,7 @@
                                     <rect key="frame" x="0.0" y="173" width="320" height="51"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
@@ -108,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb6-2t-Ait" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="523" y="-751"/>
+            <point key="canvasLocation" x="587" y="330"/>
         </scene>
         <!--Ingredients View Controller - Ingredients-->
         <scene sceneID="y6f-jz-csE">
@@ -150,13 +150,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UYk-HI-fKm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WjM-RQ-d4D" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1023" y="53"/>
+            <point key="canvasLocation" x="1115" y="-441"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="QO8-8i-SE5">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="vds-23-HY3" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="9RC-s9-x3y">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ztg-tk-JKT" kind="relationship" relationship="viewControllers" id="VGU-Zd-se5"/>
+                        <segue destination="i8C-30-O0P" kind="relationship" relationship="viewControllers" id="OE3-v0-4l7"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LQo-qM-HbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1010" y="-116"/>
+        </scene>
+        <!--Browse All Recipes View Controller - Browse All Recipes-->
+        <scene sceneID="t6Y-3f-j0O">
+            <objects>
+                <tableViewController title="Browse All Recipes" id="ZpP-B9-Wu2" customClass="BrowseAllRecipesViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eBX-SK-wdB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecipePrototypeCell" id="fZ7-Bf-Jxb">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZ7-Bf-Jxb" id="XN5-AK-2za">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="GX0-fU-EZA" kind="push" id="fib-UR-VhX"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZpP-B9-Wu2" id="cCi-Is-qmL"/>
+                            <outlet property="delegate" destination="ZpP-B9-Wu2" id="uPW-t9-ncg"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Browse All" id="Hqj-6W-nZF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7SH-yX-jOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50" y="330"/>
         </scene>
         <!--Navigation Controller - Ingredient Search-->
         <scene sceneID="GhB-se-LRM">
             <objects>
                 <navigationController title="Ingredient Search" automaticallyAdjustsScrollViewInsets="NO" id="ztg-tk-JKT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="81g-I2-Tcb"/>
+                    <tabBarItem key="tabBarItem" title="Mixable" id="81g-I2-Tcb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qjo-zw-LOy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -187,7 +238,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Iy-T7-LLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="523" y="53"/>
+            <point key="canvasLocation" x="587" y="-441"/>
+        </scene>
+        <!--Navigation Controller - Browse All Recipes-->
+        <scene sceneID="C5J-IN-rmd">
+            <objects>
+                <navigationController title="Browse All Recipes" automaticallyAdjustsScrollViewInsets="NO" id="i8C-30-O0P" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Browse All" id="98Z-bx-Zmy"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2BB-I9-lQt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZpP-B9-Wu2" kind="relationship" relationship="rootViewController" id="vaB-ag-6R4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QCX-1p-WXw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-476" y="330"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -195,4 +265,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="nx5-aG-Zab"/>
+    </inferredMetricsTieBreakers>
 </document>

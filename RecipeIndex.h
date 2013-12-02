@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "RecipeSearchResultItem.h"
+#import "RecipeItem.h"
+
 @interface RecipeIndex : NSObject
 
 @property (readonly) int fudgeFactor;
@@ -19,6 +22,7 @@
 - (void)save;
 - (void)load;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
+- (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe;
 
 + (NSSet *)pluckTags:(NSArray *)ingredients;
 + (NSSet *)pluckAllTags:(NSArray *)ingredients;

@@ -14,6 +14,7 @@
 		785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */; };
 		785CBBFE184C05C000EB2D57 /* RecipeSearchResultItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBBFD184C05C000EB2D57 /* RecipeSearchResultItem.m */; };
 		785CBC0D184C377D00EB2D57 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC0C184C377D00EB2D57 /* todo */; };
+		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		78A939541847C52A00B6784B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939531847C52A00B6784B /* Foundation.framework */; };
 		78A939561847C52A00B6784B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939551847C52A00B6784B /* CoreGraphics.framework */; };
 		78A939581847C52A00B6784B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A939571847C52A00B6784B /* UIKit.framework */; };
@@ -55,6 +56,8 @@
 		785CBBFC184C05C000EB2D57 /* RecipeSearchResultItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchResultItem.h; sourceTree = "<group>"; };
 		785CBBFD184C05C000EB2D57 /* RecipeSearchResultItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchResultItem.m; sourceTree = "<group>"; };
 		785CBC0C184C377D00EB2D57 /* todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
+		785CBC0E184C38AC00EB2D57 /* BrowseAllRecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseAllRecipesViewController.h; sourceTree = "<group>"; };
+		785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseAllRecipesViewController.m; sourceTree = "<group>"; };
 		78A939501847C52A00B6784B /* drinks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = drinks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78A939531847C52A00B6784B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		78A939551847C52A00B6784B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,6 +133,8 @@
 				78A939901847D3F300B6784B /* IngredientsViewController.m */,
 				78A939921847D45700B6784B /* RecipesViewController.h */,
 				78A939931847D45700B6784B /* RecipesViewController.m */,
+				785CBC0E184C38AC00EB2D57 /* BrowseAllRecipesViewController.h */,
+				785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */,
 				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
 				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
 			);
@@ -323,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */,
 				78A939941847D45700B6784B /* RecipesViewController.m in Sources */,
 				785CBBE0184992B800EB2D57 /* RecipeDetailViewController.m in Sources */,
 				78A939641847C52A00B6784B /* AppDelegate.m in Sources */,

@@ -12,8 +12,7 @@
 
 @interface IngredientsViewController () <UIActionSheetDelegate>
 
-@property NSDictionary *ingredientListSections;
-@property NSArray *sectionOrdering;
+@property NSMutableArray *ingredientListSections;
 
 @end
 
@@ -36,10 +35,20 @@
     for (NSMutableArray *s in [sections objectEnumerator]) {
         [s sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
     }
-    self.ingredientListSections = [[NSDictionary alloc] initWithDictionary:sections];
-    self.sectionOrdering = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *one, NSString *two) {
-        return [one compare:two];
-    }];
+    
+    self.ingredientListSections = [[NSMutableArray alloc] init];
+    for (NSString *title in [[UILocalizedIndexedCollation currentCollation] sectionTitles]) {
+        NSArray *s = [sections objectForKey:title];
+        if (!s) {
+            s = [[NSArray alloc] init];
+        }
+        [self.ingredientListSections addObject:s];
+    }
+    
+//    self.ingredientListSections = [[NSDictionary alloc] initWithDictionary:sections];
+//    self.sectionOrdering = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *one, NSString *two) {
+//        return [one compare:two];
+//    }];
 }
 
 #pragma mark - Reset ingredients button delegate
@@ -71,17 +80,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.sectionOrdering count];
+    return [self.ingredientListSections count];
 }
 
 - (IngredientItem *)ingredientForIndexPath:(NSIndexPath *)indexPath {
-    NSArray *section = [self.ingredientListSections objectForKey:[self.sectionOrdering objectAtIndex:indexPath.section]];
+    NSArray *section = [self.ingredientListSections objectAtIndex:indexPath.section];
     return [section objectAtIndex:indexPath.row];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *s = [self.ingredientListSections objectForKey:[self.sectionOrdering objectAtIndex:section]];
+    NSArray *s = [self.ingredientListSections objectAtIndex:section];
     return [s count];
 }
 
@@ -99,17 +108,25 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.sectionOrdering objectAtIndex:section];
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([[self.ingredientListSections objectAtIndex:section] count] > 0) {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    } else {
+        return nil;
+    }
 }
 
-//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-//    
-//}
-//
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-//    return [@"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z" componentsSeparatedByString:@" "];
-//}
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+}
+
 
 #pragma mark - Table view delegate
 

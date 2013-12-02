@@ -32,7 +32,8 @@
     "tag"     : "cachaca"
   },
   {
-    "display" : "Chartreuse"
+    "display" : "Chartreuse",
+    "hidden"  : true
   },
   {
     "display" : "Coffee Liqueur"
@@ -128,13 +129,18 @@
     "display" : "Noisette"
   },
   {
-    "display" : "Rum"
+    "display" : "Rum",
+    "hidden"  : true
   },
   {
     "display" : "Simple Syrup"
   },
   {
     "display" : "Sparkling Wine"
+  },
+  {
+    "display" : "Spiced Rum",
+    "generic" : "rum"
   },
   {
     "display" : "Sugar"

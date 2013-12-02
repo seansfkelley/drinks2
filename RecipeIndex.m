@@ -162,7 +162,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         IngredientItem *i = [[IngredientItem alloc]
                              initWithDisplayName:[jsonIngredient objectForKey:@"display"]
                              withTag:tag
-                             withGenericTag:[jsonIngredient objectForKey:@"generic"]]; // May be nil.
+                             withGenericTag:[jsonIngredient objectForKey:@"generic"] // May be nil.
+                             withHiddenFlag:[jsonIngredient objectForKey:@"hidden"]];
         [parsedIngredients addObject:i];
     }
     return parsedIngredients;

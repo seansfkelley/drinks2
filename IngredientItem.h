@@ -10,13 +10,12 @@
 
 @interface IngredientItem : NSObject
 
-- (id)initWithDisplayName:(NSString*)displayName withTag:(NSString*)tag;
-- (id)initWithDisplayName:(NSString*)displayName withTag:(NSString*)tag withGenericTag:(NSString*)genericTag;
+- (id)initWithDisplayName:(NSString*)displayName withTag:(NSString*)tag withGenericTag:(NSString*)genericTag withHiddenFlag:(BOOL)hidden;
 
 @property (readonly) NSString *displayName;
 @property (readonly) NSString *tag;
 @property (readonly) NSString *genericTag;
-
+@property (readonly) BOOL hidden;
 @property BOOL selected;
 
 @end

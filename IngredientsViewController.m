@@ -24,6 +24,9 @@
 
     NSMutableDictionary *sections = [[NSMutableDictionary alloc] init];
     for (IngredientItem *i in self.index.ingredients) {
+        if (i.hidden) {
+            continue;
+        }
         NSString *first = [NSString stringWithFormat:@"%C", [i.displayName characterAtIndex:0]];
         NSMutableArray *s = [sections objectForKey:first];
         if (!s) {

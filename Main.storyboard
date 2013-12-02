@@ -152,10 +152,11 @@
             </objects>
             <point key="canvasLocation" x="1023" y="53"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Ingredient Search-->
         <scene sceneID="GhB-se-LRM">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ztg-tk-JKT" sceneMemberID="viewController">
+                <navigationController title="Ingredient Search" automaticallyAdjustsScrollViewInsets="NO" id="ztg-tk-JKT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="81g-I2-Tcb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qjo-zw-LOy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

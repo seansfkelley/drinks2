@@ -13,12 +13,12 @@
 #import "IngredientItem.h"
 #import "MeasuredIngredientItem.h"
 #import "IngredientsViewController.h"
+#import "RecipeSearchResultItem.h"
 
 @interface RecipesViewController ()
 
-@property NSArray *availableIngredientsList;
 @property NSMutableArray *sectionTitles;
-@property NSMutableArray *sectionRecipes;
+@property NSMutableArray *sectionRecipeResults;
 @property RecipeIndex *index;
 
 @property UIView *tableBackground;
@@ -36,13 +36,13 @@
 
 - (void)recomputeAvailableRecipes
 {
-    self.availableIngredientsList = [self.index.ingredients filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
+    NSArray *availableIngredientsList = [self.index.ingredients filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
         return ingredient.selected;
     }]];
     
     self.sectionTitles = [[NSMutableArray alloc] init];
-    self.sectionRecipes = [[NSMutableArray alloc] init];
-    NSArray *groups = [self.index groupByMissingIngredients:self.availableIngredientsList];
+    self.sectionRecipeResults = [[NSMutableArray alloc] init];
+    NSArray *groups = [self.index groupByMissingIngredients:availableIngredientsList];
     for (int i = 0; i < self.index.fudgeFactor; ++i) {
         NSArray *g = [groups objectAtIndex:i];
         if ([g count] > 0) {
@@ -53,7 +53,7 @@
                 default: title = [NSString stringWithFormat:@"...With %d More Ingredients", i];
             }
             [self.sectionTitles addObject:title];
-            [self.sectionRecipes addObject:g];
+            [self.sectionRecipeResults addObject:g];
         }
     }
 }
@@ -73,7 +73,7 @@
 }
 
 - (void)showEmptyViewIfNecessary {
-    if ([self.sectionRecipes count] > 0) {
+    if ([self.sectionRecipeResults count] > 0) {
         self.tableView.backgroundView = nil;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     } else {
@@ -86,16 +86,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.sectionRecipes count];
+    return [self.sectionRecipeResults count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.sectionRecipes objectAtIndex:section] count];
+    return [[self.sectionRecipeResults objectAtIndex:section] count];
 }
 
-- (RecipeItem *)recipeForIndexPath:(NSIndexPath *)indexPath {
-    NSArray *section = [self.sectionRecipes objectAtIndex:indexPath.section];
+- (RecipeSearchResultItem *)recipeResultForIndexPath:(NSIndexPath *)indexPath {
+    NSArray *section = [self.sectionRecipeResults objectAtIndex:indexPath.section];
     return [section objectAtIndex:indexPath.row];
 }
 
@@ -103,7 +103,7 @@
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [self recipeForIndexPath:indexPath].name;
+    cell.textLabel.text = [self recipeResultForIndexPath:indexPath].recipe.name;
     return cell;
 }
 
@@ -131,8 +131,7 @@
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        detail.recipe = [self recipeForIndexPath:indexPath];
-        detail.availableIngredients = [self.availableIngredientsList copy];
+        detail.recipeResult = [self recipeResultForIndexPath:indexPath];
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }

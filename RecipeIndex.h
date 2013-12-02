@@ -21,6 +21,7 @@
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 
 + (NSSet *)pluckTags:(NSArray *)ingredients;
++ (NSSet *)pluckAllTags:(NSArray *)ingredients;
 + (NSSet *)pluckGenericTags:(NSArray *)ingredients;
 
 @end

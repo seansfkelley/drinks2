@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RecipeItem.h"
+#import "RecipeSearchResultItem.h"
 
 @interface RecipeDetailViewController : UIViewController
 
-@property RecipeItem *recipe;
-@property NSArray *availableIngredients;
+@property RecipeSearchResultItem *recipeResult;
 
 @end

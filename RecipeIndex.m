@@ -10,6 +10,7 @@
 #import "RecipeItem.h"
 #import "IngredientItem.h"
 #import "MeasuredIngredientItem.h"
+#import "RecipeSearchResultItem.h"
 
 @interface RecipeIndex ()
 
@@ -50,6 +51,17 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     NSMutableSet *tags = [[NSMutableSet alloc] init];
     for (IngredientItem *i in ingredients) {
         [tags addObject:i.tag];
+    }
+    return [[NSSet alloc] initWithSet:tags];
+}
+
++ (NSSet *)pluckAllTags:(NSArray *)ingredients {
+    NSMutableSet *tags = [[NSMutableSet alloc] init];
+    for (IngredientItem *i in ingredients) {
+        [tags addObject:i.tag];
+        if (i.genericTag) {
+            [tags addObject:i.genericTag];
+        }
     }
     return [[NSSet alloc] initWithSet:tags];
 }
@@ -175,8 +187,35 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     }
 }
 
+- (RecipeSearchResultItem *)generateRecipeSearchResult:(RecipeItem *)recipe withIngredientTags:(NSSet *)allTags {
+    NSMutableArray *missingIngredients = [[NSMutableArray alloc] init];
+    NSMutableArray *substituteIngredients = [[NSMutableArray alloc] init];
+    NSMutableArray *availableIngredients = [[NSMutableArray alloc] init];
+    
+    for (MeasuredIngredientItem *m in recipe.measuredIngredients) {
+        // m.ingredient may be nil if it's something like "bitters", which we don't treat as a proper ingredient.
+        if (!m.ingredient || [allTags containsObject:m.ingredient.tag]) {
+            [availableIngredients addObject:m];
+        } else if ([allTags containsObject:m.ingredient.genericTag]) {
+            [substituteIngredients addObject:m];
+        } else {
+            [missingIngredients addObject:m];
+        }
+    }
+    
+    RecipeSearchResultItem *result = [[RecipeSearchResultItem alloc] init];
+    result.recipe = recipe;
+    result.missingIngredients = [[NSArray alloc] initWithArray:missingIngredients];
+    result.substituteIngredients = [[NSArray alloc] initWithArray:substituteIngredients];
+    result.availableIngredients = [[NSArray alloc] initWithArray:availableIngredients];
+    return result;
+}
+
+
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients {
     NSSet *genericIngredients = [RecipeIndex pluckGenericTags:ingredients];
+    NSSet *allTags = [RecipeIndex pluckAllTags:ingredients];
+    
     NSMutableArray *grouped = [[NSMutableArray alloc] init];
     for (int i = 0; i < self.fudgeFactor; ++i) {
         [grouped addObject:[[NSMutableArray alloc] init]];
@@ -185,12 +224,12 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
         // Exclude recipes for which we have no significant ingredients, even if it's technically only "with two more".
         if (missing < self.fudgeFactor && missing != [[self.recipeNameToGenericTags objectForKey:r.name] count]) {
-            [[grouped objectAtIndex:missing] addObject:r];
+            [[grouped objectAtIndex:missing] addObject:[self generateRecipeSearchResult:r withIngredientTags:allTags]];
         }
     }
     for (int i = 0; i < self.fudgeFactor; ++i) {
-        [(NSMutableArray *)[grouped objectAtIndex:i] sortUsingComparator:^NSComparisonResult(RecipeItem *one, RecipeItem *two) {
-            return [one.name compare:two.name];
+        [(NSMutableArray *)[grouped objectAtIndex:i] sortUsingComparator:^NSComparisonResult(RecipeSearchResultItem *one, RecipeSearchResultItem *two) {
+            return [one.recipe.name compare:two.recipe.name];
         }];
     }
     return grouped;

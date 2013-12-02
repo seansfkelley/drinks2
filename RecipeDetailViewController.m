@@ -25,35 +25,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     
-    [self groupIngredientsByType];
+    [self generateTableSections];
     
-    self.navigationItem.title = self.recipe.name;
-    self.instructionsTextView.text = [NSString stringWithFormat:@"%@\n\n%@", self.recipe.instructions, self.recipe.notes];
+    self.navigationItem.title = self.recipeResult.recipe.name;
+    self.instructionsTextView.text = [NSString stringWithFormat:@"%@\n\n%@", self.recipeResult.recipe.instructions, self.recipeResult.recipe.notes];
     [self.instructionsTextView sizeToFit]; // TODO: Nonideal, but better than cutting everything off.
 }
 
-- (void)groupIngredientsByType {
-    NSMutableSet *allAvailable = [[NSMutableSet alloc] initWithSet:[RecipeIndex pluckTags:self.availableIngredients]];
-    [allAvailable unionSet:[RecipeIndex pluckGenericTags:self.availableIngredients]];
-    
-    NSMutableArray *missingIngredients = [[NSMutableArray alloc] init];
-    NSMutableArray *subtituteIngredients = [[NSMutableArray alloc] init];
-    NSMutableArray *haveIngredients = [[NSMutableArray alloc] init];
-    
-    for (MeasuredIngredientItem *m in self.recipe.measuredIngredients) {
-        // m.ingredient may be nil if it's something like "bitters", which we don't treat as a proper ingredient.
-        if (!m.ingredient || [allAvailable containsObject:m.ingredient.tag]) {
-            [haveIngredients addObject:m];
-        } else if ([allAvailable containsObject:m.ingredient.genericTag]) {
-            [subtituteIngredients addObject:m];
-        } else {
-            [missingIngredients addObject:m];
-        }
-    }
-    
-    NSArray *possibleSectionIngredients = @[missingIngredients, subtituteIngredients, haveIngredients];
+- (void)generateTableSections {
+    NSArray *possibleSectionIngredients = @[
+        self.recipeResult.missingIngredients,
+        self.recipeResult.substituteIngredients,
+        self.recipeResult.availableIngredients];
     NSArray *possibleSectionTitles = @[@"Missing Ingredients", @"Ingredients (Substitutions)", @"Ingredients"];
     
     self.sectionTitles = [[NSMutableArray alloc] init];

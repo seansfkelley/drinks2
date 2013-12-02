@@ -271,7 +271,7 @@
         "displayIngredient": "lemon juice"
       },
       {
-        "tag": "triple sec",
+        "tag": "cointreau",
         "displayMeasure": "3\/4 oz",
         "displayIngredient": "Cointreau"
       },
@@ -323,14 +323,14 @@
     "name": "Mudslide",
     "ingredients": [
       {
-        "tag": "irish cream",
+        "tag": "baileys",
         "displayMeasure": "1 part",
         "displayIngredient": "Baileys"
       },
       {
-        "tag": "coffee liqueur",
+        "tag": "kahlua",
         "displayMeasure": "1 part",
-        "displayIngredient": "Kahlua"
+        "displayIngredient": "Kahl\u00FAa"
       },
       {
         "tag": "vodka",
@@ -369,8 +369,8 @@
         "displayIngredient": "green Chartreuse"
       },
       {
-        "displayMeasure": "dash",
-        "displayIngredient": "of orange bitters"
+        "displayMeasure": "1 dash",
+        "displayIngredient": "orange bitters"
       }
     ],
     "instructions": "Combine all ingredients in a large glass filled with ice. Stir thoroughly and strain the mixture into a {gcoupe}. Garnish with a lime twist.",
@@ -411,17 +411,17 @@
     "ingredients": [
       {
         "tag": "gin",
-        "displayMeasure": "1.5 oz",
+        "displayMeasure": "1 1\/2 oz",
         "displayIngredient": "gin"
       },
       {
         "tag": "lemon juice",
-        "displayMeasure": "0.5 oz",
+        "displayMeasure": "1\/2 oz",
         "displayIngredient": "lemon juice"
       },
       {
         "tag": "honey syrup",
-        "displayMeasure": "0.75 oz",
+        "displayMeasure": "3\/4 oz",
         "displayIngredient": "honey syrup"
       }
     ],
@@ -452,7 +452,7 @@
       },
       {
         "tag": "angostura bitters",
-        "displayMeasure": "1.5 oz",
+        "displayMeasure": "1 1\/2 oz",
         "displayIngredient": "Angostura bitters"
       },
       {
@@ -525,7 +525,7 @@
         "displayIngredient": "London dry gin"
       },
       {
-        "tag": "triple sec",
+        "tag": "cointreau",
         "displayMeasure": "1\/2 oz",
         "displayIngredient": "Cointreau"
       },
@@ -548,10 +548,10 @@
       {
         "tag": "coffee liqueur",
         "displayMeasure": "1 part",
-        "displayIngredient": "Kahlua"
+        "displayIngredient": "Kahl\u00FAa"
       },
       {
-        "tag": "irish cream",
+        "tag": "baileys",
         "displayMeasure": "1 part",
         "displayIngredient": "Baileys"
       },
@@ -561,7 +561,7 @@
         "displayIngredient": "Grand Marnier"
       }
     ],
-    "instructions": "Layer ingredients into a shot glass (Kahlua, then Baileys, then Grand Marnier)."
+    "instructions": "Layer ingredients into a shot glass (Kahl\u00FAa, then Baileys, then Grand Marnier)."
   },
   {
     "name": "La Palabra",
@@ -630,7 +630,7 @@
       },
       {
         "tag": "lime juice",
-        "displayMeasure": "4 part",
+        "displayMeasure": "4 parts",
         "displayIngredient": "lime juice"
       },
       {
@@ -721,7 +721,7 @@
         "displayIngredient": "sweet vermouth"
       },
       {
-        "tag": "triple sec",
+        "tag": "grand marnier",
         "displayMeasure": "1\/2 oz",
         "displayIngredient": "Grand Marnier"
       }
@@ -774,7 +774,7 @@
       {
         "tag": "chartreuse",
         "displayMeasure": "3\/4 oz",
-        "displayIngredient": "yellow or green Chartreuse"
+        "displayIngredient": "yellow\/green Chartreuse"
       },
       {
         "tag": "simple syrup",
@@ -874,7 +874,7 @@
         "displayIngredient": "mezcal"
       },
       {
-        "tag": "triple sec",
+        "tag": "grand marnier",
         "displayMeasure": "3 parts",
         "displayIngredient": "Grand Marnier"
       },
@@ -942,7 +942,7 @@
       {
         "tag": "chartreuse",
         "displayMeasure": "1 part",
-        "displayIngredient": "Chartreuse"
+        "displayIngredient": "yellow/green Chartreuse"
       }
     ],
     "instructions": "Add all ingredients to a mixing glass filled with ice. Stir well, strain into a chilled cocktail glass and serve.",

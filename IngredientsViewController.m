@@ -44,11 +44,6 @@
         }
         [self.ingredientListSections addObject:s];
     }
-    
-//    self.ingredientListSections = [[NSDictionary alloc] initWithDictionary:sections];
-//    self.sectionOrdering = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(NSString *one, NSString *two) {
-//        return [one compare:two];
-//    }];
 }
 
 #pragma mark - Reset ingredients button delegate

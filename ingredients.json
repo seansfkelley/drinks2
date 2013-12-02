@@ -16,7 +16,12 @@
     "display" : "Applejack"
   },
   {
-    "display" : "Benedictine"
+    "display" : "Baileys",
+    "generic" : "irish cream"
+  },
+  {
+    "display" : "B\u00E9n\u00E9dictine",
+    "tag"     : "benedictine"
   },
   {
     "display" : "Bourbon",
@@ -31,6 +36,10 @@
   },
   {
     "display" : "Coffee Liqueur"
+  },
+  {
+    "display" : "Cointreau",
+    "generic" : "triple sec"
   },
   {
     "display" : "Cola"
@@ -86,7 +95,9 @@
     "generic" : "whiskey"
   },
   {
-    "display" : "Irish Cream"
+    "display" : "Kahl\u00FAa",
+    "tag"     : "kahlua",
+    "generic" : "coffee liqueur"
   },
   {
     "display" : "Lemon Juice"

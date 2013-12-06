@@ -49,15 +49,18 @@
     "display" : "Cynar"
   },
   {
-    "display" : "Dark Rum",
+    "display" : "Rum (dark)",
+    "tag"     : "dark rum",
     "generic" : "rum"
   },
   {
-    "display" : "Dry Gin",
+    "display" : "Gin (dry)",
+    "tag"     : "dry gin",
     "generic" : "gin"
   },
   {
-    "display" : "Dry Vermouth"
+    "display" : "Vermouth (dry)",
+    "tag"     : "dry vermouth"
   },
   {
     "display" : "Egg White"
@@ -82,7 +85,8 @@
     "generic" : "triple sec"
   },
   {
-    "display" : "Green Chartreuse",
+    "display" : "Chartreuse (green)",
+    "tag"     : "green chartreuse",
     "generic" : "chartreuse"
   },
   {
@@ -143,14 +147,16 @@
     "display" : "Sparkling Wine"
   },
   {
-    "display" : "Spiced Rum",
+    "display" : "Rum (spiced)",
+    "tag"     : "spiced rum",
     "generic" : "rum"
   },
   {
     "display" : "Sugar"
   },
   {
-    "display" : "Sweet Vermouth"
+    "display" : "Vermouth (sweet)",
+    "tag"     : "sweet vermouth"
   },
   {
     "display" : "Tequila"
@@ -168,10 +174,12 @@
     "display" : "Whiskey"
   },
   {
-    "display" : "White Rum",
+    "display" : "Rum (white)",
+    "tag"     : "white rum",
     "generic" : "rum"
   },
   {
-    "display" : "White Vermouth"
+    "display" : "Vermouth (white)",
+    "tag"     : "white vermouth"
   }
 ]

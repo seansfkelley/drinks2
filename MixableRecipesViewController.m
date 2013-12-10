@@ -103,11 +103,23 @@
     return [section objectAtIndex:indexPath.row];
 }
 
+//- (NSString *)subtitleForRecipe:(RecipeItem *)recipe {
+//    NSMutableArray *displayStrings = [[NSMutableArray alloc] init];
+//    for (IngredientItem *i in recipe.rawIngredients) {
+//        [displayStrings addObject:i.displayName];
+//    }
+//    NSLog(@"%@", [displayStrings componentsJoinedByString:@", "]);
+//    return [displayStrings componentsJoinedByString:@", "];
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [self recipeResultForIndexPath:indexPath].recipe.name;
+    RecipeItem *recipe = [self recipeResultForIndexPath:indexPath].recipe;
+    cell.textLabel.text = recipe.name;
+    cell.imageView.image = [UIImage imageNamed:@"UIButtonBarArrowUp"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu ingredients", [recipe.measuredIngredients count]];
     return cell;
 }
 

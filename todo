@@ -1,9 +1,8 @@
-prev/next in recipe-results lists
 mode: drinks with ingredient X in them
 drink images in list
 clickable glass descriptors for a quick note on them
 section titles index for browse-all mode
-sort ingredients smarter -- something like "Tequila (Reposado)" or sorting "Reposado Tequila" by "tequila reposado"
 
 BUGS:
 invisible sections in ingredients list cause toggling the immediately succeeding ingredient to move up while animating
+various spacing in detail view is totally fucked

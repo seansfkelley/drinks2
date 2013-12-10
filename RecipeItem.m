@@ -29,10 +29,12 @@
     return self;
 }
 
-- (NSArray *)getRawIngredients {
+- (NSArray *)rawIngredients {
     NSMutableArray *raw = [[NSMutableArray alloc] init];
     for (MeasuredIngredientItem *m in self.measuredIngredients) {
-        [raw addObject:m.ingredient];
+        if (m.ingredient) { // May be false if we have something that has no tag (e.g. "water").
+            [raw addObject:m.ingredient];
+        }
     }
     return [[NSArray alloc] initWithArray:raw];
 }

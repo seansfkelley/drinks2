@@ -16,7 +16,6 @@
 		785CBC0D184C377D00EB2D57 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC0C184C377D00EB2D57 /* todo */; };
 		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		785CBC12184C4E9C00EB2D57 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC11184C4E9C00EB2D57 /* README.md */; };
-		7890449D18556C1700A39B3C /* NextPreviousView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7890449C18556C1700A39B3C /* NextPreviousView.xib */; };
 		789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */; };
 		789044A318556CBF00A39B3C /* UIButtonBarArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */; };
 		789044A418556CBF00A39B3C /* UIButtonBarArrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */; };
@@ -65,7 +64,6 @@
 		785CBC0E184C38AC00EB2D57 /* BrowseAllRecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseAllRecipesViewController.h; sourceTree = "<group>"; };
 		785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseAllRecipesViewController.m; sourceTree = "<group>"; };
 		785CBC11184C4E9C00EB2D57 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		7890449C18556C1700A39B3C /* NextPreviousView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextPreviousView.xib; sourceTree = "<group>"; };
 		7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarArrowDown.png; sourceTree = "<group>"; };
 		7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowDown@2x.png"; sourceTree = "<group>"; };
 		789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarArrowUp.png; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				785CBC0C184C377D00EB2D57 /* todo */,
 				785CBC11184C4E9C00EB2D57 /* README.md */,
 				78A9398A1847CB9C00B6784B /* Main.storyboard */,
-				7890449C18556C1700A39B3C /* NextPreviousView.xib */,
 				785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */,
 				785CBBEE184A71F400EB2D57 /* models */,
 				785CBBEF184A720600EB2D57 /* controllers */,
@@ -341,7 +338,6 @@
 				785CBBED1849AE4400EB2D57 /* ingredients.json in Resources */,
 				785CBC12184C4E9C00EB2D57 /* README.md in Resources */,
 				789044A518556CBF00A39B3C /* UIButtonBarArrowUp@2x.png in Resources */,
-				7890449D18556C1700A39B3C /* NextPreviousView.xib in Resources */,
 				785CBBEB1849A96400EB2D57 /* recipes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

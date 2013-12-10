@@ -14,7 +14,7 @@
 @interface BrowseAllRecipesViewController ()
 
 @property RecipeIndex *index;
-@property NSArray *sortedRecipes;
+@property NSMutableArray *sortedRecipeResults;
 
 @end
 
@@ -29,7 +29,11 @@
     [super viewDidLoad];
     
     self.index = [RecipeIndex instance];
-    self.sortedRecipes = [self.index.recipes sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES]]];
+    NSArray *sortedRecipes = [self.index.recipes sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES]]];
+    self.sortedRecipeResults = [[NSMutableArray alloc] init];
+    for (RecipeItem *r in sortedRecipes) {
+        [self.sortedRecipeResults addObject:[self.index generateDummySearchResultFor:r]];
+    }
 }
 
 #pragma mark - Table view data source
@@ -41,15 +45,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.sortedRecipes count];
+    return [self.sortedRecipeResults count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    RecipeItem *recipe = [self.sortedRecipes objectAtIndex:indexPath.row];
-    cell.textLabel.text = recipe.name;
+    RecipeSearchResultItem *result = [self.sortedRecipeResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = result.recipe.name;
     return cell;
 }
 
@@ -70,8 +74,8 @@
     if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        RecipeItem *recipe = [self.sortedRecipes objectAtIndex:indexPath.row];
-        detail.recipeResult = [self.index generateDummySearchResultFor:recipe];
+        detail.allRecipeResults = self.sortedRecipeResults;
+        detail.currentResultIndex = indexPath.row;
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }

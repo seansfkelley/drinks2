@@ -11,6 +11,7 @@
 
 @interface RecipeDetailViewController : UIViewController
 
-@property RecipeSearchResultItem *recipeResult;
+@property NSArray *allRecipeResults;
+@property int currentResultIndex;
 
 @end

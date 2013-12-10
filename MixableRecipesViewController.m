@@ -19,6 +19,7 @@
 
 @property NSMutableArray *sectionTitles;
 @property NSMutableArray *sectionRecipeResults;
+@property NSMutableArray *allRecipeResults;
 @property RecipeIndex *index;
 
 @property UIView *tableBackground;
@@ -42,6 +43,8 @@
     
     self.sectionTitles = [[NSMutableArray alloc] init];
     self.sectionRecipeResults = [[NSMutableArray alloc] init];
+    self.allRecipeResults = [[NSMutableArray alloc] init];
+    
     NSArray *groups = [self.index groupByMissingIngredients:availableIngredientsList];
     for (int i = 0; i < self.index.fudgeFactor; ++i) {
         NSArray *g = [groups objectAtIndex:i];
@@ -54,6 +57,7 @@
             }
             [self.sectionTitles addObject:title];
             [self.sectionRecipeResults addObject:g];
+            [self.allRecipeResults addObjectsFromArray:g];
         }
     }
 }
@@ -131,7 +135,16 @@
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        detail.recipeResult = [self recipeResultForIndexPath:indexPath];
+        detail.allRecipeResults = self.allRecipeResults;
+        NSString *selectedName = [self recipeResultForIndexPath:indexPath].recipe.name;
+        // TODO: YAY LINEAR TIME
+        for (int i = 0; i < [self.allRecipeResults count]; ++i) {
+            RecipeSearchResultItem *r = [self.allRecipeResults objectAtIndex:i];
+            if ([r.recipe.name isEqualToString:selectedName]) {
+                detail.currentResultIndex = i;
+                break;
+            }
+        }
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }

@@ -16,6 +16,9 @@
 		785CBC0D184C377D00EB2D57 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC0C184C377D00EB2D57 /* todo */; };
 		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		785CBC12184C4E9C00EB2D57 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC11184C4E9C00EB2D57 /* README.md */; };
+		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
+		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
+		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
 		789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */; };
 		789044A318556CBF00A39B3C /* UIButtonBarArrowDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */; };
 		789044A418556CBF00A39B3C /* UIButtonBarArrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */; };
@@ -64,6 +67,9 @@
 		785CBC0E184C38AC00EB2D57 /* BrowseAllRecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseAllRecipesViewController.h; sourceTree = "<group>"; };
 		785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseAllRecipesViewController.m; sourceTree = "<group>"; };
 		785CBC11184C4E9C00EB2D57 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
+		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
+		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
 		7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarArrowDown.png; sourceTree = "<group>"; };
 		7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIButtonBarArrowDown@2x.png"; sourceTree = "<group>"; };
 		789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButtonBarArrowUp.png; sourceTree = "<group>"; };
@@ -160,6 +166,14 @@
 			name = search;
 			sourceTree = "<group>";
 		};
+		788D1FF61858462A0020898F /* drinks */ = {
+			isa = PBXGroup;
+			children = (
+				788D1FF9185848D40020898F /* alamagoozlum.png */,
+			);
+			name = drinks;
+			sourceTree = "<group>";
+		};
 		789044A618556CC400A39B3C /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +181,9 @@
 				7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */,
 				789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */,
 				789044A118556CBF00A39B3C /* UIButtonBarArrowUp@2x.png */,
+				788D1FF218583D720020898F /* DefaultRecipeImage.png */,
+				788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */,
+				788D1FF61858462A0020898F /* drinks */,
 			);
 			name = images;
 			path = drinks;
@@ -335,7 +352,10 @@
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
 				789044A318556CBF00A39B3C /* UIButtonBarArrowDown@2x.png in Resources */,
 				78A939661847C52A00B6784B /* Images.xcassets in Resources */,
+				788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */,
 				785CBBED1849AE4400EB2D57 /* ingredients.json in Resources */,
+				788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */,
+				788D1FFA185848D40020898F /* alamagoozlum.png in Resources */,
 				785CBC12184C4E9C00EB2D57 /* README.md in Resources */,
 				789044A518556CBF00A39B3C /* UIButtonBarArrowUp@2x.png in Resources */,
 				785CBBEB1849A96400EB2D57 /* recipes.json in Resources */,

@@ -39,4 +39,13 @@
     return [[NSArray alloc] initWithArray:raw];
 }
 
+- (NSString *)normalizedName {
+    NSError *error = nil;
+    NSRegularExpression *dropCharactersRegex = [[NSRegularExpression alloc] initWithPattern:@"[^\\- a-zA-Z0-9]" options:0 error:&error];
+    NSString *normalized = [dropCharactersRegex stringByReplacingMatchesInString:self.name options:0 range:NSMakeRange(0, [self.name length]) withTemplate:@""];
+    NSRegularExpression *collapseWhitespaceRegex = [[NSRegularExpression alloc] initWithPattern:@" +" options:0 error:&error];
+    normalized = [collapseWhitespaceRegex stringByReplacingMatchesInString:normalized options:0 range:NSMakeRange(0, [normalized length]) withTemplate:@" "];
+    return [[normalized lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+}
+
 @end

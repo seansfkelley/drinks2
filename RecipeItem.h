@@ -13,6 +13,7 @@
 - (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)ingredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes;
 
 @property (readonly) NSString *name;
+@property (readonly) NSString *normalizedName;
 @property (readonly) NSArray *measuredIngredients;
 @property (readonly) NSArray *rawIngredients;
 @property (readonly) NSString *instructions;

@@ -118,7 +118,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     RecipeItem *recipe = [self recipeResultForIndexPath:indexPath].recipe;
     cell.textLabel.text = recipe.name;
-    cell.imageView.image = [UIImage imageNamed:@"UIButtonBarArrowUp"];
+    UIImage *image = [UIImage imageNamed:recipe.normalizedName];
+    if (!image) {
+        image = [UIImage imageNamed:@"DefaultRecipeImage"];
+    }
+    cell.imageView.image = image;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu ingredients", [recipe.measuredIngredients count]];
     return cell;
 }

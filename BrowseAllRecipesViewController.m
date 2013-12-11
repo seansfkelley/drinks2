@@ -53,7 +53,14 @@
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     RecipeSearchResultItem *result = [self.sortedRecipeResults objectAtIndex:indexPath.row];
-    cell.textLabel.text = result.recipe.name;
+    RecipeItem *recipe = result.recipe;
+    cell.textLabel.text = recipe.name;
+    UIImage *image = [UIImage imageNamed:recipe.normalizedName];
+    if (!image) {
+        image = [UIImage imageNamed:@"DefaultRecipeImage"];
+    }
+    cell.imageView.image = image;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu ingredients", [recipe.measuredIngredients count]];
     return cell;
 }
 

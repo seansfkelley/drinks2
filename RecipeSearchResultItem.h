@@ -16,4 +16,7 @@
 @property NSArray *substituteIngredients;
 @property NSArray *availableIngredients;
 
+// Psuedo-property forwarded from the recipe for sorting purposes.
+@property (readonly) NSString *name;
+
 @end

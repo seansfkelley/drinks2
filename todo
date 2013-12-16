@@ -1,8 +1,9 @@
-mode: drinks with ingredient X in them
+mode: drinks with ingredient X in them (search bar in mixable view!)
 drink images in list
 clickable glass descriptors for a quick note on them
 section titles index for browse-all mode
 less ugly directions/notes
+spacing between images in drinks list?
 
 BUGS:
 invisible sections in ingredients list cause toggling the immediately succeeding ingredient to move up while animating

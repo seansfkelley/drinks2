@@ -10,11 +10,12 @@
 #import "RecipeItem.h"
 #import "RecipeIndex.h"
 #import "RecipeDetailViewController.h"
+#import "SortedTableSectionManager.h"
 
 @interface BrowseAllRecipesViewController ()
 
 @property RecipeIndex *index;
-@property NSMutableArray *sortedRecipeResults;
+@property SortedTableSectionManager *sections;
 
 @end
 
@@ -29,11 +30,11 @@
     [super viewDidLoad];
     
     self.index = [RecipeIndex instance];
-    NSArray *sortedRecipes = [self.index.recipes sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES]]];
-    self.sortedRecipeResults = [[NSMutableArray alloc] init];
-    for (RecipeItem *r in sortedRecipes) {
-        [self.sortedRecipeResults addObject:[self.index generateDummySearchResultFor:r]];
+    NSMutableArray *recipeResults = [[NSMutableArray alloc] init];
+    for (RecipeItem *r in self.index.recipes) {
+        [recipeResults addObject:[self.index generateDummySearchResultFor:r]];
     }
+    self.sections = [[SortedTableSectionManager alloc] initWithArray:recipeResults sortedByProperty:@"name"];
 }
 
 #pragma mark - Table view data source
@@ -45,14 +46,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.sortedRecipeResults count];
+    return [self.sections.sorted count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    RecipeSearchResultItem *result = [self.sortedRecipeResults objectAtIndex:indexPath.row];
+    RecipeSearchResultItem *result = [self.sections.sorted objectAtIndex:indexPath.row];
     RecipeItem *recipe = result.recipe;
     cell.textLabel.text = recipe.name;
     UIImage *image = [UIImage imageNamed:recipe.normalizedName];
@@ -81,7 +82,7 @@
     if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        detail.allRecipeResults = self.sortedRecipeResults;
+        detail.allRecipeResults = self.sections.sorted;
         detail.currentResultIndex = indexPath.row;
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");

@@ -10,4 +10,8 @@
 
 @implementation RecipeSearchResultItem
 
+- (NSString *)name {
+    return self.recipe.name;
+}
+
 @end

@@ -41,19 +41,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return [self.sections.indexToSection count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.sections.sorted count];
+    return [[self.sections.indexToSection objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    RecipeSearchResultItem *result = [self.sections.sorted objectAtIndex:indexPath.row];
+    RecipeSearchResultItem *result = [self.sections objectForIndexPath:indexPath];
     RecipeItem *recipe = result.recipe;
     cell.textLabel.text = recipe.name;
     UIImage *image = [UIImage imageNamed:recipe.normalizedName];
@@ -64,6 +64,21 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu ingredients", [recipe.measuredIngredients count]];
     return cell;
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.sections.indexToTitle objectAtIndex:section];
+}
+
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+//{
+//    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+//}
+
+//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+//{
+//    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+//}
 
 #pragma mark - Navigation
 
@@ -83,7 +98,7 @@
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         detail.allRecipeResults = self.sections.sorted;
-        detail.currentResultIndex = indexPath.row;
+        detail.currentResultIndex = [self.sections sortedIndexForIndexPath:indexPath];
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }

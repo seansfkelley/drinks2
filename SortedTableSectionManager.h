@@ -12,6 +12,12 @@
 
 - (id)initWithArray:(NSArray *)array sortedByProperty:(NSString *)property;
 
+- (id)objectForIndexPath:(NSIndexPath *)indexPath;
+- (NSUInteger)sortedIndexForIndexPath:(NSIndexPath *)indexPath;
+
+@property (readonly) NSDictionary *nameToSection;
+@property (readonly) NSArray *indexToSection;
+@property (readonly) NSArray *indexToTitle;
 @property (readonly) NSArray *sorted;
 
 @end

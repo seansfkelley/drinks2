@@ -9,10 +9,11 @@
 #import "IngredientsViewController.h"
 #import "IngredientItem.h"
 #import "RecipeIndex.h"
+#import "SortedTableSectionManager.h"
 
 @interface IngredientsViewController () <UIActionSheetDelegate>
 
-@property NSMutableArray *ingredientListSections;
+@property SortedTableSectionManager *sections;
 
 @end
 
@@ -22,31 +23,13 @@
 {
     [super viewDidLoad];
 
-    NSMutableDictionary *sections = [[NSMutableDictionary alloc] init];
+    NSMutableArray *ingredients = [[NSMutableArray alloc] init];
     for (IngredientItem *i in self.index.ingredients) {
-        if (i.hidden) {
-            continue;
+        if (!i.hidden) {
+            [ingredients addObject:i];
         }
-        NSString *first = [NSString stringWithFormat:@"%C", [i.displayName characterAtIndex:0]];
-        NSMutableArray *s = [sections objectForKey:first];
-        if (!s) {
-            s = [[NSMutableArray alloc] init];
-            [sections setObject:s forKey:first];
-        }
-        [s addObject:i];
     }
-    for (NSMutableArray *s in [sections objectEnumerator]) {
-        [s sortUsingDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"displayName" ascending:YES]]];
-    }
-    
-    self.ingredientListSections = [[NSMutableArray alloc] init];
-    for (NSString *title in [[UILocalizedIndexedCollation currentCollation] sectionTitles]) {
-        NSArray *s = [sections objectForKey:title];
-        if (!s) {
-            s = [[NSArray alloc] init];
-        }
-        [self.ingredientListSections addObject:s];
-    }
+    self.sections = [[SortedTableSectionManager alloc] initWithArray:ingredients sortedByProperty:@"displayName"];
 }
 
 #pragma mark - Reset ingredients button delegate
@@ -68,6 +51,7 @@
 }
 
 - (void) deselectAll {
+    // Note that this uses the index, not the section manager. It will deselect invisible things.
     for (IngredientItem *i in self.index.ingredients) {
         i.selected = NO;
     }
@@ -78,25 +62,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.ingredientListSections count];
-}
-
-- (IngredientItem *)ingredientForIndexPath:(NSIndexPath *)indexPath {
-    NSArray *section = [self.ingredientListSections objectAtIndex:indexPath.section];
-    return [section objectAtIndex:indexPath.row];
+    return [self.sections.indexToSection count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *s = [self.ingredientListSections objectAtIndex:section];
-    return [s count];
+    return [[self.sections.indexToSection objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"IngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    IngredientItem *ingredient = [self ingredientForIndexPath:indexPath];
+    IngredientItem *ingredient = [self.sections objectForIndexPath:indexPath];
     cell.textLabel.text = ingredient.displayName;
     if (ingredient.selected) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -108,21 +86,17 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if ([[self.ingredientListSections objectAtIndex:section] count] > 0) {
-        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
-    } else {
-        return nil;
-    }
+    return [self.sections.indexToTitle objectAtIndex:section];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+    return self.sections.sectionIndexTitles;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+    return [self.sections sectionForSectionIndexTitle:title];
 }
 
 
@@ -130,7 +104,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    IngredientItem *ingredient = [self ingredientForIndexPath:indexPath];
+    IngredientItem *ingredient = [self.sections objectForIndexPath:indexPath];
     ingredient.selected = !ingredient.selected;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }

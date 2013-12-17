@@ -43,6 +43,9 @@
 		78ECED5D184971C100B7BD5A /* RecipeIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 78ECED5C184971C100B7BD5A /* RecipeIndex.m */; };
 		78F9B6DF185EF5E00020B604 /* SortedTableSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F9B6DE185EF5E00020B604 /* SortedTableSectionManager.m */; };
 		78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F9B6E11860274E0020B604 /* PaddedUITableViewCell.m */; };
+		78F9B6E518602A4B0020B604 /* chartreuse-smash.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F9B6E418602A4B0020B604 /* chartreuse-smash.png */; };
+		78F9B6E818602BD60020B604 /* death-in-the-afternoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F9B6E718602BD60020B604 /* death-in-the-afternoon.png */; };
+		78F9B6EA18602C600020B604 /* revolver.png in Resources */ = {isa = PBXBuildFile; fileRef = 78F9B6E918602C600020B604 /* revolver.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +110,10 @@
 		78F9B6DE185EF5E00020B604 /* SortedTableSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortedTableSectionManager.m; sourceTree = "<group>"; };
 		78F9B6E01860274E0020B604 /* PaddedUITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddedUITableViewCell.h; sourceTree = "<group>"; };
 		78F9B6E11860274E0020B604 /* PaddedUITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddedUITableViewCell.m; sourceTree = "<group>"; };
+		78F9B6E418602A4B0020B604 /* chartreuse-smash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chartreuse-smash.png"; sourceTree = "<group>"; };
+		78F9B6E618602A660020B604 /* martini-glass.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "martini-glass.psd"; sourceTree = "<group>"; };
+		78F9B6E718602BD60020B604 /* death-in-the-afternoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "death-in-the-afternoon.png"; sourceTree = "<group>"; };
+		78F9B6E918602C600020B604 /* revolver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = revolver.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +185,9 @@
 			isa = PBXGroup;
 			children = (
 				788D1FF9185848D40020898F /* alamagoozlum.png */,
+				78F9B6E418602A4B0020B604 /* chartreuse-smash.png */,
+				78F9B6E718602BD60020B604 /* death-in-the-afternoon.png */,
+				78F9B6E918602C600020B604 /* revolver.png */,
 			);
 			name = drinks;
 			sourceTree = "<group>";
@@ -185,6 +195,7 @@
 		789044A618556CC400A39B3C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				78F9B6E618602A660020B604 /* martini-glass.psd */,
 				7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */,
 				7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */,
 				789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */,
@@ -368,12 +379,15 @@
 				785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */,
 				789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */,
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
+				78F9B6E518602A4B0020B604 /* chartreuse-smash.png in Resources */,
 				789044A318556CBF00A39B3C /* UIButtonBarArrowDown@2x.png in Resources */,
 				78A939661847C52A00B6784B /* Images.xcassets in Resources */,
 				788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */,
 				785CBBED1849AE4400EB2D57 /* ingredients.json in Resources */,
 				788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */,
+				78F9B6E818602BD60020B604 /* death-in-the-afternoon.png in Resources */,
 				788D1FFA185848D40020898F /* alamagoozlum.png in Resources */,
+				78F9B6EA18602C600020B604 /* revolver.png in Resources */,
 				785CBC12184C4E9C00EB2D57 /* README.md in Resources */,
 				789044A518556CBF00A39B3C /* UIButtonBarArrowUp@2x.png in Resources */,
 				785CBBEB1849A96400EB2D57 /* recipes.json in Resources */,

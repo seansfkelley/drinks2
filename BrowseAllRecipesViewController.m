@@ -11,6 +11,7 @@
 #import "RecipeIndex.h"
 #import "RecipeDetailViewController.h"
 #import "SortedTableSectionManager.h"
+#import "PaddedUITableViewCell.h"
 
 @interface BrowseAllRecipesViewController ()
 
@@ -52,7 +53,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    PaddedUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     RecipeSearchResultItem *result = [self.sections objectForIndexPath:indexPath];
     RecipeItem *recipe = result.recipe;
     cell.textLabel.text = recipe.name;

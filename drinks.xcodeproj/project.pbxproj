@@ -42,6 +42,7 @@
 		78A9399A1849649700B6784B /* RecipeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 78A939991849649700B6784B /* RecipeItem.m */; };
 		78ECED5D184971C100B7BD5A /* RecipeIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 78ECED5C184971C100B7BD5A /* RecipeIndex.m */; };
 		78F9B6DF185EF5E00020B604 /* SortedTableSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F9B6DE185EF5E00020B604 /* SortedTableSectionManager.m */; };
+		78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F9B6E11860274E0020B604 /* PaddedUITableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,8 @@
 		78ECED5C184971C100B7BD5A /* RecipeIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeIndex.m; sourceTree = "<group>"; };
 		78F9B6DD185EF5E00020B604 /* SortedTableSectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedTableSectionManager.h; sourceTree = "<group>"; };
 		78F9B6DE185EF5E00020B604 /* SortedTableSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortedTableSectionManager.m; sourceTree = "<group>"; };
+		78F9B6E01860274E0020B604 /* PaddedUITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddedUITableViewCell.h; sourceTree = "<group>"; };
+		78F9B6E11860274E0020B604 /* PaddedUITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddedUITableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +206,7 @@
 				785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */,
 				785CBBEE184A71F400EB2D57 /* models */,
 				785CBBEF184A720600EB2D57 /* controllers */,
+				78F9B6E31860275D0020B604 /* views */,
 				785CBBF0184A720F00EB2D57 /* search */,
 				78A939591847C52A00B6784B /* drinks */,
 				789044A618556CC400A39B3C /* images */,
@@ -272,6 +276,15 @@
 				78A939751847C52A00B6784B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		78F9B6E31860275D0020B604 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				78F9B6E01860274E0020B604 /* PaddedUITableViewCell.h */,
+				78F9B6E11860274E0020B604 /* PaddedUITableViewCell.m */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +402,7 @@
 				78F9B6DF185EF5E00020B604 /* SortedTableSectionManager.m in Sources */,
 				78A939911847D3F300B6784B /* IngredientsViewController.m in Sources */,
 				78A939971847D9E700B6784B /* IngredientItem.m in Sources */,
+				78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */,
 				785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */,
 				78ECED5D184971C100B7BD5A /* RecipeIndex.m in Sources */,
 				785CBBFE184C05C000EB2D57 /* RecipeSearchResultItem.m in Sources */,

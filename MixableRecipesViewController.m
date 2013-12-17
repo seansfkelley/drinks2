@@ -14,6 +14,7 @@
 #import "MeasuredIngredientItem.h"
 #import "IngredientsViewController.h"
 #import "RecipeSearchResultItem.h"
+#import "PaddedUITableViewCell.h"
 
 @interface MixableRecipesViewController ()
 
@@ -115,7 +116,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    PaddedUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     RecipeItem *recipe = [self recipeResultForIndexPath:indexPath].recipe;
     cell.textLabel.text = recipe.name;
     UIImage *image = [UIImage imageNamed:recipe.normalizedName];

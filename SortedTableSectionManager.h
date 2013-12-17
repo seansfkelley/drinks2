@@ -14,10 +14,12 @@
 
 - (id)objectForIndexPath:(NSIndexPath *)indexPath;
 - (NSUInteger)sortedIndexForIndexPath:(NSIndexPath *)indexPath;
+- (NSUInteger)sectionForSectionIndexTitle:(NSString *)title;
 
 @property (readonly) NSDictionary *nameToSection;
 @property (readonly) NSArray *indexToSection;
 @property (readonly) NSArray *indexToTitle;
 @property (readonly) NSArray *sorted;
+@property (readonly) NSArray *sectionIndexTitles;
 
 @end

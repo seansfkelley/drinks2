@@ -70,15 +70,15 @@
     return [self.sections.indexToTitle objectAtIndex:section];
 }
 
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-//{
-//    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
-//}
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.sections.sectionIndexTitles;
+}
 
-//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
-//{
-//    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
-//}
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [self.sections sectionForSectionIndexTitle:title];
+}
 
 #pragma mark - Navigation
 

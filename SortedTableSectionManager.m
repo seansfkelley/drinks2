@@ -14,10 +14,13 @@
 @property (readwrite) NSArray *indexToSection;
 @property (readwrite) NSArray *indexToTitle;
 @property (readwrite) NSArray *sorted;
+@property (readwrite) NSArray *sectionIndexTitles;
 
 @end
 
 @implementation SortedTableSectionManager
+
+NSString *ALPHABET_UPPER = @"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z #";
 
 - (id)initWithArray:(NSArray *)array sortedByProperty:(NSString *)property {
     self = [super init];
@@ -47,6 +50,7 @@
         self.nameToSection = nameToSection;
         self.indexToSection = indexToSection;
         self.indexToTitle = indexToTitle;
+        self.sectionIndexTitles = [ALPHABET_UPPER componentsSeparatedByString:@" "];
     }
     return self;
 }
@@ -61,6 +65,16 @@
         index += [[self.indexToSection objectAtIndex:i] count];
     }
     return index + indexPath.row;
+}
+
+- (NSUInteger)sectionForSectionIndexTitle:(NSString *)title {
+    for (int i = (int) [self.indexToTitle count] - 1; i >= 0 ; --i) {
+        NSComparisonResult result = [title compare:[self.indexToTitle objectAtIndex:i]];
+        if (result == NSOrderedDescending || result == NSOrderedSame) {
+            return i;
+        }
+    }
+    return [self.indexToTitle count] - 1;
 }
 
 @end

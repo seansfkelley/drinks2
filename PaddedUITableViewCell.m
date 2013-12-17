@@ -8,13 +8,19 @@
 
 #import "PaddedUITableViewCell.h"
 
+#define PADDING 4
+
 @implementation PaddedUITableViewCell
 
 - (void) layoutSubviews {
     [super layoutSubviews];
     
     CGRect r = self.imageView.frame;
-    self.imageView.frame = CGRectMake(r.origin.x + 4, r.origin.y + 4, r.size.width - 8, r.size.height - 8);
+    self.imageView.frame = CGRectMake(
+        r.origin.x + PADDING,
+        r.origin.y + PADDING,
+        r.size.width  - 2 * PADDING,
+        r.size.height - 2 * PADDING);
 }
 
 @end

@@ -1,8 +1,8 @@
 mode: drinks with ingredient X in them (search bar in mixable view!)
 drink images in list
 clickable glass descriptors for a quick note on them
-less ugly directions/notes
-spacing between images in drinks list?
-
-BUGS:
-various spacing in detail view is totally fucked
+less ugly title for detail view
+move away from JSON because it's too verbose (yml would be easy and already much better)
+when switching tabs, default back to list even if it was left in detail view
+generalize notes/instructions details display mechanism to make it easier to add a source section with a URL
+icons for tab bar!

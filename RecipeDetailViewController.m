@@ -14,7 +14,6 @@
 
 @property IBOutlet UILabel *labelView;
 @property IBOutlet UITableView *ingredientsTableView;
-@property IBOutlet UITextView *instructionsTextView;
 
 @property UIBarButtonItem *nextButton;
 @property UIBarButtonItem *previousButton;
@@ -23,8 +22,20 @@
 @property NSMutableArray *sectionTitles;
 
 @property (readonly) RecipeSearchResultItem *recipeResult;
+@property (readonly) BOOL hasInstructions;
+@property (readonly) BOOL hasNotes;
 
 @end
+
+typedef enum rowTypeEnum {
+    INGREDIENT,
+    INSTRUCTIONS,
+    NOTES
+} RowType;
+
+static int DEFAULT_TABLE_CELL_HEIGHT;
+static UIFont *DEFAULT_TABLE_CELL_FONT;
+static int DEFAULT_TABLE_CELL_WIDTH;
 
 @implementation RecipeDetailViewController
 
@@ -32,9 +43,22 @@
     return [self.allRecipeResults objectAtIndex:self.currentResultIndex];
 }
 
+- (BOOL)hasInstructions {
+    return self.recipeResult.recipe.instructions != nil;
+}
+
+- (BOOL)hasNotes {
+    return self.recipeResult.recipe.notes != nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // This is some horrific shit.
+    // UITableViewCell *dummy = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+    DEFAULT_TABLE_CELL_HEIGHT = 44; // dummy.frame.size.height;
+    DEFAULT_TABLE_CELL_WIDTH  = 320 - 40; // iPhone width - inferred padding.
+    DEFAULT_TABLE_CELL_FONT   = [UIFont systemFontOfSize:14.0f]; // dummy.detailTextLabel.font;
     
     self.previousButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBarArrowUp"] style:UIBarButtonItemStylePlain target:self action:@selector(goToPrevious)];
     // TODO: These have SO MANY MUCH SPACING.
@@ -50,9 +74,7 @@
     [self generateTableSections];
     
     self.labelView.text = self.recipeResult.recipe.name;
-    self.instructionsTextView.text = [NSString stringWithFormat:@"%@\n\n%@", self.recipeResult.recipe.instructions, self.recipeResult.recipe.notes];
     [self.ingredientsTableView reloadData];
-    [self.instructionsTextView sizeToFit]; // TODO: Nonideal, but better than cutting everything off.
 }
 
 - (void)generateTableSections {
@@ -70,6 +92,13 @@
             [self.sectionIngredients addObject:[possibleSectionIngredients objectAtIndex:i]];
         }
     }
+    
+    if (self.hasInstructions) {
+        [self.sectionTitles addObject:@"Instructions"];
+    }
+    if (self.hasNotes) {
+        [self.sectionTitles addObject:@"Notes"];
+    }
 }
 
 - (void) updateNextPreviousButtonState {
@@ -81,12 +110,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.sectionIngredients count];
+    return [self.sectionTitles count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.sectionIngredients objectAtIndex:section] count];
+    if (section < [self.sectionIngredients count]) {
+        return [[self.sectionIngredients objectAtIndex:section] count];
+    } else {
+        return 1; // instructions or notes!
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -98,17 +131,71 @@
     return [section objectAtIndex:indexPath.row];
 }
 
+// Wow, this is gross.
+- (RowType)tableView:(UITableView *)tableView rowTypeForIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger sections = [self numberOfSectionsInTableView:tableView];
+    if (self.hasInstructions && self.hasNotes) {
+        if (indexPath.section == sections - 2) {
+            return INSTRUCTIONS;
+        } else if (indexPath.section == sections - 1){
+            return NOTES;
+        }
+    } else if (indexPath.section == sections - 1) {
+        if (self.hasInstructions) {
+            return INSTRUCTIONS;
+        } else if (self.hasNotes) {
+            return NOTES;
+        }
+    }
+    return INGREDIENT;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *text;
+    switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
+        case INGREDIENT:
+            return DEFAULT_TABLE_CELL_HEIGHT;
+        case NOTES:
+            text = self.recipeResult.recipe.notes;
+            break;
+        case INSTRUCTIONS:
+            text = self.recipeResult.recipe.instructions;
+            break;
+    }
+    // Is there really no better way to do this?
+    return [text boundingRectWithSize:CGSizeMake(DEFAULT_TABLE_CELL_WIDTH, FLT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:DEFAULT_TABLE_CELL_FONT} context:nil].size.height + 20; // Padding!
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"MeasuredIngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    MeasuredIngredientItem *ingredient = [self tableView:tableView ingredientAtIndexPath:indexPath];
-    if (ingredient.measurementDisplay) {
-        cell.textLabel.text = ingredient.measurementDisplay;
+    if (indexPath.section < [self.sectionIngredients count]) {
+        MeasuredIngredientItem *ingredient = [self tableView:tableView ingredientAtIndexPath:indexPath];
+        if (ingredient.measurementDisplay) {
+            cell.textLabel.text = ingredient.measurementDisplay;
+        } else {
+            cell.textLabel.text = @" "; // Trick the layout into lining up the ingredient without a measure.
+        }
+        cell.detailTextLabel.text = ingredient.ingredientDisplay;
+        cell.detailTextLabel.numberOfLines = 1;
+        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     } else {
-        cell.textLabel.text = @" "; // Trick the layout into lining up the ingredient without a measure.
+        cell.textLabel.text = @""; // DON'T trick the layout as above.
+        cell.detailTextLabel.numberOfLines = 0;
+        cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
+            case INGREDIENT:
+                NSAssert(NO, @"Ingredient case should already be handled.");
+                break;
+            case INSTRUCTIONS:
+                cell.detailTextLabel.text = self.recipeResult.recipe.instructions;
+                break;
+            case NOTES:
+                cell.detailTextLabel.text = self.recipeResult.recipe.notes;
+                break;
+        }
     }
-    cell.detailTextLabel.text = ingredient.ingredientDisplay;
     return cell;
 }
 

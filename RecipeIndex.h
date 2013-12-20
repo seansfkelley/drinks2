@@ -22,6 +22,7 @@
 - (void)save;
 - (void)load;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
+- (NSArray *)groupByMissingIngredients:(NSArray *)ingredients withSearchString:(NSString *)searchString;
 - (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe;
 
 + (NSSet *)pluckTags:(NSArray *)ingredients;

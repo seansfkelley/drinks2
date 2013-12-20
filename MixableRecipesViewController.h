@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MixableRecipesViewController : UITableViewController
+@interface MixableRecipesViewController : UITableViewController<UISearchDisplayDelegate>
 
 @end

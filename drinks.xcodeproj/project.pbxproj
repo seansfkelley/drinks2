@@ -16,6 +16,7 @@
 		785CBC0D184C377D00EB2D57 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC0C184C377D00EB2D57 /* todo */; };
 		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		785CBC12184C4E9C00EB2D57 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC11184C4E9C00EB2D57 /* README.md */; };
+		78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */; };
 		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
 		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
 		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
@@ -72,6 +73,8 @@
 		785CBC0E184C38AC00EB2D57 /* BrowseAllRecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseAllRecipesViewController.h; sourceTree = "<group>"; };
 		785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseAllRecipesViewController.m; sourceTree = "<group>"; };
 		785CBC11184C4E9C00EB2D57 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		78850C001864002700C76E3A /* MixableRecipeTableSectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixableRecipeTableSectionManager.h; sourceTree = "<group>"; };
+		78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixableRecipeTableSectionManager.m; sourceTree = "<group>"; };
 		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
 		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
 		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				78ECED5C184971C100B7BD5A /* RecipeIndex.m */,
 				78F9B6DD185EF5E00020B604 /* SortedTableSectionManager.h */,
 				78F9B6DE185EF5E00020B604 /* SortedTableSectionManager.m */,
+				78850C001864002700C76E3A /* MixableRecipeTableSectionManager.h */,
+				78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */,
 			);
 			name = search;
 			sourceTree = "<group>";
@@ -418,6 +423,7 @@
 				78A939971847D9E700B6784B /* IngredientItem.m in Sources */,
 				78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */,
 				785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */,
+				78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */,
 				78ECED5D184971C100B7BD5A /* RecipeIndex.m in Sources */,
 				785CBBFE184C05C000EB2D57 /* RecipeSearchResultItem.m in Sources */,
 				78A9399A1849649700B6784B /* RecipeItem.m in Sources */,

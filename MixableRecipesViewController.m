@@ -15,15 +15,19 @@
 #import "IngredientsViewController.h"
 #import "RecipeSearchResultItem.h"
 #import "PaddedUITableViewCell.h"
+#import "MixableRecipeTableSectionManager.h"
 
 @interface MixableRecipesViewController ()
 
-@property NSMutableArray *sectionTitles;
-@property NSMutableArray *sectionRecipeResults;
-@property NSMutableArray *allRecipeResults;
+@property NSArray *availableIngredients;
+
 @property RecipeIndex *index;
 
+@property MixableRecipeTableSectionManager *sections;
+@property MixableRecipeTableSectionManager *searchedSections;
+
 @property UIView *tableBackground;
+@property IBOutlet UISearchDisplayController *searchController;
 
 @end
 
@@ -31,36 +35,34 @@
 
 - (IBAction)unwindToRecipes:(UIStoryboardSegue *)segue
 {
-    [self recomputeAvailableRecipes];
+    [self recomputeMixableRecipes];
     [self.tableView reloadData];
     [self showEmptyViewIfNecessary];
 }
 
-- (void)recomputeAvailableRecipes
-{
-    NSArray *availableIngredientsList = [self.index.ingredients filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
+# pragma mark - Search
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    [self recomputeSearchedRecipes:searchString];
+    return YES;
+}
+
+- (void)recomputeSearchedRecipes:(NSString *)searchString {
+    self.searchedSections = [[MixableRecipeTableSectionManager alloc] initWithRecipes:[self.index groupByMissingIngredients:self.availableIngredients withSearchString:searchString]];
+}
+
+# pragma mark
+
+- (void)recomputeMixableRecipes {
+    [self recomputeAvailableIngredients];
+    
+    self.sections = [[MixableRecipeTableSectionManager alloc] initWithRecipes:[self.index groupByMissingIngredients:self.availableIngredients]];
+}
+
+- (void)recomputeAvailableIngredients {
+    self.availableIngredients = [self.index.ingredients filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^ BOOL (IngredientItem *ingredient, NSDictionary *bindings) {
         return ingredient.selected;
     }]];
-    
-    self.sectionTitles = [[NSMutableArray alloc] init];
-    self.sectionRecipeResults = [[NSMutableArray alloc] init];
-    self.allRecipeResults = [[NSMutableArray alloc] init];
-    
-    NSArray *groups = [self.index groupByMissingIngredients:availableIngredientsList];
-    for (int i = 0; i < self.index.fudgeFactor; ++i) {
-        NSArray *g = [groups objectAtIndex:i];
-        if ([g count] > 0) {
-            NSString *title;
-            switch (i) {
-                case 0:  title = @"Mixable Drinks"; break;
-                case 1:  title = @"...With Another Ingredient"; break;
-                default: title = [NSString stringWithFormat:@"...With %d More Ingredients", i];
-            }
-            [self.sectionTitles addObject:title];
-            [self.sectionRecipeResults addObject:g];
-            [self.allRecipeResults addObjectsFromArray:g];
-        }
-    }
 }
 
 - (void)viewDidLoad
@@ -73,12 +75,12 @@
     self.tableBackground = view;
     
     self.index = [RecipeIndex instance];
-    [self recomputeAvailableRecipes];
+    [self recomputeMixableRecipes];
     [self showEmptyViewIfNecessary];
 }
 
 - (void)showEmptyViewIfNecessary {
-    if ([self.sectionRecipeResults count] > 0) {
+    if (self.sections && [self.sections sectionCount] > 0) {
         self.tableView.backgroundView = nil;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     } else {
@@ -89,19 +91,22 @@
 
 #pragma mark - Table view data source
 
+- (MixableRecipeTableSectionManager *)managerForTableView:(UITableView *)tableView {
+    if (tableView == self.tableView) {
+        return self.sections;
+    } else {
+        return self.searchedSections;
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.sectionRecipeResults count];
+    return [[self managerForTableView:tableView] sectionCount];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.sectionRecipeResults objectAtIndex:section] count];
-}
-
-- (RecipeSearchResultItem *)recipeResultForIndexPath:(NSIndexPath *)indexPath {
-    NSArray *section = [self.sectionRecipeResults objectAtIndex:indexPath.section];
-    return [section objectAtIndex:indexPath.row];
+    return [[self managerForTableView:tableView] numberOfRowsInSection:section];
 }
 
 //- (NSString *)subtitleForRecipe:(RecipeItem *)recipe {
@@ -113,11 +118,13 @@
 //    return [displayStrings componentsJoinedByString:@", "];
 //}
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
-    PaddedUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    RecipeItem *recipe = [self recipeResultForIndexPath:indexPath].recipe;
+    PaddedUITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    RecipeItem *recipe = [[self managerForTableView:tableView] recipeResultForIndexPath:indexPath].recipe;
     cell.textLabel.text = recipe.name;
     UIImage *image = [UIImage imageNamed:recipe.normalizedName];
     if (!image) {
@@ -125,11 +132,12 @@
     }
     cell.imageView.image = image;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu ingredients", [recipe.measuredIngredients count]];
+    
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.sectionTitles objectAtIndex:section];
+    return [[self managerForTableView:tableView].sectionTitles objectAtIndex:section];
 }
 
 #pragma mark - Navigation
@@ -152,11 +160,13 @@
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        detail.allRecipeResults = self.allRecipeResults;
-        NSString *selectedName = [self recipeResultForIndexPath:indexPath].recipe.name;
+        // herp derp, need to know who got us here in the first place (tableView, that is).
+        NSArray *all = self.sections.allRecipeResults;
+        detail.allRecipeResults = all; // Unconditionally everything!
+        NSString *selectedName = [self.sections recipeResultForIndexPath:indexPath].recipe.name;
         // TODO: YAY LINEAR TIME
-        for (int i = 0; i < [self.allRecipeResults count]; ++i) {
-            RecipeSearchResultItem *r = [self.allRecipeResults objectAtIndex:i];
+        for (int i = 0; i < [all count]; ++i) {
+            RecipeSearchResultItem *r = [all objectAtIndex:i];
             if ([r.recipe.name isEqualToString:selectedName]) {
                 detail.currentResultIndex = i;
                 break;

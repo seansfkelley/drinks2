@@ -218,7 +218,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 }
 
 
-- (NSArray *)groupByMissingIngredients:(NSArray *)ingredients {
+- (NSMutableArray *)_internalGroupByMissingIngredients:(NSArray *)ingredients {
     NSSet *genericIngredients = [RecipeIndex pluckGenericTags:ingredients];
     NSSet *allTags = [RecipeIndex pluckAllTags:ingredients];
     
@@ -239,6 +239,25 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         }];
     }
     return grouped;
+}
+
+- (NSArray *)groupByMissingIngredients:(NSArray *)ingredients {
+    return [self _internalGroupByMissingIngredients:ingredients];
+}
+
+- (NSArray *)groupByMissingIngredients:(NSArray *)ingredients withSearchString:(NSString *)searchString {
+    NSMutableArray *grouped = [self _internalGroupByMissingIngredients:ingredients];
+    if ([searchString isEqualToString:@""]) {
+        return grouped;
+    } else {
+        NSMutableArray *filtered = [[NSMutableArray alloc] init];
+        NSPredicate *p = [NSPredicate predicateWithFormat:@"self.recipe.name contains[cd] %@", searchString];
+        for (NSMutableArray *g in grouped) {
+            NSArray *filteredGroup = [g filteredArrayUsingPredicate:p];
+            [filtered addObject:filteredGroup];
+        }
+        return filtered;
+    }
 }
 
 - (void)save {

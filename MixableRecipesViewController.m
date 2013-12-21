@@ -31,6 +31,8 @@
 
 @end
 
+const CGFloat ROW_HEIGHT = 88.0f;
+
 @implementation MixableRecipesViewController
 
 - (IBAction)unwindToRecipes:(UIStoryboardSegue *)segue
@@ -122,6 +124,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecipePrototypeCell";
+    tableView.rowHeight = ROW_HEIGHT;
     PaddedUITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     RecipeItem *recipe = [[self managerForTableView:tableView] recipeResultForIndexPath:indexPath].recipe;
@@ -140,10 +143,18 @@
     return [[self managerForTableView:tableView].sectionTitles objectAtIndex:section];
 }
 
++ (id)nearestSuperview:(UIView *)view ofType:(Class)class {
+    UIView *superview = view.superview;
+    while (superview && ![superview isKindOfClass:class]) {
+        superview = superview.superview;
+    }
+    return superview;
+}
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
 {
     // http://stackoverflow.com/questions/15414146/uitableview-prepareforsegue-assigning-indexpath-to-sender
     UIViewController *controller;
@@ -157,13 +168,16 @@
     if ([controller isKindOfClass:[IngredientsViewController class]]) {
         IngredientsViewController *ingredients = (IngredientsViewController *)controller;
         ingredients.index = self.index;
+        
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        // herp derp, need to know who got us here in the first place (tableView, that is).
-        NSArray *all = self.sections.allRecipeResults;
-        detail.allRecipeResults = all; // Unconditionally everything!
-        NSString *selectedName = [self.sections recipeResultForIndexPath:indexPath].recipe.name;
+        UITableView *currentTableView = [MixableRecipesViewController nearestSuperview:sender ofType:[UITableView class]];
+        NSIndexPath *indexPath = [currentTableView indexPathForSelectedRow];
+        
+        MixableRecipeTableSectionManager *manager = [self managerForTableView:currentTableView];
+        NSArray *all = manager.allRecipeResults;
+        detail.allRecipeResults = all;
+        NSString *selectedName = [manager recipeResultForIndexPath:indexPath].recipe.name;
         // TODO: YAY LINEAR TIME
         for (int i = 0; i < [all count]; ++i) {
             RecipeSearchResultItem *r = [all objectAtIndex:i];

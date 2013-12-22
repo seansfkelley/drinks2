@@ -20,6 +20,7 @@
 		78850C0418666ED800C76E3A /* sources.json in Resources */ = {isa = PBXBuildFile; fileRef = 78850C0318666ED800C76E3A /* sources.json */; };
 		78850C0718666F1C00C76E3A /* SourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0618666F1C00C76E3A /* SourceItem.m */; };
 		78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C09186678D600C76E3A /* SourceSiteViewController.m */; };
+		78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */; };
 		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
 		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
 		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
@@ -83,6 +84,8 @@
 		78850C0618666F1C00C76E3A /* SourceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceItem.m; sourceTree = "<group>"; };
 		78850C08186678D600C76E3A /* SourceSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSiteViewController.h; sourceTree = "<group>"; };
 		78850C09186678D600C76E3A /* SourceSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceSiteViewController.m; sourceTree = "<group>"; };
+		78850C0E1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoppingTabBarControllerDelegate.h; sourceTree = "<group>"; };
+		78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoppingTabBarControllerDelegate.m; sourceTree = "<group>"; };
 		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
 		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
 		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
@@ -198,6 +201,15 @@
 			name = search;
 			sourceTree = "<group>";
 		};
+		78850C111866D77A00C76E3A /* delegates */ = {
+			isa = PBXGroup;
+			children = (
+				78850C0E1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.h */,
+				78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */,
+			);
+			name = delegates;
+			sourceTree = "<group>";
+		};
 		788D1FF61858462A0020898F /* drinks */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +246,7 @@
 				785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */,
 				785CBBEE184A71F400EB2D57 /* models */,
 				785CBBEF184A720600EB2D57 /* controllers */,
+				78850C111866D77A00C76E3A /* delegates */,
 				78F9B6E31860275D0020B604 /* views */,
 				785CBBF0184A720F00EB2D57 /* search */,
 				78A939591847C52A00B6784B /* drinks */,
@@ -442,6 +455,7 @@
 				78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */,
 				78ECED5D184971C100B7BD5A /* RecipeIndex.m in Sources */,
 				785CBBFE184C05C000EB2D57 /* RecipeSearchResultItem.m in Sources */,
+				78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */,
 				78A9399A1849649700B6784B /* RecipeItem.m in Sources */,
 				78A939601847C52A00B6784B /* main.m in Sources */,
 			);

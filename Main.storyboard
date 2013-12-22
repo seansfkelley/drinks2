@@ -233,11 +233,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="delegate" destination="bKI-ea-Yy1" id="WPE-KR-zVM"/>
                         <segue destination="ztg-tk-JKT" kind="relationship" relationship="viewControllers" id="VGU-Zd-se5"/>
                         <segue destination="i8C-30-O0P" kind="relationship" relationship="viewControllers" id="OE3-v0-4l7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQo-qM-HbJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="bKI-ea-Yy1" customClass="PoppingTabBarControllerDelegate"/>
             </objects>
             <point key="canvasLocation" x="-1010" y="-116"/>
         </scene>
@@ -352,6 +354,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="nx5-aG-Zab"/>
+        <segue reference="fib-UR-VhX"/>
     </inferredMetricsTieBreakers>
 </document>

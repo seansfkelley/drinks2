@@ -2,6 +2,6 @@ drink images in list
 clickable glass descriptors for a quick note on them
 less ugly title for detail view
 move away from JSON because it's too verbose (yml would be easy and already much better)
-when switching tabs, default back to list even if it was left in detail view
 stylize notes text
 icons for tab bar!
+custom drink input for users

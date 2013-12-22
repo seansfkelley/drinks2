@@ -34,14 +34,10 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         if (!index) {
             index = [[RecipeIndex alloc] init];
             
-            NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
-            index.ingredients = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
-            
-            NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"sources" ofType:@".json"];
-            index.sources = [RecipeIndex loadSourcesFromFile:sourcesPath];
-            
-            NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
-            index.recipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients withSources:index.sources];
+            if (![index bootstrapIndexFromUserState]) {
+                [index bootstrapIndexFromJson];
+                [index saveUserState];
+            }
             
             index.fudgeFactor = 3;
             
@@ -50,6 +46,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         return index;
     }
 }
+
+# pragma mark - Utility functions for searching
 
 + (NSSet *)pluckTags:(NSArray *)ingredients {
     NSMutableSet *tags = [[NSMutableSet alloc] init];
@@ -90,6 +88,19 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         }
     }
     return missing;
+}
+
+# pragma mark - Initial app load from JSON
+
+- (void)bootstrapIndexFromJson {
+    NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
+    self.ingredients = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
+    
+    NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"sources" ofType:@".json"];
+    self.sources = [RecipeIndex loadSourcesFromFile:sourcesPath];
+    
+    NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
+    self.recipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:self.ingredients withSources:self.sources];
 }
 
 + (id)loadJsonFromFile:(NSString *)path {
@@ -192,6 +203,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     }
     return parsedSources;
 }
+
+# pragma mark - Public functions for searching
 
 - (void)index {
     self.tagToIngredient = [[NSMutableDictionary alloc] init];
@@ -296,6 +309,9 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     }
 }
 
+# pragma mark - Save/load functions
+
+// TODO: Rename: this should only save transient selection state and such.
 - (void)save {
     NSMutableArray *selectedTags = [[NSMutableArray alloc] init];
     for (IngredientItem *i in self.ingredients) {
@@ -306,11 +322,20 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     [[NSUserDefaults standardUserDefaults] setObject:selectedTags forKey:SELECTED_KEY];
 }
 
+- (void)saveUserState {
+    // TODO: Save what ingredients, recipes, etc. exist.
+}
+
+// TODO: Rename: same reasons as -save.
 - (void)load {
     NSSet *selectedTags = [[NSSet alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:SELECTED_KEY]];
     for (IngredientItem *i in self.ingredients) {
         i.selected = [selectedTags containsObject:i.tag];
     }
+}
+
+- (BOOL)bootstrapIndexFromUserState {
+    return NO;
 }
 
 @end

@@ -9,11 +9,13 @@
 #import "RecipeDetailViewController.h"
 #import "MeasuredIngredientItem.h"
 #import "RecipeIndex.h"
+#import "SourceSiteViewController.h"
 
 @interface RecipeDetailViewController ()
 
 @property IBOutlet UILabel *labelView;
 @property IBOutlet UITableView *ingredientsTableView;
+@property IBOutlet SourceSiteViewController *sourceController;
 
 @property UIBarButtonItem *nextButton;
 @property UIBarButtonItem *previousButton;
@@ -180,10 +182,14 @@ static int DEFAULT_TABLE_CELL_WIDTH;
         cell.detailTextLabel.text = ingredient.ingredientDisplay;
         cell.detailTextLabel.numberOfLines = 1;
         cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.userInteractionEnabled = NO;
     } else {
         cell.textLabel.text = @""; // DON'T trick the layout as above.
         cell.detailTextLabel.numberOfLines = 0;
         cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+        cell.userInteractionEnabled = YES;
         switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
             case INGREDIENT:
                 NSAssert(NO, @"Ingredient case should already be handled.");
@@ -209,7 +215,36 @@ static int DEFAULT_TABLE_CELL_WIDTH;
     return nil;
 }
 
+# pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
+    [self performSegueWithIdentifier:@"sourceSiteSegue" sender:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UIViewController *controller;
+    if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        controller = [navController.viewControllers objectAtIndex:0];
+    } else {
+        controller = segue.destinationViewController;
+    }
+    
+    if ([controller isKindOfClass:[SourceSiteViewController class]]) {
+        SourceSiteViewController *sourceSite = (SourceSiteViewController *)controller;
+        sourceSite.recipe = self.recipeResult.recipe;
+    } else {
+        NSAssert(NO, @"Unknown segue. All segues must be handled.");
+    }
+}
+
 #pragma mark - IBActions
+
+- (IBAction)unwindToDetails:(UIStoryboardSegue *)segue {
+    
+}
 
 - (void)goToPrevious {
     self.currentResultIndex--;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SourceItem.h"
 
-@interface RecipeItem : NSObject
+@interface RecipeItem : NSObject<NSCoding>
 
 - (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)measuredIngredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes withSource:(SourceItem *)source withSourceOverrideUrl:(NSString *)sourceOverrideUrl;
 

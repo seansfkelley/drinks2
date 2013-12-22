@@ -4,4 +4,7 @@ less ugly title for detail view
 move away from JSON because it's too verbose (yml would be easy and already much better)
 stylize notes text
 icons for tab bar!
-custom drink input for users
+
+smarter saving/loading to disk
+- included recipes should just be bootstrap
+- allow custom drink input from users

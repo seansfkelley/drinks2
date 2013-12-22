@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SourceItem : NSObject
+@interface SourceItem : NSObject<NSCoding>
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *url;

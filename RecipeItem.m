@@ -54,4 +54,25 @@
     return [[normalized lowercaseString] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
 }
 
+# pragma mark - NSCoding protocol
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    NSString *name = [aDecoder decodeObjectForKey:@"name"];
+    NSArray *measuredIngredients = [aDecoder decodeObjectForKey:@"measuredIngredients"];
+    NSString *instructions = [aDecoder decodeObjectForKey:@"instructions"];
+    NSString *notes = [aDecoder decodeObjectForKey:@"notes"];
+    SourceItem *source = [aDecoder decodeObjectForKey:@"source"];
+    NSString *sourceOverrideUrl = [aDecoder decodeObjectForKey:@"sourceOverrideUrl"];
+    return [self initWithName:name withMeasuredIngredients:measuredIngredients withInstructions:instructions withNotes:notes withSource:source withSourceOverrideUrl:sourceOverrideUrl];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:self.measuredIngredients forKey:@"measuredIngredients"];
+    [aCoder encodeObject:self.instructions forKey:@"instructions"];
+    [aCoder encodeObject:self.notes forKey:@"notes"];
+    [aCoder encodeObject:self.source forKey:@"source"];
+    [aCoder encodeObject:self.sourceOverrideUrl forKey:@"sourceOverrideUrl"];
+}
+
 @end

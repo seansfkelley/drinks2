@@ -8,10 +8,12 @@
 
 #import "IngredientItem.h"
 
-@interface MeasuredIngredientItem : NSObject
+@interface MeasuredIngredientItem : NSObject<NSCoding>
 
-@property IngredientItem *ingredient;
-@property NSString *measurementDisplay;
-@property NSString *ingredientDisplay;
+@property (readonly) IngredientItem *ingredient;
+@property (readonly) NSString *measurementDisplay;
+@property (readonly) NSString *ingredientDisplay;
+
+- (id)initWithIngredient:(IngredientItem *)ingredient withMeasurementDisplay:(NSString *)measurementDisplay withIngredientDisplay:(NSString *)ingredientDisplay;
 
 @end

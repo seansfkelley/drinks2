@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IngredientItem : NSObject
+@interface IngredientItem : NSObject<NSCoding>
 
 - (id)initWithDisplayName:(NSString*)displayName withTag:(NSString*)tag withGenericTag:(NSString*)genericTag withHiddenFlag:(BOOL)hidden;
 

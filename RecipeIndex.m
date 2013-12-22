@@ -133,10 +133,10 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
                 fail = YES;
                 break;
             } else {
-                MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc] init];
-                m.ingredient = [tagToIngredient objectForKey:tag];
-                m.measurementDisplay = [jsonIngredient objectForKey:@"displayMeasure"];
-                m.ingredientDisplay = [jsonIngredient objectForKey:@"displayIngredient"];
+                MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc]
+                                             initWithIngredient:[tagToIngredient objectForKey:tag]
+                                             withMeasurementDisplay:[jsonIngredient objectForKey:@"displayMeasure"]
+                                             withIngredientDisplay:[jsonIngredient objectForKey:@"displayIngredient"]];
                 [parsedIngredients addObject:m];
             }
         }

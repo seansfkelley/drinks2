@@ -15,7 +15,6 @@
 
 @property IBOutlet UILabel *labelView;
 @property IBOutlet UITableView *ingredientsTableView;
-@property IBOutlet SourceSiteViewController *sourceController;
 
 @property UIBarButtonItem *nextButton;
 @property UIBarButtonItem *previousButton;
@@ -26,13 +25,15 @@
 @property (readonly) RecipeSearchResultItem *recipeResult;
 @property (readonly) BOOL hasInstructions;
 @property (readonly) BOOL hasNotes;
+@property (readonly) BOOL hasSource;
 
 @end
 
 typedef enum rowTypeEnum {
     INGREDIENT,
     INSTRUCTIONS,
-    NOTES
+    NOTES,
+    SOURCE
 } RowType;
 
 static int DEFAULT_TABLE_CELL_HEIGHT;
@@ -51,6 +52,10 @@ static int DEFAULT_TABLE_CELL_WIDTH;
 
 - (BOOL)hasNotes {
     return self.recipeResult.recipe.notes != nil;
+}
+
+- (BOOL)hasSource {
+    return self.recipeResult.recipe.source != nil;
 }
 
 - (void)viewDidLoad
@@ -101,6 +106,9 @@ static int DEFAULT_TABLE_CELL_WIDTH;
     if (self.hasNotes) {
         [self.sectionTitles addObject:@"Notes"];
     }
+    if (self.hasSource) {
+        [self.sectionTitles addObject:@"Source"];
+    }
 }
 
 - (void) updateNextPreviousButtonState {
@@ -135,26 +143,24 @@ static int DEFAULT_TABLE_CELL_WIDTH;
 
 // Wow, this is gross.
 - (RowType)tableView:(UITableView *)tableView rowTypeForIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger sections = [self numberOfSectionsInTableView:tableView];
-    if (self.hasInstructions && self.hasNotes) {
-        if (indexPath.section == sections - 2) {
-            return INSTRUCTIONS;
-        } else if (indexPath.section == sections - 1){
-            return NOTES;
-        }
-    } else if (indexPath.section == sections - 1) {
-        if (self.hasInstructions) {
-            return INSTRUCTIONS;
-        } else if (self.hasNotes) {
-            return NOTES;
-        }
+    NSUInteger extraSections = (self.hasInstructions ? 1 : 0) + (self.hasNotes ? 1 : 0) + (self.hasSource ? 1 : 0);
+    NSInteger sectionDiff = indexPath.section - ([self numberOfSectionsInTableView:tableView] - extraSections);
+    switch (sectionDiff) {
+        case 0:
+            if (self.hasInstructions) return INSTRUCTIONS;
+        case 1: // FALL-THROUGH
+            if (self.hasNotes) return NOTES;
+        case 2: // FALL-THROUGH
+            return SOURCE;
+        default:
+            return INGREDIENT;
     }
-    return INGREDIENT;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *text;
     switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
+        case SOURCE:
         case INGREDIENT:
             return DEFAULT_TABLE_CELL_HEIGHT;
         case NOTES:
@@ -165,13 +171,20 @@ static int DEFAULT_TABLE_CELL_WIDTH;
             break;
     }
     // Is there really no better way to do this?
-    return [text boundingRectWithSize:CGSizeMake(DEFAULT_TABLE_CELL_WIDTH, FLT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:DEFAULT_TABLE_CELL_FONT} context:nil].size.height + 20; // Padding!
+    return [text boundingRectWithSize:CGSizeMake(DEFAULT_TABLE_CELL_WIDTH, FLT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:DEFAULT_TABLE_CELL_FONT} context:nil].size.height + 30; // Padding!
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"MeasuredIngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // Reset some stuff.
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.userInteractionEnabled = NO;
+    
+    // Configure!
     if (indexPath.section < [self.sectionIngredients count]) {
         MeasuredIngredientItem *ingredient = [self tableView:tableView ingredientAtIndexPath:indexPath];
         if (ingredient.measurementDisplay) {
@@ -182,17 +195,19 @@ static int DEFAULT_TABLE_CELL_WIDTH;
         cell.detailTextLabel.text = ingredient.ingredientDisplay;
         cell.detailTextLabel.numberOfLines = 1;
         cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.userInteractionEnabled = NO;
     } else {
         cell.textLabel.text = @""; // DON'T trick the layout as above.
         cell.detailTextLabel.numberOfLines = 0;
         cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        cell.userInteractionEnabled = YES;
         switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
             case INGREDIENT:
                 NSAssert(NO, @"Ingredient case should already be handled.");
+                break;
+            case SOURCE:
+                cell.detailTextLabel.text = self.recipeResult.recipe.source.name;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                cell.userInteractionEnabled = YES;
                 break;
             case INSTRUCTIONS:
                 cell.detailTextLabel.text = self.recipeResult.recipe.instructions;
@@ -205,21 +220,10 @@ static int DEFAULT_TABLE_CELL_WIDTH;
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == [self.sectionTitles count] - 1) { // Last section.
-        RecipeItem *recipe = self.recipeResult.recipe;
-        if (recipe.source) {
-            return [NSString stringWithFormat:@"Source: %@", recipe.source.name];
-        }
-    }
-    return nil;
-}
-
 # pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selected = NO;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self performSegueWithIdentifier:@"sourceSiteSegue" sender:nil];
 }
 

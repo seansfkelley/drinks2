@@ -79,6 +79,7 @@ const CGFloat ROW_HEIGHT = 88.0f;
     self.index = [RecipeIndex instance];
     [self recomputeMixableRecipes];
     [self showEmptyViewIfNecessary];
+    [self scrollToHideSearch];
 }
 
 - (void)showEmptyViewIfNecessary {
@@ -89,6 +90,10 @@ const CGFloat ROW_HEIGHT = 88.0f;
         self.tableView.backgroundView = self.tableBackground;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
+}
+
+- (void)scrollToHideSearch {
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 #pragma mark - Table view data source

@@ -199,7 +199,15 @@ static int DEFAULT_TABLE_CELL_WIDTH;
     return cell;
 }
 
-#pragma mark - Table view delegate
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == [self.sectionTitles count] - 1) { // Last section.
+        RecipeItem *recipe = self.recipeResult.recipe;
+        if (recipe.source) {
+            return [NSString stringWithFormat:@"Source: %@", recipe.source.name];
+        }
+    }
+    return nil;
+}
 
 #pragma mark - IBActions
 

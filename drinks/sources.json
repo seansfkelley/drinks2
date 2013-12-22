@@ -1,0 +1,38 @@
+{
+  "clover-club": {
+    "name": "The Clover Club, NY",
+    "url": "http://cloverclubny.com"
+  },
+  "saloon": {
+    "name": "Saloon",
+    "url": "http://www.saloondavis.com"
+  },
+  "drunken-moogle": {
+    "name": "The Drunken Moogle",
+    "url": "http://thedrunkenmoogle.com"
+  },
+  "cocktalia": {
+    "name": "Cocktalia",
+    "url": "http://cocktalia.com"
+  },
+  "saveur": {
+    "name": "Saveur",
+    "url": "http://www.saveur.com"
+  },
+  "nytimes": {
+    "name": "NY Times",
+    "url": "http://nytimes.com/pages/dining/"
+  },
+  "serious-eats": {
+    "name": "serious eats",
+    "url": "http://www.seriouseats.com"
+  },
+  "sloshed": {
+    "name": "Sloshed!",
+    "url": "http://sloshed.hyperkinetic.org/"
+  },
+  "loungerati": {
+    "name": "Loungerati",
+    "url": "http://loungerati.blogspot.com/"
+  }
+}

@@ -15,17 +15,23 @@
 @property (readwrite) NSArray *measuredIngredients;
 @property (readwrite) NSString *instructions;
 @property (readwrite) NSString *notes;
+@property (readwrite) SourceItem *source;
+@property (readwrite) NSString *sourceOverrideUrl;
 
 @end
 
 @implementation RecipeItem
 
-- (id)initWithName:(NSString *)name withMeasuredIngredients:(NSArray *)ingredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes {
+- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)measuredIngredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes withSource:(SourceItem *)source withSourceOverrideUrl:(NSString *)sourceOverrideUrl{
     self = [super init];
-    self.name = [name copy];
-    self.measuredIngredients = [ingredients copy];
-    self.instructions = [instructions copy];
-    self.notes = [notes copy];
+    if (self) {
+        self.name = name;
+        self.measuredIngredients = measuredIngredients;
+        self.instructions = instructions;
+        self.notes = notes;
+        self.source = source;
+        self.sourceOverrideUrl = sourceOverrideUrl;
+    }
     return self;
 }
 

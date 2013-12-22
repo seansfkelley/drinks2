@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RecipeSearchResultItem.h"
 
-@interface RecipeDetailViewController : UIViewController
+@interface RecipeDetailViewController : UIViewController<UITableViewDataSource>
 
 @property NSArray *allRecipeResults;
 @property int currentResultIndex;

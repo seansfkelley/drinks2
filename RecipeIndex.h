@@ -16,6 +16,7 @@
 @property (readonly) int fudgeFactor;
 @property (readonly) NSArray *ingredients;
 @property (readonly) NSArray *recipes;
+@property (readonly) NSDictionary *sources;
 
 + (RecipeIndex *)instance;
 

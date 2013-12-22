@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SourceItem.h"
 
 @interface RecipeItem : NSObject
 
-- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)ingredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes;
+- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)measuredIngredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes withSource:(SourceItem *)source withSourceOverrideUrl:(NSString *)sourceOverrideUrl;
 
 @property (readonly) NSString *name;
 @property (readonly) NSString *normalizedName;
@@ -18,5 +19,7 @@
 @property (readonly) NSArray *rawIngredients;
 @property (readonly) NSString *instructions;
 @property (readonly) NSString *notes;
+@property (readonly) SourceItem *source;
+@property (readonly) NSString *sourceOverrideUrl;
 
 @end

@@ -275,9 +275,21 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         return grouped;
     } else {
         NSMutableArray *filtered = [[NSMutableArray alloc] init];
-        NSPredicate *p = [NSPredicate predicateWithFormat:@"self.recipe.name contains[cd] %@", searchString];
+        NSPredicate *stringPredicate = [NSPredicate predicateWithFormat:@"self contains[cd] %@", searchString];
+        NSPredicate *recipePredicate = [NSPredicate predicateWithBlock:^BOOL(RecipeSearchResultItem *r, NSDictionary *bindings) {
+            if ([stringPredicate evaluateWithObject:r.recipe.name]) {
+                return true;
+            } else {
+                for (MeasuredIngredientItem *i in r.recipe.measuredIngredients) {
+                    if ([stringPredicate evaluateWithObject:i.ingredient.tag]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }];
         for (NSMutableArray *g in grouped) {
-            NSArray *filteredGroup = [g filteredArrayUsingPredicate:p];
+            NSArray *filteredGroup = [g filteredArrayUsingPredicate:recipePredicate];
             [filtered addObject:filteredGroup];
         }
         return filtered;

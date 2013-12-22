@@ -138,8 +138,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="viA-L2-bdl"/>
                     <connections>
-                        <outlet property="ingredientsTableView" destination="zSu-aU-0Mw" id="sHB-t5-md1"/>
                         <outlet property="labelView" destination="A9y-Jq-hxt" id="GAm-9B-IdB"/>
+                        <outlet property="tableView" destination="zSu-aU-0Mw" id="tc0-Ho-UcA"/>
                         <segue destination="YcL-h0-KYo" kind="push" identifier="sourceSiteSegue" id="cGe-1H-Mgn"/>
                     </connections>
                 </viewController>

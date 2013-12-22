@@ -14,7 +14,7 @@
 @interface RecipeDetailViewController ()
 
 @property IBOutlet UILabel *labelView;
-@property IBOutlet UITableView *ingredientsTableView;
+@property IBOutlet UITableView *tableView;
 
 @property UIBarButtonItem *nextButton;
 @property UIBarButtonItem *previousButton;
@@ -81,7 +81,8 @@ static int DEFAULT_TABLE_CELL_WIDTH;
     [self generateTableSections];
     
     self.labelView.text = self.recipeResult.recipe.name;
-    [self.ingredientsTableView reloadData];
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointMake(0.0f, -self.tableView.contentInset.top) animated:YES];
 }
 
 - (void)generateTableSections {

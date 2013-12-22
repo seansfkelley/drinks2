@@ -4,7 +4,8 @@ less ugly title for detail view
 move away from JSON because it's too verbose (yml would be easy and already much better)
 stylize notes text
 icons for tab bar!
+rewrite sources -- no need for another object, just a name and URL (even with repeats this is probably the better solution)
 
 smarter saving/loading to disk
-- included recipes should just be bootstrap
 - allow custom drink input from users
+- instead of persisting everything included in the JSON, only persist custom ones and merge them in before indexing

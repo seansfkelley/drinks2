@@ -32,11 +32,11 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     static RecipeIndex *index;
     @synchronized(self) {
         if (!index) {
-            index = [[RecipeIndex alloc] init];
+            index = [RecipeIndex bootstrapIndexFromUserState];
             
-            if (![index bootstrapIndexFromUserState]) {
-                [index bootstrapIndexFromJson];
-                [index saveUserState];
+            if (!index) {
+                index = [RecipeIndex bootstrapIndexFromJson];
+                [index savePermanentState];
             }
             
             index.fudgeFactor = 3;
@@ -92,15 +92,19 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 
 # pragma mark - Initial app load from JSON
 
-- (void)bootstrapIndexFromJson {
++ (RecipeIndex *)bootstrapIndexFromJson {
+    RecipeIndex *index = [[RecipeIndex alloc] init];
+    
     NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
-    self.ingredients = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
+    index.ingredients = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
     
     NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"sources" ofType:@".json"];
-    self.sources = [RecipeIndex loadSourcesFromFile:sourcesPath];
+    index.sources = [RecipeIndex loadSourcesFromFile:sourcesPath];
     
     NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
-    self.recipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:self.ingredients withSources:self.sources];
+    index.recipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients withSources:index.sources];
+    
+    return index;
 }
 
 + (id)loadJsonFromFile:(NSString *)path {
@@ -311,8 +315,23 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 
 # pragma mark - Save/load functions
 
-// TODO: Rename: this should only save transient selection state and such.
-- (void)save {
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.ingredients = [aDecoder decodeObjectForKey:@"ingredients"];
+        self.sources = [aDecoder decodeObjectForKey:@"sources"];
+        self.recipes = [aDecoder decodeObjectForKey:@"recipes"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.ingredients forKey:@"ingredients"];
+    [aCoder encodeObject:self.sources forKey:@"sources"];
+    [aCoder encodeObject:self.recipes forKey:@"recipes"];
+}
+
+- (void)saveTransientState {
     NSMutableArray *selectedTags = [[NSMutableArray alloc] init];
     for (IngredientItem *i in self.ingredients) {
         if (i.selected) {
@@ -322,20 +341,40 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     [[NSUserDefaults standardUserDefaults] setObject:selectedTags forKey:SELECTED_KEY];
 }
 
-- (void)saveUserState {
-    // TODO: Save what ingredients, recipes, etc. exist.
+- (void)savePermanentState {
+    [NSKeyedArchiver archiveRootObject:self toFile:[RecipeIndex dataFilePath]];
 }
 
-// TODO: Rename: same reasons as -save.
-- (void)load {
+- (void)loadTransientState {
     NSSet *selectedTags = [[NSSet alloc] initWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:SELECTED_KEY]];
     for (IngredientItem *i in self.ingredients) {
         i.selected = [selectedTags containsObject:i.tag];
     }
 }
 
-- (BOOL)bootstrapIndexFromUserState {
-    return NO;
++ (NSString *)dataDirectory {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+}
+
++ (NSString *)dataFilePath {
+    return [NSString stringWithFormat:@"%@/%@", [RecipeIndex dataDirectory], @"drinks.dat"];
+}
+
++ (BOOL)createDirectoryAtPath:(NSString *)path {
+    NSError *error;
+    BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    if (!success) {
+        NSLog(@"Error creating directory: %@", error.localizedDescription);
+    }
+    return success;
+}
+
++ (RecipeIndex *)bootstrapIndexFromUserState {
+    NSData *data = [[NSData alloc] initWithContentsOfFile:[RecipeIndex dataFilePath]];
+    if (!data) {
+        return nil;
+    }
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[RecipeIndex dataFilePath]];
 }
 
 @end

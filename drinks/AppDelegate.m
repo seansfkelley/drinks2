@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.index = [RecipeIndex instance];
-    [self.index load];
+    [self.index loadTransientState];
     return YES;
 }
 
@@ -32,7 +32,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [self.index save];
+    [self.index saveTransientState];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -47,7 +47,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [self.index save];
+    [self.index savePermanentState];
+    [self.index saveTransientState];
+    
 }
 
 @end

@@ -11,7 +11,7 @@
 #import "RecipeSearchResultItem.h"
 #import "RecipeItem.h"
 
-@interface RecipeIndex : NSObject
+@interface RecipeIndex : NSObject<NSCoding>
 
 @property (readonly) int fudgeFactor;
 @property (readonly) NSArray *ingredients;
@@ -20,8 +20,9 @@
 
 + (RecipeIndex *)instance;
 
-- (void)save;
-- (void)load;
+- (void)saveTransientState;
+- (void)savePermanentState;
+- (void)loadTransientState;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients withSearchString:(NSString *)searchString;
 - (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe;

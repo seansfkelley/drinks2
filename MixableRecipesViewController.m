@@ -159,7 +159,6 @@ const CGFloat ROW_HEIGHT = 88.0f;
 
 #pragma mark - Navigation
 
-// In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
 {
     // http://stackoverflow.com/questions/15414146/uitableview-prepareforsegue-assigning-indexpath-to-sender
@@ -193,7 +192,8 @@ const CGFloat ROW_HEIGHT = 88.0f;
             }
         }
     } else if ([controller isKindOfClass:[CustomDrinkTableViewController class]]) {
-        // nop
+        CustomDrinkTableViewController *custom = (CustomDrinkTableViewController *)controller;
+        custom.index = self.index;
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }

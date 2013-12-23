@@ -8,6 +8,7 @@
 
 #import "CustomDrinkTableViewController.h"
 #import "MeasuredIngredientItem.h"
+#import "ChooseSingleIngredientViewController.h"
 
 typedef enum rowTypeEnum {
     ONE_LINE_TEXT,
@@ -213,6 +214,32 @@ typedef enum rowTypeEnum {
     }
     NSAssert(NO, @"Should not be requesting the editing type for non-ingredient sections.");
     return UITableViewCellEditingStyleNone;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
+{
+    UIViewController *controller;
+    if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        controller = [navController.viewControllers objectAtIndex:0];
+    } else {
+        controller = segue.destinationViewController;
+    }
+
+    if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
+        ChooseSingleIngredientViewController *ingredients = (ChooseSingleIngredientViewController *)controller;
+        ingredients.index = self.index;
+    } else {
+        NSAssert(NO, @"Unknown segue. All segues must be handled.");
+    }
+}
+
+# pragma mark - IBActions
+
+- (IBAction)unwindToCustom:(UIStoryboardSegue *)segue {
+    
 }
 
 /*

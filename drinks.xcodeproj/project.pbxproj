@@ -26,6 +26,7 @@
 		78850C221868305200C76E3A /* OneLineTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C211868305200C76E3A /* OneLineTextTableViewCell.m */; };
 		78850C25186832F400C76E3A /* LongFormTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C24186832F400C76E3A /* LongFormTextTableViewCell.m */; };
 		78850C2C1868411000C76E3A /* AddIngredientTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C2B1868411000C76E3A /* AddIngredientTableViewController.m */; };
+		78850C2F1868430100C76E3A /* ChooseSingleIngredientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C2E1868430100C76E3A /* ChooseSingleIngredientViewController.m */; };
 		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
 		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
 		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
@@ -100,6 +101,8 @@
 		78850C24186832F400C76E3A /* LongFormTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongFormTextTableViewCell.m; sourceTree = "<group>"; };
 		78850C2A1868411000C76E3A /* AddIngredientTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddIngredientTableViewController.h; sourceTree = "<group>"; };
 		78850C2B1868411000C76E3A /* AddIngredientTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddIngredientTableViewController.m; sourceTree = "<group>"; };
+		78850C2D1868430100C76E3A /* ChooseSingleIngredientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSingleIngredientViewController.h; sourceTree = "<group>"; };
+		78850C2E1868430100C76E3A /* ChooseSingleIngredientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSingleIngredientViewController.m; sourceTree = "<group>"; };
 		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
 		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
 		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 			children = (
 				78850C151868132B00C76E3A /* CustomDrinkTableViewController.h */,
 				78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */,
+				78850C2D1868430100C76E3A /* ChooseSingleIngredientViewController.h */,
+				78850C2E1868430100C76E3A /* ChooseSingleIngredientViewController.m */,
 				78850C2A1868411000C76E3A /* AddIngredientTableViewController.h */,
 				78850C2B1868411000C76E3A /* AddIngredientTableViewController.m */,
 			);
@@ -497,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78850C2F1868430100C76E3A /* ChooseSingleIngredientViewController.m in Sources */,
 				785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */,
 				78A939941847D45700B6784B /* MixableRecipesViewController.m in Sources */,
 				785CBBE0184992B800EB2D57 /* RecipeDetailViewController.m in Sources */,

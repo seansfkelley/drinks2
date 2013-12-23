@@ -32,13 +32,15 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     static RecipeIndex *index;
     @synchronized(self) {
         if (!index) {
-            index = [RecipeIndex bootstrapIndexFromUserState];
-            
-            if (!index) {
-                index = [RecipeIndex bootstrapIndexFromJson];
-                [index savePermanentState];
-            }
-            
+            index = [RecipeIndex bootstrapIndexFromJson];
+
+//            index = [RecipeIndex bootstrapIndexFromUserState];
+//            
+//            if (!index) {
+//                index = [RecipeIndex bootstrapIndexFromJson];
+//                [index savePermanentState];
+//            }
+
             index.fudgeFactor = 3;
             
             [index index];

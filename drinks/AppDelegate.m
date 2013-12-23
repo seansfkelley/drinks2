@@ -47,7 +47,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [self.index savePermanentState];
+//    [self.index savePermanentState];
     [self.index saveTransientState];
     
 }

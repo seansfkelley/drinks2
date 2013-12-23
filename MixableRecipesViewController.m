@@ -16,6 +16,7 @@
 #import "RecipeSearchResultItem.h"
 #import "PaddedUITableViewCell.h"
 #import "MixableRecipeTableSectionManager.h"
+#import "CustomDrinkTableViewController.h"
 
 @interface MixableRecipesViewController ()
 
@@ -191,6 +192,8 @@ const CGFloat ROW_HEIGHT = 88.0f;
                 break;
             }
         }
+    } else if ([controller isKindOfClass:[CustomDrinkTableViewController class]]) {
+        // nop
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }

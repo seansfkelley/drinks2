@@ -18,6 +18,7 @@
 		78850C0718666F1C00C76E3A /* SourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0618666F1C00C76E3A /* SourceItem.m */; };
 		78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C09186678D600C76E3A /* SourceSiteViewController.m */; };
 		78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */; };
+		78850C171868132B00C76E3A /* CustomDrinkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */; };
 		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
 		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
 		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
@@ -80,6 +81,8 @@
 		78850C09186678D600C76E3A /* SourceSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceSiteViewController.m; sourceTree = "<group>"; };
 		78850C0E1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoppingTabBarControllerDelegate.h; sourceTree = "<group>"; };
 		78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoppingTabBarControllerDelegate.m; sourceTree = "<group>"; };
+		78850C151868132B00C76E3A /* CustomDrinkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDrinkTableViewController.h; sourceTree = "<group>"; };
+		78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDrinkTableViewController.m; sourceTree = "<group>"; };
 		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
 		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
 		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
@@ -178,6 +181,8 @@
 				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
 				78850C08186678D600C76E3A /* SourceSiteViewController.h */,
 				78850C09186678D600C76E3A /* SourceSiteViewController.m */,
+				78850C151868132B00C76E3A /* CustomDrinkTableViewController.h */,
+				78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */,
 				785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */,
 				78850C0718666F1C00C76E3A /* SourceItem.m in Sources */,
+				78850C171868132B00C76E3A /* CustomDrinkTableViewController.m in Sources */,
 				78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */,
 				78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */,
 				78ECED5D184971C100B7BD5A /* RecipeIndex.m in Sources */,

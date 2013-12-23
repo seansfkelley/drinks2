@@ -35,7 +35,7 @@
     for (RecipeItem *r in self.index.recipes) {
         [recipeResults addObject:[self.index generateDummySearchResultFor:r]];
     }
-    self.sections = [[SortedTableSectionManager alloc] initWithArray:recipeResults sortedByProperty:@"name"];
+    self.sections = [[SortedTableSectionManager alloc] initWithArray:recipeResults sortedByProperty:@"name"];    
 }
 
 #pragma mark - Table view data source

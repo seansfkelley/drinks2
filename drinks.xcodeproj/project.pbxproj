@@ -23,6 +23,8 @@
 		78850C1D186814BA00C76E3A /* UIRemoveControlMinus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C19186814BA00C76E3A /* UIRemoveControlMinus@2x.png */; };
 		78850C1E186814BA00C76E3A /* UIRemoveControlPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C1A186814BA00C76E3A /* UIRemoveControlPlus.png */; };
 		78850C1F186814BA00C76E3A /* UIRemoveControlPlus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C1B186814BA00C76E3A /* UIRemoveControlPlus@2x.png */; };
+		78850C221868305200C76E3A /* OneLineTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C211868305200C76E3A /* OneLineTextTableViewCell.m */; };
+		78850C25186832F400C76E3A /* LongFormTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C24186832F400C76E3A /* LongFormTextTableViewCell.m */; };
 		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
 		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
 		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
@@ -91,6 +93,10 @@
 		78850C19186814BA00C76E3A /* UIRemoveControlMinus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIRemoveControlMinus@2x.png"; sourceTree = "<group>"; };
 		78850C1A186814BA00C76E3A /* UIRemoveControlPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIRemoveControlPlus.png; sourceTree = "<group>"; };
 		78850C1B186814BA00C76E3A /* UIRemoveControlPlus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIRemoveControlPlus@2x.png"; sourceTree = "<group>"; };
+		78850C201868305200C76E3A /* OneLineTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneLineTextTableViewCell.h; sourceTree = "<group>"; };
+		78850C211868305200C76E3A /* OneLineTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneLineTextTableViewCell.m; sourceTree = "<group>"; };
+		78850C23186832F400C76E3A /* LongFormTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongFormTextTableViewCell.h; sourceTree = "<group>"; };
+		78850C24186832F400C76E3A /* LongFormTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongFormTextTableViewCell.m; sourceTree = "<group>"; };
 		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
 		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
 		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
@@ -333,6 +339,10 @@
 			children = (
 				78F9B6E01860274E0020B604 /* PaddedUITableViewCell.h */,
 				78F9B6E11860274E0020B604 /* PaddedUITableViewCell.m */,
+				78850C201868305200C76E3A /* OneLineTextTableViewCell.h */,
+				78850C211868305200C76E3A /* OneLineTextTableViewCell.m */,
+				78850C23186832F400C76E3A /* LongFormTextTableViewCell.h */,
+				78850C24186832F400C76E3A /* LongFormTextTableViewCell.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -456,6 +466,8 @@
 				78A939641847C52A00B6784B /* AppDelegate.m in Sources */,
 				78F9B6DF185EF5E00020B604 /* SortedTableSectionManager.m in Sources */,
 				78A939911847D3F300B6784B /* IngredientsViewController.m in Sources */,
+				78850C25186832F400C76E3A /* LongFormTextTableViewCell.m in Sources */,
+				78850C221868305200C76E3A /* OneLineTextTableViewCell.m in Sources */,
 				78A939971847D9E700B6784B /* IngredientItem.m in Sources */,
 				78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */,
 				785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */,

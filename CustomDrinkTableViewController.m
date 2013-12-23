@@ -7,30 +7,30 @@
 //
 
 #import "CustomDrinkTableViewController.h"
+#import "MeasuredIngredientItem.h"
 
 typedef enum rowTypeEnum {
-    CUSTOM_CONTENT,
-    SINGLE_EDITABLE,
-    ADDABLE,
-    EMPTY
+    ONE_LINE_TEXT,
+    LONG_FORM_TEXT,
+    CUSTOM_INGREDIENT,
+    ADD_INGREDIENT
 } RowType;
 
-@interface RowItem : NSObject
 
-@property RowType type;
-@property NSString *text;
+@interface IngredientRowItem : NSObject
 
-- (id)initWithType:(RowType)type withText:(NSString *)text;
+@property IngredientItem *ingredient;
+
+- (id)initWithIngredient:(IngredientItem *)ingredient;
 
 @end
 
-@implementation RowItem
+@implementation IngredientRowItem
 
-- (id)initWithType:(RowType)type withText:(NSString *)text {
+- (id)initWithIngredient:(IngredientItem *)ingredient {
     self = [super init];
     if (self) {
-        self.type = type;
-        self.text = text;
+        self.ingredient = ingredient;
     }
     return self;
 }
@@ -39,7 +39,8 @@ typedef enum rowTypeEnum {
 
 @interface CustomDrinkTableViewController ()
 
-@property NSMutableArray *rows;
+@property NSArray *sectionTitles;
+@property NSMutableArray *ingredientRows;
 
 @end
 
@@ -50,11 +51,8 @@ typedef enum rowTypeEnum {
 
     self.editing = YES;
 
-    self.rows = [[NSMutableArray alloc] initWithArray:@[
-        [[RowItem alloc] initWithType:SINGLE_EDITABLE withText:@"Name"],
-        [[RowItem alloc] initWithType:EMPTY withText:nil],
-        [[RowItem alloc] initWithType:ADDABLE withText:@"add Ingredient"]
-    ]];
+    self.sectionTitles = @[@"Name", @"Ingredients", @"Instructions", @"Notes", @"Source"];
+    self.ingredientRows = [[NSMutableArray alloc] init];
     // This is goofy: this class gets tapped as a data source before viewDidLoad, so we need to
     // force a reload. Putting this in initWithStyle doesn't seem to help.
     [self.tableView reloadData];
@@ -65,81 +63,146 @@ typedef enum rowTypeEnum {
 
 #pragma mark - Table view data source
 
+- (RowType)rowTypeForIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case 0:
+            return ONE_LINE_TEXT;
+        case 1:
+            if (indexPath.row < [self.ingredientRows count]) {
+                return CUSTOM_INGREDIENT;
+            } else {
+                return ADD_INGREDIENT;
+            }
+        default:
+            return LONG_FORM_TEXT;
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [self.sectionTitles count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.rows count];
+    if (section == 1) {
+        return [self.ingredientRows count] + 1;
+    } else {
+        return 1;
+    }
 }
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView oneLineTextCellForIndexPath:(NSIndexPath *)indexPath {
+//    static NSString *CellIdentifier = @"OneLineTextPrototypeCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    return cell;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView longFormTextCellForIndexPath:(NSIndexPath *)indexPath {
+//    static NSString *CellIdentifier = @"LongFormTextPrototypeCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    return cell;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView customIngredientCellForIndexPath:(NSIndexPath *)indexPath {
+//    static NSString *CellIdentifier = @"IngredientPrototypeCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    return cell;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView addIngredientCellForIndexPath:(NSIndexPath *)indexPath {
+//    static NSString *CellIdentifier = @"AddIngredientPrototypeCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    return cell;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CustomDrinkPrototypeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    RowItem *r = [self rowItemForIndexPath:indexPath];
+    static NSString *OneLineText = @"OneLineTextPrototypeCell";
+    static NSString *Ingredient = @"IngredientPrototypeCell";
+    static NSString *AddIngredient = @"AddIngredientPrototypeCell";
+    static NSString *LongFormText = @"LongFormTextPrototypeCell";
+
+    UITableViewCell *cell;
+    RowType rowType = [self rowTypeForIndexPath:indexPath];
+    switch (rowType) {
+        case ONE_LINE_TEXT:
+            cell = [tableView dequeueReusableCellWithIdentifier:OneLineText forIndexPath:indexPath];
+            break;
+        case LONG_FORM_TEXT:
+            cell = [tableView dequeueReusableCellWithIdentifier:LongFormText forIndexPath:indexPath];
+            break;
+        case CUSTOM_INGREDIENT:
+            cell = [tableView dequeueReusableCellWithIdentifier:Ingredient forIndexPath:indexPath];
+            break;
+        case ADD_INGREDIENT:
+            cell = [tableView dequeueReusableCellWithIdentifier:AddIngredient forIndexPath:indexPath];
+            break;
+    }
 
     cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
-    cell.textLabel.text = r.text; // How to make nice blue color?
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.userInteractionEnabled = NO;
+    cell.textLabel.text = @"";
 
-    switch (r.type) {
-        case ADDABLE:
-//            cell.userInteractionEnabled = YES; // But no style -- don't want to flash colors.
+    switch (rowType) {
+        case ONE_LINE_TEXT:
             break;
-        case CUSTOM_CONTENT:
-        case SINGLE_EDITABLE:
-        case EMPTY:
+        case LONG_FORM_TEXT:
+            break;
+        case CUSTOM_INGREDIENT:
+            cell.textLabel.text = @"placeholder";
+            break;
+        case ADD_INGREDIENT:
+            cell.textLabel.text = @"add ingredient";
             break;
     }
 
     return cell;
 }
 
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.sectionTitles objectAtIndex:section];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    RowType rowType = [self rowTypeForIndexPath:indexPath];
+    return rowType == CUSTOM_INGREDIENT || rowType == ADD_INGREDIENT;
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    RowItem *r = [self rowItemForIndexPath:indexPath];
-    switch (r.type) {
-        case CUSTOM_CONTENT:
-            NSAssert(editingStyle == UITableViewCellEditingStyleDelete, @"CUSTOM_CONTENT must have delete editing style.");
-            [self.rows removeObjectAtIndex:indexPath.row];
+    RowType rowType = [self rowTypeForIndexPath:indexPath];
+    switch (rowType) {
+        case CUSTOM_INGREDIENT:
+            NSAssert(editingStyle == UITableViewCellEditingStyleDelete, @"CUSTOM_INGREDIENT must have delete editing style.");
+            [self.ingredientRows removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        case SINGLE_EDITABLE:
-        case EMPTY:
             break;
-        case ADDABLE: {
-            NSAssert(editingStyle == UITableViewCellEditingStyleInsert, @"ADDABLE must have insert editing style.");
-            RowItem *newRow = [[RowItem alloc] initWithType:CUSTOM_CONTENT withText:@"test"];
-            [self.rows insertObject:newRow atIndex:indexPath.row];
+        case ADD_INGREDIENT: {
+            NSAssert(editingStyle == UITableViewCellEditingStyleInsert, @"ADD_INGREDIENT must have insert editing style.");
+            IngredientRowItem *newRow = [[IngredientRowItem alloc] initWithIngredient:nil];
+            [self.ingredientRows insertObject:newRow atIndex:indexPath.row];
             [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             break;
         }
+        case ONE_LINE_TEXT:
+        case LONG_FORM_TEXT:
+            NSAssert(NO, @"Invalid row type '%d' for editing.", rowType);
     }
 }
 
-- (RowItem *)rowItemForIndexPath:(NSIndexPath *)indexPath {
-    return [self.rows objectAtIndex:indexPath.row];
+- (IngredientRowItem *)rowItemForIndexPath:(NSIndexPath *)indexPath {
+    NSAssert(indexPath.section == 1, @"Cannot request the IngredientRowItem for a path in the wrong section.");
+    return [self.ingredientRows objectAtIndex:indexPath.row];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch ([self rowItemForIndexPath:indexPath].type) {
-        case CUSTOM_CONTENT:
+    switch ([self rowTypeForIndexPath:indexPath]) {
+        case CUSTOM_INGREDIENT:
             return UITableViewCellEditingStyleDelete;
-        case SINGLE_EDITABLE:
-        case EMPTY:
-            return UITableViewCellEditingStyleNone;
-        case ADDABLE:
+        case ADD_INGREDIENT:
             return UITableViewCellEditingStyleInsert;
+        default:
+            break;
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-
+    NSAssert(NO, @"Should not be requesting the editing type for non-ingredient sections.");
+    return UITableViewCellEditingStyleNone;
 }
 
 /*

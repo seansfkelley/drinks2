@@ -138,6 +138,7 @@ typedef enum rowTypeEnum {
             break;
     }
 
+    cell.accessoryType = UITableViewCellAccessoryNone;
     cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
     cell.textLabel.text = @"";
 
@@ -148,6 +149,7 @@ typedef enum rowTypeEnum {
             break;
         case CUSTOM_INGREDIENT:
             cell.textLabel.text = @"placeholder";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         case ADD_INGREDIENT:
             cell.textLabel.text = @"add ingredient";
@@ -164,6 +166,14 @@ typedef enum rowTypeEnum {
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     RowType rowType = [self rowTypeForIndexPath:indexPath];
     return rowType == CUSTOM_INGREDIENT || rowType == ADD_INGREDIENT;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self rowTypeForIndexPath:indexPath] == CUSTOM_INGREDIENT ? indexPath : nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSAssert([self rowTypeForIndexPath:indexPath] == CUSTOM_INGREDIENT, @"Only custom ingredients should be selectable.");
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "RecipeIndex.h"
+#import "IngredientItem.h"
 
 @interface ChooseSingleIngredientViewController : UITableViewController
 
 @property RecipeIndex *index;
+@property IngredientItem *selectedIngredient;
 
 @end

@@ -9,6 +9,8 @@
 #import "CustomDrinkTableViewController.h"
 #import "MeasuredIngredientItem.h"
 #import "ChooseSingleIngredientViewController.h"
+#import "EditableIngredientTableViewCell.h"
+#import "UIUtils.h"
 
 typedef enum rowTypeEnum {
     ONE_LINE_TEXT,
@@ -17,31 +19,12 @@ typedef enum rowTypeEnum {
     ADD_INGREDIENT
 } RowType;
 
-
-@interface IngredientRowItem : NSObject
-
-@property IngredientItem *ingredient;
-
-- (id)initWithIngredient:(IngredientItem *)ingredient;
-
-@end
-
-@implementation IngredientRowItem
-
-- (id)initWithIngredient:(IngredientItem *)ingredient {
-    self = [super init];
-    if (self) {
-        self.ingredient = ingredient;
-    }
-    return self;
-}
-
-@end
-
 @interface CustomDrinkTableViewController ()
 
 @property NSArray *sectionTitles;
 @property NSMutableArray *ingredientRows;
+
+@property NSIndexPath *currentIngredientRowItemIndex;
 
 @end
 
@@ -131,9 +114,20 @@ typedef enum rowTypeEnum {
         case LONG_FORM_TEXT:
             cell = [tableView dequeueReusableCellWithIdentifier:LongFormText forIndexPath:indexPath];
             break;
-        case CUSTOM_INGREDIENT:
+        case CUSTOM_INGREDIENT: {
             cell = [tableView dequeueReusableCellWithIdentifier:Ingredient forIndexPath:indexPath];
+            EditableIngredientTableViewCell *editable = (EditableIngredientTableViewCell *)cell;
+            id i = [self.ingredientRows objectAtIndex:indexPath.row];
+//            NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:editable.ingredientButton.titleLabel.attributedText];
+            if (i != [NSNull null]) {
+                // How to edit the attributed string??
+                editable.ingredientButton.titleLabel.text = ((IngredientItem *)i).displayName;
+            } else {
+                editable.ingredientButton.titleLabel.text = @"ingredient";
+            }
+//            editable.ingredientButton.titleLabel.attributedText = text;
             break;
+        }
         case ADD_INGREDIENT:
             cell = [tableView dequeueReusableCellWithIdentifier:AddIngredient forIndexPath:indexPath];
             break;
@@ -149,8 +143,6 @@ typedef enum rowTypeEnum {
         case LONG_FORM_TEXT:
             break;
         case CUSTOM_INGREDIENT:
-            cell.textLabel.text = @"placeholder";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         case ADD_INGREDIENT:
             cell.textLabel.text = @"add ingredient";
@@ -187,8 +179,7 @@ typedef enum rowTypeEnum {
             break;
         case ADD_INGREDIENT: {
             NSAssert(editingStyle == UITableViewCellEditingStyleInsert, @"ADD_INGREDIENT must have insert editing style.");
-            IngredientRowItem *newRow = [[IngredientRowItem alloc] initWithIngredient:nil];
-            [self.ingredientRows insertObject:newRow atIndex:indexPath.row];
+            [self.ingredientRows insertObject:[NSNull null] atIndex:indexPath.row];
             [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             break;
         }
@@ -196,11 +187,6 @@ typedef enum rowTypeEnum {
         case LONG_FORM_TEXT:
             NSAssert(NO, @"Invalid row type '%d' for editing.", rowType);
     }
-}
-
-- (IngredientRowItem *)rowItemForIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(indexPath.section == 1, @"Cannot request the IngredientRowItem for a path in the wrong section.");
-    return [self.ingredientRows objectAtIndex:indexPath.row];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -218,7 +204,7 @@ typedef enum rowTypeEnum {
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIViewController *controller;
     if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
@@ -229,8 +215,11 @@ typedef enum rowTypeEnum {
     }
 
     if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
-        ChooseSingleIngredientViewController *ingredients = (ChooseSingleIngredientViewController *)controller;
-        ingredients.index = self.index;
+        ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
+        choose.index = self.index;
+
+        UITableViewCell *cell = [UIUtils nearestSuperview:sender ofType:[UITableViewCell class]];
+        self.currentIngredientRowItemIndex = [self.tableView indexPathForCell:cell];
     } else {
         NSAssert(NO, @"Unknown segue. All segues must be handled.");
     }
@@ -239,35 +228,12 @@ typedef enum rowTypeEnum {
 # pragma mark - IBActions
 
 - (IBAction)unwindToCustom:(UIStoryboardSegue *)segue {
-    
+    if ([segue.sourceViewController isKindOfClass:[ChooseSingleIngredientViewController class]]) {
+        ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)segue.sourceViewController;
+        [self.ingredientRows replaceObjectAtIndex:self.currentIngredientRowItemIndex.row withObject:choose.selectedIngredient];
+        [self.tableView reloadData];
+//        [self.tableView reloadRowsAtIndexPaths:@[self.currentIngredientRowItemIndex] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
-
- // In a story board-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- 
- */
 
 @end

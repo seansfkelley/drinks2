@@ -69,7 +69,8 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender {
-    // Get which ingredient was selected and send it back somehow.
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    self.selectedIngredient = [self.sections objectForIndexPath:indexPath];
 }
 
 @end

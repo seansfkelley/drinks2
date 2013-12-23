@@ -17,6 +17,7 @@
 #import "PaddedUITableViewCell.h"
 #import "MixableRecipeTableSectionManager.h"
 #import "CustomDrinkTableViewController.h"
+#import "UIUtils.h"
 
 @interface MixableRecipesViewController ()
 
@@ -149,14 +150,6 @@ const CGFloat ROW_HEIGHT = 88.0f;
     return [[self managerForTableView:tableView].sectionTitles objectAtIndex:section];
 }
 
-+ (id)nearestSuperview:(UIView *)view ofType:(Class)class {
-    UIView *superview = view.superview;
-    while (superview && ![superview isKindOfClass:class]) {
-        superview = superview.superview;
-    }
-    return superview;
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
@@ -176,7 +169,7 @@ const CGFloat ROW_HEIGHT = 88.0f;
         
     } else if ([controller isKindOfClass:[RecipeDetailViewController class]]) {
         RecipeDetailViewController *detail = (RecipeDetailViewController *)controller;
-        UITableView *currentTableView = [MixableRecipesViewController nearestSuperview:sender ofType:[UITableView class]];
+        UITableView *currentTableView = [UIUtils nearestSuperview:sender ofType:[UITableView class]];
         NSIndexPath *indexPath = [currentTableView indexPathForSelectedRow];
         
         MixableRecipeTableSectionManager *manager = [self managerForTableView:currentTableView];

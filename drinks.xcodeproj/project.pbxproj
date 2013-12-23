@@ -19,6 +19,10 @@
 		78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C09186678D600C76E3A /* SourceSiteViewController.m */; };
 		78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */; };
 		78850C171868132B00C76E3A /* CustomDrinkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */; };
+		78850C1C186814BA00C76E3A /* UIRemoveControlMinus.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C18186814BA00C76E3A /* UIRemoveControlMinus.png */; };
+		78850C1D186814BA00C76E3A /* UIRemoveControlMinus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C19186814BA00C76E3A /* UIRemoveControlMinus@2x.png */; };
+		78850C1E186814BA00C76E3A /* UIRemoveControlPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C1A186814BA00C76E3A /* UIRemoveControlPlus.png */; };
+		78850C1F186814BA00C76E3A /* UIRemoveControlPlus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78850C1B186814BA00C76E3A /* UIRemoveControlPlus@2x.png */; };
 		788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF218583D720020898F /* DefaultRecipeImage.png */; };
 		788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */; };
 		788D1FFA185848D40020898F /* alamagoozlum.png in Resources */ = {isa = PBXBuildFile; fileRef = 788D1FF9185848D40020898F /* alamagoozlum.png */; };
@@ -83,6 +87,10 @@
 		78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoppingTabBarControllerDelegate.m; sourceTree = "<group>"; };
 		78850C151868132B00C76E3A /* CustomDrinkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDrinkTableViewController.h; sourceTree = "<group>"; };
 		78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDrinkTableViewController.m; sourceTree = "<group>"; };
+		78850C18186814BA00C76E3A /* UIRemoveControlMinus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIRemoveControlMinus.png; sourceTree = "<group>"; };
+		78850C19186814BA00C76E3A /* UIRemoveControlMinus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIRemoveControlMinus@2x.png"; sourceTree = "<group>"; };
+		78850C1A186814BA00C76E3A /* UIRemoveControlPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIRemoveControlPlus.png; sourceTree = "<group>"; };
+		78850C1B186814BA00C76E3A /* UIRemoveControlPlus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIRemoveControlPlus@2x.png"; sourceTree = "<group>"; };
 		788D1FF218583D720020898F /* DefaultRecipeImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultRecipeImage.png; sourceTree = "<group>"; };
 		788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultRecipeImage@2x.png"; sourceTree = "<group>"; };
 		788D1FF9185848D40020898F /* alamagoozlum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alamagoozlum.png; sourceTree = "<group>"; };
@@ -230,6 +238,10 @@
 				789044A118556CBF00A39B3C /* UIButtonBarArrowUp@2x.png */,
 				788D1FF218583D720020898F /* DefaultRecipeImage.png */,
 				788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */,
+				78850C18186814BA00C76E3A /* UIRemoveControlMinus.png */,
+				78850C19186814BA00C76E3A /* UIRemoveControlMinus@2x.png */,
+				78850C1A186814BA00C76E3A /* UIRemoveControlPlus.png */,
+				78850C1B186814BA00C76E3A /* UIRemoveControlPlus@2x.png */,
 				788D1FF61858462A0020898F /* drinks */,
 			);
 			name = images;
@@ -400,11 +412,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78850C1F186814BA00C76E3A /* UIRemoveControlPlus@2x.png in Resources */,
 				789044A418556CBF00A39B3C /* UIButtonBarArrowUp.png in Resources */,
+				78850C1D186814BA00C76E3A /* UIRemoveControlMinus@2x.png in Resources */,
 				785CBC0D184C377D00EB2D57 /* todo in Resources */,
 				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,
 				785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */,
 				789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */,
+				78850C1C186814BA00C76E3A /* UIRemoveControlMinus.png in Resources */,
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
 				78F9B6E518602A4B0020B604 /* chartreuse-smash.png in Resources */,
 				789044A318556CBF00A39B3C /* UIButtonBarArrowDown@2x.png in Resources */,
@@ -413,6 +428,7 @@
 				788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */,
 				78F9B6E818602BD60020B604 /* death-in-the-afternoon.png in Resources */,
 				788D1FFA185848D40020898F /* alamagoozlum.png in Resources */,
+				78850C1E186814BA00C76E3A /* UIRemoveControlPlus.png in Resources */,
 				78F9B6EA18602C600020B604 /* revolver.png in Resources */,
 				785CBC12184C4E9C00EB2D57 /* README.md in Resources */,
 				789044A518556CBF00A39B3C /* UIButtonBarArrowUp@2x.png in Resources */,

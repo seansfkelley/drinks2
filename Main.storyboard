@@ -173,6 +173,9 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="textFieldDidChange:" destination="Mq1-Mu-Jqj" eventType="editingChanged" id="khP-gw-kcA"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -350,7 +353,13 @@
                             <outlet property="delegate" destination="3An-Ht-klF" id="Eiy-pU-c3f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Choose Ingredient" id="LQl-rP-BLF"/>
+                    <navigationItem key="navigationItem" title="Choose Ingredient" id="LQl-rP-BLF">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bIz-Vu-0zG">
+                            <connections>
+                                <segue destination="ED6-hW-yWS" kind="unwind" unwindAction="unwindToCustom:" id="rIb-7F-Cfp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoy-pb-1Ch" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ED6-hW-yWS" userLabel="Exit" sceneMemberID="exit"/>

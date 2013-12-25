@@ -189,8 +189,7 @@
 		785CBBEF184A720600EB2D57 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
-				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
+				78850C36186AB0B400C76E3A /* shared */,
 				78850C261868407F00C76E3A /* mixable */,
 				78850C271868408500C76E3A /* browse all */,
 				78850C281868409800C76E3A /* custom */,
@@ -227,8 +226,6 @@
 				78A939901847D3F300B6784B /* IngredientsViewController.m */,
 				78A939921847D45700B6784B /* MixableRecipesViewController.h */,
 				78A939931847D45700B6784B /* MixableRecipesViewController.m */,
-				78850C08186678D600C76E3A /* SourceSiteViewController.h */,
-				78850C09186678D600C76E3A /* SourceSiteViewController.m */,
 			);
 			name = mixable;
 			sourceTree = "<group>";
@@ -266,6 +263,17 @@
 				78850C311868499500C76E3A /* EditableIngredientTableViewCell.m */,
 			);
 			name = custom;
+			sourceTree = "<group>";
+		};
+		78850C36186AB0B400C76E3A /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */,
+				785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */,
+				78850C08186678D600C76E3A /* SourceSiteViewController.h */,
+				78850C09186678D600C76E3A /* SourceSiteViewController.m */,
+			);
+			name = shared;
 			sourceTree = "<group>";
 		};
 		788D1FF61858462A0020898F /* drinks */ = {

@@ -68,9 +68,13 @@
     return [self.sections sectionForSectionIndexTitle:title];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    self.selectedIngredient = [self.sections objectForIndexPath:indexPath];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[UITableViewCell class]]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        self.selectedIngredient = [self.sections objectForIndexPath:indexPath];
+    } else {
+        self.selectedIngredient = nil;
+    }
 }
 
 @end

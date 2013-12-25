@@ -15,12 +15,11 @@
 + (UIFont *)DEFAULT_CELL_FONT { return [UIFont systemFontOfSize:14.0f]; }
 
 + (CGFloat)cellHeightForText:(NSString *)text {
-    return [UIUtils cellHeightForText:text withWidth:[UIUtils DEFAULT_CELL_WIDTH]];
+    return [UIUtils cellHeightForText:text withWidth:UIUtils.DEFAULT_CELL_WIDTH];
 }
 
 + (CGFloat)cellHeightForText:(NSString *)text withWidth:(CGFloat)width {
-    return [text boundingRectWithSize:CGSizeMake(width, FLT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:UIUtils.DEFAULT_CELL_FONT} context:nil].size.height + 27;
-    // 27 = magic constant padding inferred by trial and error such that one line of text will result in a row the same size as a standard row.
+    return [text boundingRectWithSize:CGSizeMake(width, FLT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:UIUtils.DEFAULT_CELL_FONT} context:nil].size.height + UIUtils.DEFAULT_CELL_HEIGHT - UIUtils.DEFAULT_CELL_FONT.lineHeight;
 }
 
 + (id)nearestSuperview:(UIView *)view ofType:(Class)class {

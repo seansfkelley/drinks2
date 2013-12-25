@@ -11,6 +11,7 @@
 #import "ChooseSingleIngredientViewController.h"
 #import "EditableIngredientTableViewCell.h"
 #import "LongFormTextTableViewCell.h"
+#import "OneLineTextTableViewCell.h"
 #import "UIUtils.h"
 
 typedef enum rowTypeEnum {
@@ -31,6 +32,10 @@ typedef enum rowTypeEnum {
 @property IBOutlet UIBarButtonItem *cancelButton;
 @property IBOutlet UIBarButtonItem *doneButton;
 
+@property UITextField *nameTextField;
+@property UITextView *instructionsTextView;
+@property UITextView *notesTextView;
+
 @end
 
 @implementation CustomDrinkTableViewController
@@ -39,9 +44,9 @@ typedef enum rowTypeEnum {
     [super viewDidLoad];
 
     self.editing = YES;
-    self.doneButton.enabled = NO;
+    [self updateDoneButtonState];
 
-    self.sectionTitles = @[@"Name", @"Ingredients", @"Instructions", @"Notes", @"Source"];
+    self.sectionTitles = @[@"Name", @"Ingredients", @"Instructions", @"Notes"];
     self.ingredientRows = [[NSMutableArray alloc] init];
     self.sectionToComputedHeight = [[NSMutableDictionary alloc] init];
     // This is goofy: this class gets tapped as a data source before viewDidLoad, so we need to
@@ -85,79 +90,64 @@ typedef enum rowTypeEnum {
             if (h) {
                 return h.floatValue;
             } else {
-                return [UIUtils DEFAULT_CELL_HEIGHT];
+                return UIUtils.DEFAULT_CELL_HEIGHT;
             }
         }
         case ONE_LINE_TEXT:
         case CUSTOM_INGREDIENT:
         case ADD_INGREDIENT:
-            return [UIUtils DEFAULT_CELL_HEIGHT];
+            return UIUtils.DEFAULT_CELL_HEIGHT;
     }
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView oneLineTextCellForIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier = @"OneLineTextPrototypeCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    return cell;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView longFormTextCellForIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier = @"LongFormTextPrototypeCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    return cell;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView customIngredientCellForIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier = @"IngredientPrototypeCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    return cell;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView addIngredientCellForIndexPath:(NSIndexPath *)indexPath {
-//    static NSString *CellIdentifier = @"AddIngredientPrototypeCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    return cell;
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView oneLineTextCellForIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"OneLineTextPrototypeCell";
+    OneLineTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    self.nameTextField = cell.textField;
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView longFormTextCellForIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"LongFormTextPrototypeCell";
+    LongFormTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    switch (indexPath.section) {
+        case 2: self.instructionsTextView = cell.textView; break;
+        case 3: self.notesTextView = cell.textView; break;
+    }
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView customIngredientCellForIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"IngredientPrototypeCell";
+    EditableIngredientTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    id i = [self.ingredientRows objectAtIndex:indexPath.row];
+    NSString *text;
+    if (i != [NSNull null]) {
+        text = ((IngredientItem *)i).displayName;
+    } else {
+        text = @"choose ingredient...";
+    }
+    [cell.ingredientButton setTitle:text forState:UIControlStateNormal];
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView addIngredientCellForIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"AddIngredientPrototypeCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    return cell;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *OneLineText = @"OneLineTextPrototypeCell";
-    static NSString *Ingredient = @"IngredientPrototypeCell";
-    static NSString *AddIngredient = @"AddIngredientPrototypeCell";
-    static NSString *LongFormText = @"LongFormTextPrototypeCell";
-
     UITableViewCell *cell;
     RowType rowType = [self rowTypeForIndexPath:indexPath];
     switch (rowType) {
-        case ONE_LINE_TEXT:
-            cell = [tableView dequeueReusableCellWithIdentifier:OneLineText forIndexPath:indexPath];
-            break;
-        case LONG_FORM_TEXT:
-            cell = [tableView dequeueReusableCellWithIdentifier:LongFormText forIndexPath:indexPath];
-//            LongFormTextTableViewCell *longForm = (LongFormTextTableViewCell *)cell;
-//            longForm.textView.delegate = longForm;
-            break;
-        case CUSTOM_INGREDIENT: {
-            cell = [tableView dequeueReusableCellWithIdentifier:Ingredient forIndexPath:indexPath];
-            EditableIngredientTableViewCell *editable = (EditableIngredientTableViewCell *)cell;
-            id i = [self.ingredientRows objectAtIndex:indexPath.row];
-//            NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:editable.ingredientButton.titleLabel.attributedText];
-            NSString *text;
-            if (i != [NSNull null]) {
-                // How to edit the attributed string??
-                text = ((IngredientItem *)i).displayName;
-            } else {
-                text = @"choose ingredient...";
-            }
-            [editable.ingredientButton setTitle:text forState:UIControlStateNormal];
-            break;
-        }
-        case ADD_INGREDIENT:
-            cell = [tableView dequeueReusableCellWithIdentifier:AddIngredient forIndexPath:indexPath];
-            break;
+        case ONE_LINE_TEXT:     cell = [self tableView:tableView oneLineTextCellForIndexPath:indexPath];      break;
+        case LONG_FORM_TEXT:    cell = [self tableView:tableView longFormTextCellForIndexPath:indexPath];     break;
+        case CUSTOM_INGREDIENT: cell = [self tableView:tableView customIngredientCellForIndexPath:indexPath]; break;
+        case ADD_INGREDIENT:    cell = [self tableView:tableView addIngredientCellForIndexPath:indexPath];    break;
     }
 
-    cell.accessoryType = UITableViewCellAccessoryNone;
     cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
     cell.textLabel.text = @"";
 
@@ -199,10 +189,10 @@ typedef enum rowTypeEnum {
             [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             break;
         }
-        case ONE_LINE_TEXT:
-        case LONG_FORM_TEXT:
+        default:
             NSAssert(NO, @"Invalid row type '%d' for editing.", rowType);
     }
+    [self updateDoneButtonState];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -232,6 +222,8 @@ typedef enum rowTypeEnum {
 
     if (sender == self.cancelButton) {
         // nop
+    } else if (sender == self.doneButton) {
+        // build recipe
     } else if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
         choose.index = self.index;
@@ -248,13 +240,16 @@ typedef enum rowTypeEnum {
 - (IBAction)unwindToCustom:(UIStoryboardSegue *)segue {
     if ([segue.sourceViewController isKindOfClass:[ChooseSingleIngredientViewController class]]) {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)segue.sourceViewController;
-        [self.ingredientRows replaceObjectAtIndex:self.currentIngredientRowItemIndex.row withObject:choose.selectedIngredient];
-        [self.tableView reloadData];
-//        [self.tableView reloadRowsAtIndexPaths:@[self.currentIngredientRowItemIndex] withRowAnimation:UITableViewRowAnimationNone];
+        if (choose.selectedIngredient) {
+            [self.ingredientRows replaceObjectAtIndex:self.currentIngredientRowItemIndex.row withObject:choose.selectedIngredient];
+            [self.tableView reloadData];
+    //        [self.tableView reloadRowsAtIndexPaths:@[self.currentIngredientRowItemIndex] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        [self updateDoneButtonState];
     }
 }
 
-# pragma mark - UITextView delegate
+# pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView {
     UITableViewCell *cell = [UIUtils nearestSuperview:textView ofType:[UITableViewCell class]];
@@ -264,8 +259,8 @@ typedef enum rowTypeEnum {
 
     NSNumber *key = [NSNumber numberWithInteger:indexPath.section];
     NSNumber *previousHeight = [self.sectionToComputedHeight objectForKey:key];
-    // -8 magic constant because this is for some reason just a little too wide.
-    CGFloat width = textView.frame.size.width - textView.contentInset.left - textView.contentInset.right - 8;
+    // -10 magic constant because this is for some reason just a little too wide.
+    CGFloat width = textView.frame.size.width - textView.contentInset.left - textView.contentInset.right - 10;
     NSNumber *newHeight = [NSNumber numberWithFloat:[UIUtils cellHeightForText:textView.text withWidth:width]];
     [self.sectionToComputedHeight setObject:newHeight forKey:key];
 
@@ -278,6 +273,44 @@ typedef enum rowTypeEnum {
         // This is bad, because it doesn't work immediately while typing until a few characters into the new line have been typed.
         [self.tableView scrollRectToVisible:scrollTarget animated:YES];
     }
+
+    [self updateDoneButtonState];
+}
+
+# pragma mark - UITextField actions
+
+- (IBAction)textFieldDidChange:(UITextField *)textField {
+    [self updateDoneButtonState];
+}
+
+# pragma mark - Miscellaneous
+
++ (BOOL)isStringBlank:(NSString *)string {
+    if(!string.length) {
+        return YES;
+    } else if(![string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)updateDoneButtonState {
+    BOOL enabled = YES;
+    if ([CustomDrinkTableViewController isStringBlank:self.nameTextField.text]) {
+        enabled = NO;
+    } else if ([CustomDrinkTableViewController isStringBlank:self.instructionsTextView.text]) {
+        enabled = NO;
+    } else if ([self.ingredientRows count] == 0) {
+        enabled = NO;
+    } else {
+        for (id i in self.ingredientRows) {
+            if (i == [NSNull null]) {
+                enabled = NO;
+                break;
+            }
+        }
+    }
+    self.doneButton.enabled = enabled;
 }
 
 @end

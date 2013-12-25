@@ -32,6 +32,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [self.index savePermanentState];
     [self.index saveTransientState];
 }
 
@@ -47,7 +48,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-//    [self.index savePermanentState];
+    [self.index savePermanentState];
     [self.index saveTransientState];
     
 }

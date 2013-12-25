@@ -15,6 +15,7 @@
 @property (readwrite) NSArray *measuredIngredients;
 @property (readwrite) NSString *instructions;
 @property (readwrite) NSString *notes;
+@property (readwrite) BOOL isCustom;
 @property (readwrite) SourceItem *source;
 @property (readwrite) NSString *sourceOverrideUrl;
 
@@ -22,13 +23,14 @@
 
 @implementation RecipeItem
 
-- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)measuredIngredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes withSource:(SourceItem *)source withSourceOverrideUrl:(NSString *)sourceOverrideUrl{
+- (id)initWithName:(NSString*)name withMeasuredIngredients:(NSArray*)measuredIngredients withInstructions:(NSString *)instructions withNotes:(NSString *)notes withIsCustom:(BOOL)isCustom withSource:(SourceItem *)source withSourceOverrideUrl:(NSString *)sourceOverrideUrl{
     self = [super init];
     if (self) {
         self.name = name;
         self.measuredIngredients = measuredIngredients;
         self.instructions = instructions;
         self.notes = notes;
+        self.isCustom = isCustom;
         self.source = source;
         self.sourceOverrideUrl = sourceOverrideUrl;
     }
@@ -61,9 +63,10 @@
     NSArray *measuredIngredients = [aDecoder decodeObjectForKey:@"measuredIngredients"];
     NSString *instructions = [aDecoder decodeObjectForKey:@"instructions"];
     NSString *notes = [aDecoder decodeObjectForKey:@"notes"];
+    BOOL isCustom = [aDecoder decodeBoolForKey:@"isCustom"];
     SourceItem *source = [aDecoder decodeObjectForKey:@"source"];
     NSString *sourceOverrideUrl = [aDecoder decodeObjectForKey:@"sourceOverrideUrl"];
-    return [self initWithName:name withMeasuredIngredients:measuredIngredients withInstructions:instructions withNotes:notes withSource:source withSourceOverrideUrl:sourceOverrideUrl];
+    return [self initWithName:name withMeasuredIngredients:measuredIngredients withInstructions:instructions withNotes:notes withIsCustom:isCustom withSource:source withSourceOverrideUrl:sourceOverrideUrl];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -71,6 +74,7 @@
     [aCoder encodeObject:self.measuredIngredients forKey:@"measuredIngredients"];
     [aCoder encodeObject:self.instructions forKey:@"instructions"];
     [aCoder encodeObject:self.notes forKey:@"notes"];
+    [aCoder encodeBool:self.isCustom forKey:@"isCustom"];
     [aCoder encodeObject:self.source forKey:@"source"];
     [aCoder encodeObject:self.sourceOverrideUrl forKey:@"sourceOverrideUrl"];
 }

@@ -15,8 +15,9 @@
 
 @property (readwrite) int fudgeFactor;
 @property (readwrite) NSArray *ingredients;
-@property (readwrite) NSArray *recipes;
 @property (readwrite) NSDictionary *sources;
+
+@property NSMutableArray *_internalRecipes;
 
 @property NSSet *allIngredientTags;
 @property NSMutableDictionary *tagToIngredient;
@@ -26,6 +27,10 @@
 
 @implementation RecipeIndex
 
+- (NSArray *)recipes {
+    return self._internalRecipes;
+}
+
 NSString * const SELECTED_KEY = @"selected-ingredients";
 
 + (RecipeIndex *)instance {
@@ -33,13 +38,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     @synchronized(self) {
         if (!index) {
             index = [RecipeIndex bootstrapIndexFromJson];
-
-//            index = [RecipeIndex bootstrapIndexFromUserState];
-//            
-//            if (!index) {
-//                index = [RecipeIndex bootstrapIndexFromJson];
-//                [index savePermanentState];
-//            }
+            NSArray *customRecipes = [RecipeIndex loadPermanentState];
+            [index._internalRecipes addObjectsFromArray:customRecipes];
 
             index.fudgeFactor = 3;
             
@@ -104,7 +104,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     index.sources = [RecipeIndex loadSourcesFromFile:sourcesPath];
     
     NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
-    index.recipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients withSources:index.sources];
+    index._internalRecipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients withSources:index.sources];
     
     return index;
 }
@@ -126,7 +126,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     }
 }
 
-+ (NSArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients withSources:(NSDictionary *)sources{
++ (NSMutableArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients withSources:(NSDictionary *)sources{
     NSArray *list = [RecipeIndex loadJsonFromFile:path];
     if (!list) {
         return nil;
@@ -163,6 +163,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
                              withMeasuredIngredients:parsedIngredients
                              withInstructions:[jsonRecipe objectForKey:@"instructions"]
                              withNotes:[jsonRecipe objectForKey:@"notes"]
+                             withIsCustom:NO
                              withSource:[sources objectForKey:[jsonRecipe objectForKey:@"source"]] // May be nil.
                              withSourceOverrideUrl:[jsonRecipe objectForKey:@"url"]]; // May be nil.
             [parsedRecipes addObject:r];
@@ -220,16 +221,26 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     
     self.recipeNameToGenericTags = [[NSMutableDictionary alloc] init];
     for (RecipeItem *r in self.recipes) {
-        NSMutableArray *ingredients = [[NSMutableArray alloc] init];
-        for (MeasuredIngredientItem *m in r.measuredIngredients) {
-            if (m.ingredient) {
-                [ingredients addObject:m.ingredient];
-            }
-        }
-        [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:r.name];
+        [self indexRecipe:r];
     }
     
     self.allIngredientTags = [[NSSet alloc] initWithArray:[self.tagToIngredient allKeys]];
+}
+
+
+- (void)addRecipe:(RecipeItem *)recipe {
+    [self._internalRecipes addObject:recipe];
+    [self indexRecipe:recipe];
+}
+
+- (void)indexRecipe:(RecipeItem *)recipe {
+    NSMutableArray *ingredients = [[NSMutableArray alloc] init];
+    for (MeasuredIngredientItem *m in recipe.measuredIngredients) {
+        if (m.ingredient) {
+            [ingredients addObject:m.ingredient];
+        }
+    }
+    [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:recipe.name];
 }
 
 - (RecipeSearchResultItem *)generateRecipeSearchResult:(RecipeItem *)recipe withIngredientTags:(NSSet *)allTags {
@@ -322,7 +333,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     if (self) {
         self.ingredients = [aDecoder decodeObjectForKey:@"ingredients"];
         self.sources = [aDecoder decodeObjectForKey:@"sources"];
-        self.recipes = [aDecoder decodeObjectForKey:@"recipes"];
+        self._internalRecipes = [aDecoder decodeObjectForKey:@"recipes"];
     }
     return self;
 }
@@ -330,7 +341,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.ingredients forKey:@"ingredients"];
     [aCoder encodeObject:self.sources forKey:@"sources"];
-    [aCoder encodeObject:self.recipes forKey:@"recipes"];
+    [aCoder encodeObject:self._internalRecipes forKey:@"recipes"];
 }
 
 - (void)saveTransientState {
@@ -344,7 +355,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 }
 
 - (void)savePermanentState {
-    [NSKeyedArchiver archiveRootObject:self toFile:[RecipeIndex dataFilePath]];
+    NSArray *customRecipes = [self.recipes filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self.isCustom == true"]];
+    [NSKeyedArchiver archiveRootObject:customRecipes toFile:[RecipeIndex dataFilePath]];
 }
 
 - (void)loadTransientState {
@@ -359,7 +371,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 }
 
 + (NSString *)dataFilePath {
-    return [NSString stringWithFormat:@"%@/%@", [RecipeIndex dataDirectory], @"drinks.dat"];
+    return [NSString stringWithFormat:@"%@/%@", [RecipeIndex dataDirectory], @"custom-drinks.dat"];
 }
 
 + (BOOL)createDirectoryAtPath:(NSString *)path {
@@ -371,11 +383,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     return success;
 }
 
-+ (RecipeIndex *)bootstrapIndexFromUserState {
-    NSData *data = [[NSData alloc] initWithContentsOfFile:[RecipeIndex dataFilePath]];
-    if (!data) {
-        return nil;
-    }
++ (NSArray *)loadPermanentState {
     return [NSKeyedUnarchiver unarchiveObjectWithFile:[RecipeIndex dataFilePath]];
 }
 

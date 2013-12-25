@@ -223,7 +223,10 @@ typedef enum rowTypeEnum {
     if (sender == self.cancelButton) {
         // nop
     } else if (sender == self.doneButton) {
-        // build recipe
+        // TODO: Make a real recipe.
+        MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc] initWithIngredient:[self.index.ingredients objectAtIndex:0] withMeasurementDisplay:@"test ingredient" withIngredientDisplay:@"ingredient display"];
+        RecipeItem *r = [[RecipeItem alloc] initWithName:@"test" withMeasuredIngredients:@[m] withInstructions:@"test instructions" withNotes:Nil withIsCustom:YES withSource:nil withSourceOverrideUrl:nil];
+        [self.index addRecipe:r];
     } else if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
         choose.index = self.index;

@@ -543,7 +543,7 @@
         <scene sceneID="GhB-se-LRM">
             <objects>
                 <navigationController title="Ingredient Search" automaticallyAdjustsScrollViewInsets="NO" id="ztg-tk-JKT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Mixable" id="81g-I2-Tcb"/>
+                    <tabBarItem key="tabBarItem" title="Mixable" image="UITabBarSearchTemplateSelected.png" id="81g-I2-Tcb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qjo-zw-LOy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -561,7 +561,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Jvq-1N-mbw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Iy-T7-LLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Od-bA-I9q" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="U4f-Ih-I2l"/>
@@ -574,6 +573,7 @@
                         <segue destination="Whg-TS-949" kind="relationship" relationship="rootViewController" id="yz2-QT-0cB"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Iy-T7-LLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="587" y="-441"/>
         </scene>
@@ -581,7 +581,7 @@
         <scene sceneID="C5J-IN-rmd">
             <objects>
                 <navigationController title="Browse All Recipes" automaticallyAdjustsScrollViewInsets="NO" id="i8C-30-O0P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Browse All" id="98Z-bx-Zmy"/>
+                    <tabBarItem key="tabBarItem" title="Browse All" image="ShakerSilhouette.png" id="98Z-bx-Zmy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2BB-I9-lQt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -615,6 +615,10 @@
             <point key="canvasLocation" x="587" y="-1222"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ShakerSilhouette.png" width="19" height="25"/>
+        <image name="UITabBarSearchTemplateSelected.png" width="24" height="24"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		7808E984186B93DC00922CA4 /* ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 7808E982186B93DC00922CA4 /* ingredients.json */; };
 		7808E985186B93DC00922CA4 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 7808E983186B93DC00922CA4 /* recipes.json */; };
+		7808E988186BA09800922CA4 /* UITabBarSearchTemplateSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 7808E986186BA09800922CA4 /* UITabBarSearchTemplateSelected.png */; };
+		7808E989186BA09800922CA4 /* UITabBarSearchTemplateSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7808E987186BA09800922CA4 /* UITabBarSearchTemplateSelected@2x.png */; };
+		7808E994186BA27600922CA4 /* ShakerSilhouette.png in Resources */ = {isa = PBXBuildFile; fileRef = 7808E992186BA27600922CA4 /* ShakerSilhouette.png */; };
+		7808E995186BA27600922CA4 /* ShakerSilhouette@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7808E993186BA27600922CA4 /* ShakerSilhouette@2x.png */; };
 		785CBBE0184992B800EB2D57 /* RecipeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */; };
 		785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBBE51849992000EB2D57 /* MeasuredIngredientItem.m */; };
 		785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */; };
@@ -71,6 +75,11 @@
 /* Begin PBXFileReference section */
 		7808E982186B93DC00922CA4 /* ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ingredients.json; path = ../ingredients.json; sourceTree = "<group>"; };
 		7808E983186B93DC00922CA4 /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = recipes.json; path = ../recipes.json; sourceTree = "<group>"; };
+		7808E986186BA09800922CA4 /* UITabBarSearchTemplateSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UITabBarSearchTemplateSelected.png; sourceTree = "<group>"; };
+		7808E987186BA09800922CA4 /* UITabBarSearchTemplateSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UITabBarSearchTemplateSelected@2x.png"; sourceTree = "<group>"; };
+		7808E992186BA27600922CA4 /* ShakerSilhouette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShakerSilhouette.png; sourceTree = "<group>"; };
+		7808E993186BA27600922CA4 /* ShakerSilhouette@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShakerSilhouette@2x.png"; sourceTree = "<group>"; };
+		7808E996186BA29900922CA4 /* shaker-outline.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "shaker-outline.psd"; sourceTree = "<group>"; };
 		785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailViewController.h; sourceTree = "<group>"; };
 		785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailViewController.m; sourceTree = "<group>"; };
 		785CBBE41849992000EB2D57 /* MeasuredIngredientItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasuredIngredientItem.h; sourceTree = "<group>"; };
@@ -290,12 +299,17 @@
 			isa = PBXGroup;
 			children = (
 				78F9B6E618602A660020B604 /* martini-glass.psd */,
+				7808E996186BA29900922CA4 /* shaker-outline.psd */,
 				7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */,
 				7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */,
 				789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */,
 				789044A118556CBF00A39B3C /* UIButtonBarArrowUp@2x.png */,
+				7808E986186BA09800922CA4 /* UITabBarSearchTemplateSelected.png */,
+				7808E987186BA09800922CA4 /* UITabBarSearchTemplateSelected@2x.png */,
 				788D1FF218583D720020898F /* DefaultRecipeImage.png */,
 				788D1FF318583D720020898F /* DefaultRecipeImage@2x.png */,
+				7808E992186BA27600922CA4 /* ShakerSilhouette.png */,
+				7808E993186BA27600922CA4 /* ShakerSilhouette@2x.png */,
 				788D1FF61858462A0020898F /* drinks */,
 			);
 			name = images;
@@ -472,15 +486,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				789044A418556CBF00A39B3C /* UIButtonBarArrowUp.png in Resources */,
+				7808E994186BA27600922CA4 /* ShakerSilhouette.png in Resources */,
 				785CBC0D184C377D00EB2D57 /* todo in Resources */,
 				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,
+				7808E995186BA27600922CA4 /* ShakerSilhouette@2x.png in Resources */,
 				785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */,
 				7808E984186B93DC00922CA4 /* ingredients.json in Resources */,
+				7808E988186BA09800922CA4 /* UITabBarSearchTemplateSelected.png in Resources */,
 				789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */,
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
 				78F9B6E518602A4B0020B604 /* chartreuse-smash.png in Resources */,
 				789044A318556CBF00A39B3C /* UIButtonBarArrowDown@2x.png in Resources */,
 				78A939661847C52A00B6784B /* Images.xcassets in Resources */,
+				7808E989186BA09800922CA4 /* UITabBarSearchTemplateSelected@2x.png in Resources */,
 				788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */,
 				788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */,
 				78F9B6E818602BD60020B604 /* death-in-the-afternoon.png in Resources */,

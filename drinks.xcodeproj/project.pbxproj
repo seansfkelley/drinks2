@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7808E984186B93DC00922CA4 /* ingredients.json in Resources */ = {isa = PBXBuildFile; fileRef = 7808E982186B93DC00922CA4 /* ingredients.json */; };
+		7808E985186B93DC00922CA4 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 7808E983186B93DC00922CA4 /* recipes.json */; };
 		785CBBE0184992B800EB2D57 /* RecipeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */; };
 		785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBBE51849992000EB2D57 /* MeasuredIngredientItem.m */; };
 		785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785CBBF7184BF12600EB2D57 /* EmptyRecipeResultsView.xib */; };
@@ -15,7 +17,6 @@
 		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		785CBC12184C4E9C00EB2D57 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC11184C4E9C00EB2D57 /* README.md */; };
 		78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */; };
-		78850C0718666F1C00C76E3A /* SourceItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0618666F1C00C76E3A /* SourceItem.m */; };
 		78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C09186678D600C76E3A /* SourceSiteViewController.m */; };
 		78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */; };
 		78850C171868132B00C76E3A /* CustomDrinkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C161868132B00C76E3A /* CustomDrinkTableViewController.m */; };
@@ -68,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7808E982186B93DC00922CA4 /* ingredients.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ingredients.json; path = ../ingredients.json; sourceTree = "<group>"; };
+		7808E983186B93DC00922CA4 /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = recipes.json; path = ../recipes.json; sourceTree = "<group>"; };
 		785CBBDE184992B800EB2D57 /* RecipeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailViewController.h; sourceTree = "<group>"; };
 		785CBBDF184992B800EB2D57 /* RecipeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailViewController.m; sourceTree = "<group>"; };
 		785CBBE41849992000EB2D57 /* MeasuredIngredientItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasuredIngredientItem.h; sourceTree = "<group>"; };
@@ -81,8 +84,6 @@
 		785CBC11184C4E9C00EB2D57 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		78850C001864002700C76E3A /* MixableRecipeTableSectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixableRecipeTableSectionManager.h; sourceTree = "<group>"; };
 		78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixableRecipeTableSectionManager.m; sourceTree = "<group>"; };
-		78850C0518666F1C00C76E3A /* SourceItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceItem.h; sourceTree = "<group>"; };
-		78850C0618666F1C00C76E3A /* SourceItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceItem.m; sourceTree = "<group>"; };
 		78850C08186678D600C76E3A /* SourceSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSiteViewController.h; sourceTree = "<group>"; };
 		78850C09186678D600C76E3A /* SourceSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourceSiteViewController.m; sourceTree = "<group>"; };
 		78850C0E1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoppingTabBarControllerDelegate.h; sourceTree = "<group>"; };
@@ -180,8 +181,6 @@
 				78A939991849649700B6784B /* RecipeItem.m */,
 				785CBBFC184C05C000EB2D57 /* RecipeSearchResultItem.h */,
 				785CBBFD184C05C000EB2D57 /* RecipeSearchResultItem.m */,
-				78850C0518666F1C00C76E3A /* SourceItem.h */,
-				78850C0618666F1C00C76E3A /* SourceItem.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -350,6 +349,8 @@
 			children = (
 				78A939621847C52A00B6784B /* AppDelegate.h */,
 				78A939631847C52A00B6784B /* AppDelegate.m */,
+				7808E982186B93DC00922CA4 /* ingredients.json */,
+				7808E983186B93DC00922CA4 /* recipes.json */,
 				78A939651847C52A00B6784B /* Images.xcassets */,
 				78A9395A1847C52A00B6784B /* Supporting Files */,
 			);
@@ -474,6 +475,7 @@
 				785CBC0D184C377D00EB2D57 /* todo in Resources */,
 				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,
 				785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */,
+				7808E984186B93DC00922CA4 /* ingredients.json in Resources */,
 				789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */,
 				78A9395E1847C52A00B6784B /* InfoPlist.strings in Resources */,
 				78F9B6E518602A4B0020B604 /* chartreuse-smash.png in Resources */,
@@ -482,6 +484,7 @@
 				788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */,
 				788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */,
 				78F9B6E818602BD60020B604 /* death-in-the-afternoon.png in Resources */,
+				7808E985186B93DC00922CA4 /* recipes.json in Resources */,
 				788D1FFA185848D40020898F /* alamagoozlum.png in Resources */,
 				78F9B6EA18602C600020B604 /* revolver.png in Resources */,
 				785CBC12184C4E9C00EB2D57 /* README.md in Resources */,
@@ -518,7 +521,6 @@
 				78850C3518684E5300C76E3A /* UIUtils.m in Sources */,
 				78F9B6E21860274E0020B604 /* PaddedUITableViewCell.m in Sources */,
 				785CBBE61849992000EB2D57 /* MeasuredIngredientItem.m in Sources */,
-				78850C0718666F1C00C76E3A /* SourceItem.m in Sources */,
 				78850C171868132B00C76E3A /* CustomDrinkTableViewController.m in Sources */,
 				78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */,
 				78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */,

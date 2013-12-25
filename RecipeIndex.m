@@ -9,7 +9,6 @@
 #import "RecipeIndex.h"
 #import "IngredientItem.h"
 #import "MeasuredIngredientItem.h"
-#import "SourceItem.h"
 
 @interface RecipeIndex ()
 
@@ -100,11 +99,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     NSString *ingredientsPath = [[NSBundle mainBundle] pathForResource:@"ingredients" ofType:@".json"];
     index.ingredients = [RecipeIndex loadIngredientsFromFile:ingredientsPath];
     
-    NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"sources" ofType:@".json"];
-    index.sources = [RecipeIndex loadSourcesFromFile:sourcesPath];
-    
     NSString *recipesPath = [[NSBundle mainBundle] pathForResource:@"recipes" ofType:@".json"];
-    index._internalRecipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients withSources:index.sources];
+    index._internalRecipes = [RecipeIndex loadRecipesFromFile:recipesPath withIngredients:index.ingredients];
     
     return index;
 }
@@ -126,7 +122,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     }
 }
 
-+ (NSMutableArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients withSources:(NSDictionary *)sources{
++ (NSMutableArray *)loadRecipesFromFile:(NSString *)path withIngredients:(NSArray *)ingredients {
     NSArray *list = [RecipeIndex loadJsonFromFile:path];
     if (!list) {
         return nil;
@@ -163,9 +159,9 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
                              withMeasuredIngredients:parsedIngredients
                              withInstructions:[jsonRecipe objectForKey:@"instructions"]
                              withNotes:[jsonRecipe objectForKey:@"notes"]
-                             withIsCustom:NO
-                             withSource:[sources objectForKey:[jsonRecipe objectForKey:@"source"]] // May be nil.
-                             withSourceOverrideUrl:[jsonRecipe objectForKey:@"url"]]; // May be nil.
+                             withSourceName:[jsonRecipe objectForKey:@"source"] // May be nil.
+                             withSourceUrl:[jsonRecipe objectForKey:@"url"] // May be nil.
+                             withIsCustom:NO];
             [parsedRecipes addObject:r];
         }
     }
@@ -192,23 +188,6 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
         [parsedIngredients addObject:i];
     }
     return parsedIngredients;
-}
-
-+ (NSDictionary *)loadSourcesFromFile:(NSString *)path {
-    NSDictionary *dict = [RecipeIndex loadJsonFromFile:path];
-    if (!dict) {
-        return nil;
-    }
-    
-    NSMutableDictionary *parsedSources = [[NSMutableDictionary alloc] init];
-    for (NSString *key in dict.keyEnumerator) {
-        NSDictionary *jsonSource = [dict objectForKey:key];
-        SourceItem *s = [[SourceItem alloc]
-                         initWithName:[jsonSource objectForKey:@"name" ]
-                         withUrl:[jsonSource objectForKey:@"url"]];
-        [parsedSources setObject:s forKey:key];
-    }
-    return parsedSources;
 }
 
 # pragma mark - Public functions for searching

@@ -339,7 +339,7 @@ typedef enum rowTypeEnum {
         }
     }
 
-    RecipeItem *r = [[RecipeItem alloc] initWithName:name withMeasuredIngredients:measuredIngredients withInstructions:instructions withNotes:notes withIsCustom:YES withSource:nil withSourceOverrideUrl:nil];
+    RecipeItem *r = [[RecipeItem alloc] initWithName:name withMeasuredIngredients:measuredIngredients withInstructions:instructions withNotes:notes withSourceName:nil withSourceUrl:nil withIsCustom:YES];
     [self.index addRecipe:r];
 }
 

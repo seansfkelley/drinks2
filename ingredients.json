@@ -20,6 +20,10 @@
     "generic" : "irish cream"
   },
   {
+    "display": "Irish Cream",
+    "hidden" : true
+  },
+  {
     "display" : "B\u00E9n\u00E9dictine",
     "tag"     : "benedictine"
   },

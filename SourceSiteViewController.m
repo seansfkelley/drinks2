@@ -20,11 +20,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = self.recipe.name;
-    NSString *url = self.recipe.sourceOverrideUrl;
-    if (!url) {
-        url = self.recipe.source.url;
-    }
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.recipe.sourceUrl]]];
 }
 
 @end

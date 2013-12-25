@@ -52,7 +52,7 @@ typedef enum rowTypeEnum {
 }
 
 - (BOOL)hasSource {
-    return self.recipeResult.recipe.source != nil;
+    return self.recipeResult.recipe.sourceName != nil;
 }
 
 - (void)viewDidLoad
@@ -196,10 +196,12 @@ typedef enum rowTypeEnum {
                 NSAssert(NO, @"Ingredient case should already be handled.");
                 break;
             case SOURCE:
-                cell.detailTextLabel.text = self.recipeResult.recipe.source.name;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                cell.userInteractionEnabled = YES;
+                cell.detailTextLabel.text = self.recipeResult.recipe.sourceName;
+                if (self.recipeResult.recipe.sourceUrl) {
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                    cell.userInteractionEnabled = YES;
+                }
                 break;
             case INSTRUCTIONS:
                 cell.detailTextLabel.text = self.recipeResult.recipe.instructions;

@@ -25,8 +25,7 @@ NSString *ALPHABET_UPPER = @"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
 - (id)initWithArray:(NSArray *)array sortedByProperty:(NSString *)property {
     self = [super init];
     if (self) {
-        // Why is this out of order?? All the strings start with ASCII and are capitalized...
-        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:property ascending:YES];
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:property ascending:YES selector:@selector(caseInsensitiveCompare:)];
         self.sorted = [array sortedArrayUsingDescriptors:@[descriptor]];
         
         NSMutableDictionary *nameToSection = [[NSMutableDictionary alloc] init];
@@ -35,6 +34,7 @@ NSString *ALPHABET_UPPER = @"A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
         
         for (NSObject *o in self.sorted) {
             NSString *key = [o performSelector:NSSelectorFromString(property)];
+            key = [key uppercaseString];
             NSString *first = [NSString stringWithFormat:@"%C", [key characterAtIndex:0]];
             if (![nameToSection objectForKey:first]) {
                 // Because this is sorted, we know we can stick the new array onto the end of indexToSection

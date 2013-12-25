@@ -289,7 +289,7 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     }
     for (int i = 0; i < self.fudgeFactor; ++i) {
         [(NSMutableArray *)[grouped objectAtIndex:i] sortUsingComparator:^NSComparisonResult(RecipeSearchResultItem *one, RecipeSearchResultItem *two) {
-            return [one.recipe.name compare:two.recipe.name];
+            return [one.recipe.name caseInsensitiveCompare:two.recipe.name];
         }];
     }
     return grouped;

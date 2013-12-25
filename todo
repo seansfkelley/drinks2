@@ -6,6 +6,8 @@ stylize notes text
 icons for tab bar!
 rewrite sources -- no need for another object, just a name and URL (even with repeats this is probably the better solution)
 
-smarter saving/loading to disk
-- allow custom drink input from users
-- instead of persisting everything included in the JSON, only persist custom ones and merge them in before indexing
+custom stuff
+- taking a picture of the drink
+- deleting of custom drinks
+- more fine-tuned editing of the ingredient
+- better sorting when the casing is wrong

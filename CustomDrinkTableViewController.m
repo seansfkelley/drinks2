@@ -25,6 +25,7 @@ typedef enum rowTypeEnum {
 
 @property NSArray *sectionTitles;
 @property NSMutableArray *ingredientRows;
+@property NSMutableArray *ingredientRowMeasureTextFields;
 @property NSMutableDictionary *sectionToComputedHeight;
 
 @property NSIndexPath *currentIngredientRowItemIndex;
@@ -48,6 +49,7 @@ typedef enum rowTypeEnum {
 
     self.sectionTitles = @[@"Name", @"Ingredients", @"Instructions", @"Notes"];
     self.ingredientRows = [[NSMutableArray alloc] init];
+    self.ingredientRowMeasureTextFields = [[NSMutableArray alloc] init];
     self.sectionToComputedHeight = [[NSMutableDictionary alloc] init];
     // This is goofy: this class gets tapped as a data source before viewDidLoad, so we need to
     // force a reload. Putting this in initWithStyle doesn't seem to help.
@@ -100,14 +102,14 @@ typedef enum rowTypeEnum {
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView oneLineTextCellForIndexPath:(NSIndexPath *)indexPath {
+- (OneLineTextTableViewCell *)tableView:(UITableView *)tableView oneLineTextCellForIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"OneLineTextPrototypeCell";
     OneLineTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     self.nameTextField = cell.textField;
     return cell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView longFormTextCellForIndexPath:(NSIndexPath *)indexPath {
+- (LongFormTextTableViewCell *)tableView:(UITableView *)tableView longFormTextCellForIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"LongFormTextPrototypeCell";
     LongFormTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     switch (indexPath.section) {
@@ -117,10 +119,12 @@ typedef enum rowTypeEnum {
     return cell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView customIngredientCellForIndexPath:(NSIndexPath *)indexPath {
+- (EditableIngredientTableViewCell *)tableView:(UITableView *)tableView customIngredientCellForIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"IngredientPrototypeCell";
     EditableIngredientTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     id i = [self.ingredientRows objectAtIndex:indexPath.row];
+    // TODO: This is ULTRA-MEGA SKETCHY, but what's the right way to keep track of the arbitrary number of text fields that might exist?
+    [self.ingredientRowMeasureTextFields replaceObjectAtIndex:indexPath.row withObject:cell.measureTextField];
     NSString *text;
     if (i != [NSNull null]) {
         text = ((IngredientItem *)i).displayName;
@@ -181,14 +185,15 @@ typedef enum rowTypeEnum {
         case CUSTOM_INGREDIENT:
             NSAssert(editingStyle == UITableViewCellEditingStyleDelete, @"CUSTOM_INGREDIENT must have delete editing style.");
             [self.ingredientRows removeObjectAtIndex:indexPath.row];
+            [self.ingredientRowMeasureTextFields removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
-        case ADD_INGREDIENT: {
+        case ADD_INGREDIENT:
             NSAssert(editingStyle == UITableViewCellEditingStyleInsert, @"ADD_INGREDIENT must have insert editing style.");
             [self.ingredientRows insertObject:[NSNull null] atIndex:indexPath.row];
+            [self.ingredientRowMeasureTextFields insertObject:[NSNull null] atIndex:indexPath.row];
             [tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             break;
-        }
         default:
             NSAssert(NO, @"Invalid row type '%d' for editing.", rowType);
     }
@@ -223,10 +228,7 @@ typedef enum rowTypeEnum {
     if (sender == self.cancelButton) {
         // nop
     } else if (sender == self.doneButton) {
-        // TODO: Make a real recipe.
-        MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc] initWithIngredient:[self.index.ingredients objectAtIndex:0] withMeasurementDisplay:@"test ingredient" withIngredientDisplay:@"ingredient display"];
-        RecipeItem *r = [[RecipeItem alloc] initWithName:@"test" withMeasuredIngredients:@[m] withInstructions:@"test instructions" withNotes:Nil withIsCustom:YES withSource:nil withSourceOverrideUrl:nil];
-        [self.index addRecipe:r];
+        [self createAndIndexNewRecipe];
     } else if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
         choose.index = self.index;
@@ -314,6 +316,31 @@ typedef enum rowTypeEnum {
         }
     }
     self.doneButton.enabled = enabled;
+}
+
+- (void)createAndIndexNewRecipe {
+    NSString *name = self.nameTextField.text;
+    NSString *instructions = self.instructionsTextView.text;
+    NSString *notes = self.notesTextView.text;
+    if ([CustomDrinkTableViewController isStringBlank:notes]) {
+        notes = nil;
+    }
+    NSMutableArray *measuredIngredients = [[NSMutableArray alloc] init];
+
+    for (NSUInteger i = 0; i < [self.ingredientRows count]; ++i) {
+        id ingredient = [self.ingredientRows objectAtIndex:i];
+        if (ingredient != [NSNull null]) {
+            NSString *measurementDisplay = ((UITextField *)[self.ingredientRowMeasureTextFields objectAtIndex:i]).text;
+            if ([CustomDrinkTableViewController isStringBlank:measurementDisplay]) {
+                measurementDisplay = nil;
+            }
+            MeasuredIngredientItem *m = [[MeasuredIngredientItem alloc] initWithIngredient:ingredient withMeasurementDisplay:measurementDisplay withIngredientDisplay:((IngredientItem *)ingredient).displayName];
+            [measuredIngredients addObject:m];
+        }
+    }
+
+    RecipeItem *r = [[RecipeItem alloc] initWithName:name withMeasuredIngredients:measuredIngredients withInstructions:instructions withNotes:notes withIsCustom:YES withSource:nil withSourceOverrideUrl:nil];
+    [self.index addRecipe:r];
 }
 
 @end

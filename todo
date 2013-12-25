@@ -3,9 +3,9 @@ less ugly title for detail view
 move away from JSON because it's too verbose (yml would be easy and already much better)
 stylize notes text
 icons for tab bar!
-rewrite sources -- no need for another object, just a name and URL (even with repeats this is probably the better solution)
 
 glasses -- what's a good way to include them as a reference
+garnish -- should these be treated separately from regular ingredients?
 
 custom stuff
 - taking a picture of the drink

@@ -381,7 +381,7 @@
     "name": "Margarita",
     "ingredients": [
       {
-        "tag": "tequila",
+        "tag": "blanco tequila",
         "displayMeasure": "1 part",
         "displayIngredient": "blanco tequila"
       },
@@ -859,7 +859,7 @@
     "name": "Perfect Margarita",
     "ingredients": [
       {
-        "tag": "tequila",
+        "tag": "reposado tequila",
         "displayMeasure": "1 part",
         "displayIngredient": "reposado tequila"
       },

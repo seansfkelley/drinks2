@@ -97,6 +97,11 @@
     "generic" : "chartreuse"
   },
   {
+    "display" : "Chartreuse (yellow)",
+    "tag"     : "yellow chartreuse",
+    "generic" : "chartreuse"
+  },
+  {
     "display" : "Grenadine"
   },
   {
@@ -166,7 +171,23 @@
     "tag"     : "sweet vermouth"
   },
   {
-    "display" : "Tequila"
+    "display" : "Tequila (blanco)",
+    "tag"     : "blanco tequila",
+    "generic" : "tequila"
+  },
+  {
+    "display" : "Tequila (reposado)",
+    "tag"     : "reposado tequila",
+    "generic" : "tequila"
+  },
+  {
+    "display" : "Tequila (a\u00f1ejo)",
+    "tag"     : "anejo tequila",
+    "generic" : "tequila"
+  },
+  {
+    "display" : "Tequila",
+    "hidden"  : true
   },
   {
     "display" : "Tonic"
@@ -188,5 +209,16 @@
   {
     "display" : "Vermouth (white)",
     "tag"     : "white vermouth"
+  },
+  {
+    "display" : "Club Soda",
+    "tag"     : "club soda"
+  },
+  {
+    "display" : "Scotch",
+    "generic" : "whiskey"
+  },
+  {
+    "display" : "Orange Juice"
   }
 ]

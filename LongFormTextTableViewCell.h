@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LongFormTextTableViewCell : UITableViewCell<UITextViewDelegate>
+@interface LongFormTextTableViewCell : UITableViewCell
 
 @property IBOutlet UITextView *textView;
 

@@ -10,6 +10,7 @@
 #import "MeasuredIngredientItem.h"
 #import "ChooseSingleIngredientViewController.h"
 #import "EditableIngredientTableViewCell.h"
+#import "LongFormTextTableViewCell.h"
 #import "UIUtils.h"
 
 typedef enum rowTypeEnum {
@@ -23,8 +24,12 @@ typedef enum rowTypeEnum {
 
 @property NSArray *sectionTitles;
 @property NSMutableArray *ingredientRows;
+@property NSMutableDictionary *sectionToComputedHeight;
 
 @property NSIndexPath *currentIngredientRowItemIndex;
+
+@property IBOutlet UIBarButtonItem *cancelButton;
+@property IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
@@ -34,15 +39,14 @@ typedef enum rowTypeEnum {
     [super viewDidLoad];
 
     self.editing = YES;
+    self.doneButton.enabled = NO;
 
     self.sectionTitles = @[@"Name", @"Ingredients", @"Instructions", @"Notes", @"Source"];
     self.ingredientRows = [[NSMutableArray alloc] init];
+    self.sectionToComputedHeight = [[NSMutableDictionary alloc] init];
     // This is goofy: this class gets tapped as a data source before viewDidLoad, so we need to
     // force a reload. Putting this in initWithStyle doesn't seem to help.
     [self.tableView reloadData];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
 }
 
 #pragma mark - Table view data source
@@ -71,6 +75,23 @@ typedef enum rowTypeEnum {
         return [self.ingredientRows count] + 1;
     } else {
         return 1;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch ([self rowTypeForIndexPath:indexPath]) {
+        case LONG_FORM_TEXT: {
+            NSNumber *h = [self.sectionToComputedHeight objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+            if (h) {
+                return h.floatValue;
+            } else {
+                return [UIUtils DEFAULT_CELL_HEIGHT];
+            }
+        }
+        case ONE_LINE_TEXT:
+        case CUSTOM_INGREDIENT:
+        case ADD_INGREDIENT:
+            return [UIUtils DEFAULT_CELL_HEIGHT];
     }
 }
 
@@ -113,19 +134,22 @@ typedef enum rowTypeEnum {
             break;
         case LONG_FORM_TEXT:
             cell = [tableView dequeueReusableCellWithIdentifier:LongFormText forIndexPath:indexPath];
+//            LongFormTextTableViewCell *longForm = (LongFormTextTableViewCell *)cell;
+//            longForm.textView.delegate = longForm;
             break;
         case CUSTOM_INGREDIENT: {
             cell = [tableView dequeueReusableCellWithIdentifier:Ingredient forIndexPath:indexPath];
             EditableIngredientTableViewCell *editable = (EditableIngredientTableViewCell *)cell;
             id i = [self.ingredientRows objectAtIndex:indexPath.row];
 //            NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString:editable.ingredientButton.titleLabel.attributedText];
+            NSString *text;
             if (i != [NSNull null]) {
                 // How to edit the attributed string??
-                editable.ingredientButton.titleLabel.text = ((IngredientItem *)i).displayName;
+                text = ((IngredientItem *)i).displayName;
             } else {
-                editable.ingredientButton.titleLabel.text = @"ingredient";
+                text = @"choose ingredient...";
             }
-//            editable.ingredientButton.titleLabel.attributedText = text;
+            [editable.ingredientButton setTitle:text forState:UIControlStateNormal];
             break;
         }
         case ADD_INGREDIENT:
@@ -159,14 +183,6 @@ typedef enum rowTypeEnum {
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     RowType rowType = [self rowTypeForIndexPath:indexPath];
     return rowType == CUSTOM_INGREDIENT || rowType == ADD_INGREDIENT;
-}
-
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self rowTypeForIndexPath:indexPath] == CUSTOM_INGREDIENT ? indexPath : nil;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert([self rowTypeForIndexPath:indexPath] == CUSTOM_INGREDIENT, @"Only custom ingredients should be selectable.");
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -214,7 +230,9 @@ typedef enum rowTypeEnum {
         controller = segue.destinationViewController;
     }
 
-    if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
+    if (sender == self.cancelButton) {
+        // nop
+    } else if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
         choose.index = self.index;
 
@@ -233,6 +251,32 @@ typedef enum rowTypeEnum {
         [self.ingredientRows replaceObjectAtIndex:self.currentIngredientRowItemIndex.row withObject:choose.selectedIngredient];
         [self.tableView reloadData];
 //        [self.tableView reloadRowsAtIndexPaths:@[self.currentIngredientRowItemIndex] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+# pragma mark - UITextView delegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+    UITableViewCell *cell = [UIUtils nearestSuperview:textView ofType:[UITableViewCell class]];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+    NSAssert([self rowTypeForIndexPath:indexPath] == LONG_FORM_TEXT, @"Cannot have text view outside of table.");
+
+    NSNumber *key = [NSNumber numberWithInteger:indexPath.section];
+    NSNumber *previousHeight = [self.sectionToComputedHeight objectForKey:key];
+    // -8 magic constant because this is for some reason just a little too wide.
+    CGFloat width = textView.frame.size.width - textView.contentInset.left - textView.contentInset.right - 8;
+    NSNumber *newHeight = [NSNumber numberWithFloat:[UIUtils cellHeightForText:textView.text withWidth:width]];
+    [self.sectionToComputedHeight setObject:newHeight forKey:key];
+
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+
+    if (previousHeight && previousHeight.floatValue != newHeight.floatValue) {
+        CGRect r = cell.frame;
+        CGRect scrollTarget = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height + 10); // 10 -> bottom padding.
+        // This is bad, because it doesn't work immediately while typing until a few characters into the new line have been typed.
+        [self.tableView scrollRectToVisible:scrollTarget animated:YES];
     }
 }
 

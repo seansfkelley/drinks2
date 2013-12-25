@@ -10,6 +10,12 @@
 
 @interface UIUtils : NSObject
 
++ (CGFloat)DEFAULT_CELL_HEIGHT;
++ (CGFloat)DEFAULT_CELL_WIDTH;
++ (UIFont *)DEFAULT_CELL_FONT;
++ (CGFloat)cellHeightForText:(NSString *)text;
++ (CGFloat)cellHeightForText:(NSString *)text withWidth:(CGFloat)width;
+
 + (id)nearestSuperview:(UIView *)view ofType:(Class)class;
 
 @end

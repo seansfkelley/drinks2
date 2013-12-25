@@ -9,6 +9,7 @@
 #import "RecipeDetailViewController.h"
 #import "MeasuredIngredientItem.h"
 #import "RecipeIndex.h"
+#import "UIUtils.h"
 #import "SourceSiteViewController.h"
 
 @interface RecipeDetailViewController ()
@@ -36,10 +37,6 @@ typedef enum rowTypeEnum {
     SOURCE
 } RowType;
 
-static int DEFAULT_TABLE_CELL_HEIGHT;
-static UIFont *DEFAULT_TABLE_CELL_FONT;
-static int DEFAULT_TABLE_CELL_WIDTH;
-
 @implementation RecipeDetailViewController
 
 - (RecipeSearchResultItem *)recipeResult {
@@ -61,12 +58,7 @@ static int DEFAULT_TABLE_CELL_WIDTH;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // This is some horrific shit.
-    // UITableViewCell *dummy = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
-    DEFAULT_TABLE_CELL_HEIGHT = 44; // dummy.frame.size.height;
-    DEFAULT_TABLE_CELL_WIDTH  = 320 - 40; // iPhone width - inferred padding.
-    DEFAULT_TABLE_CELL_FONT   = [UIFont systemFontOfSize:14.0f]; // dummy.detailTextLabel.font;
-    
+
     self.previousButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"UIButtonBarArrowUp"] style:UIBarButtonItemStylePlain target:self action:@selector(goToPrevious)];
     // TODO: These have SO MANY MUCH SPACING.
     // http://stackoverflow.com/questions/18897470/ios7-excessive-navigationbar-button-padding
@@ -163,7 +155,7 @@ static int DEFAULT_TABLE_CELL_WIDTH;
     switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
         case SOURCE:
         case INGREDIENT:
-            return DEFAULT_TABLE_CELL_HEIGHT;
+            return UIUtils.DEFAULT_CELL_HEIGHT;
         case NOTES:
             text = self.recipeResult.recipe.notes;
             break;
@@ -171,8 +163,7 @@ static int DEFAULT_TABLE_CELL_WIDTH;
             text = self.recipeResult.recipe.instructions;
             break;
     }
-    // Is there really no better way to do this?
-    return [text boundingRectWithSize:CGSizeMake(DEFAULT_TABLE_CELL_WIDTH, FLT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:DEFAULT_TABLE_CELL_FONT} context:nil].size.height + 30; // Padding!
+    return [UIUtils cellHeightForText:text];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

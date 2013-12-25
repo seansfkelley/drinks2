@@ -10,8 +10,4 @@
 
 @implementation LongFormTextTableViewCell
 
-- (void)textViewDidChange:(UITextView *)textView {
-    NSLog(@"%@", self.textView.text); // In the future, this should resize it.
-}
-
 @end

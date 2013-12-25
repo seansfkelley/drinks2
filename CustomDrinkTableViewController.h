@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RecipeIndex.h"
 
-@interface CustomDrinkTableViewController : UITableViewController
+@interface CustomDrinkTableViewController : UITableViewController<UITextViewDelegate>
 
 @property RecipeIndex *index;
 

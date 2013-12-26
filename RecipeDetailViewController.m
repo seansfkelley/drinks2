@@ -27,6 +27,9 @@
 @property (readonly) BOOL hasInstructions;
 @property (readonly) BOOL hasNotes;
 @property (readonly) BOOL hasSource;
+@property (readonly) BOOL shouldShowButtons;
+@property (readonly) NSUInteger ingredientSectionCount;
+@property (readonly) NSUInteger proseSectionCount;
 
 @end
 
@@ -34,7 +37,8 @@ typedef enum rowTypeEnum {
     INGREDIENT,
     INSTRUCTIONS,
     NOTES,
-    SOURCE
+    SOURCE,
+    BUTTONS
 } RowType;
 
 @implementation RecipeDetailViewController
@@ -53,6 +57,10 @@ typedef enum rowTypeEnum {
 
 - (BOOL)hasSource {
     return self.recipeResult.recipe.sourceName != nil;
+}
+
+- (BOOL)shouldShowButtons {
+    return NO; // return self.recipeResult.recipe.isCustom;
 }
 
 - (void)viewDidLoad
@@ -113,38 +121,54 @@ typedef enum rowTypeEnum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.sectionTitles count];
+    return self.ingredientSectionCount + self.proseSectionCount + (self.shouldShowButtons ? 1 : 0);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section < [self.sectionIngredients count]) {
+    if (section < self.ingredientSectionCount) {
         return [[self.sectionIngredients objectAtIndex:section] count];
+    } else if (section < self.ingredientSectionCount + self.proseSectionCount) {
+        return 1; // ingredients/notes/source
     } else {
-        return 1; // instructions or notes!
+        return 2; // buttons
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.sectionTitles objectAtIndex:section];
+    if (section < [self.sectionTitles count]) {
+        return [self.sectionTitles objectAtIndex:section];
+    } else {
+        return nil;
+    }
 }
 
 - (MeasuredIngredientItem *)tableView:(UITableView *)tableView ingredientAtIndexPath:(NSIndexPath *)indexPath {
+    NSAssert(indexPath.section < [self.sectionIngredients count], @"Index path inappropriate for ingredient.");
     NSArray *section = [self.sectionIngredients objectAtIndex:indexPath.section];
     return [section objectAtIndex:indexPath.row];
 }
 
+- (NSUInteger)ingredientSectionCount {
+    return [self.sectionIngredients count];
+}
+
+- (NSUInteger)proseSectionCount {
+    return (self.hasInstructions ? 1 : 0) + (self.hasNotes ? 1 : 0) + (self.hasSource ? 1 : 0);
+}
+
 // Wow, this is gross.
 - (RowType)tableView:(UITableView *)tableView rowTypeForIndexPath:(NSIndexPath *)indexPath {
-    NSUInteger extraSections = (self.hasInstructions ? 1 : 0) + (self.hasNotes ? 1 : 0) + (self.hasSource ? 1 : 0);
-    NSInteger sectionDiff = indexPath.section - ([self numberOfSectionsInTableView:tableView] - extraSections);
+    NSInteger sectionDiff = indexPath.section - ([self numberOfSectionsInTableView:tableView] - self.proseSectionCount - (self.shouldShowButtons ? 1 : 0));
     switch (sectionDiff) {
         case 0:
             if (self.hasInstructions) return INSTRUCTIONS;
         case 1: // FALL-THROUGH
             if (self.hasNotes) return NOTES;
         case 2: // FALL-THROUGH
-            return SOURCE;
+            if (self.hasSource) return SOURCE;
+        case 3 : // FALL-THROUGH
+            return BUTTONS;
         default:
             return INGREDIENT;
     }
@@ -155,6 +179,7 @@ typedef enum rowTypeEnum {
     switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
         case SOURCE:
         case INGREDIENT:
+        case BUTTONS:
             return UIUtils.DEFAULT_CELL_HEIGHT;
         case NOTES:
             text = self.recipeResult.recipe.notes;
@@ -166,59 +191,105 @@ typedef enum rowTypeEnum {
     return [UIUtils cellHeightForText:text];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView measuredIngredientCellForIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"MeasuredIngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+
+    cell.userInteractionEnabled = NO; // Disable selection.
+
+    MeasuredIngredientItem *ingredient = [self tableView:tableView ingredientAtIndexPath:indexPath];
+    if (ingredient.measurementDisplay) {
+        cell.textLabel.text = ingredient.measurementDisplay;
+    } else {
+        cell.textLabel.text = @" "; // Trick the layout into lining up the ingredient without a measure.
+    }
+    cell.detailTextLabel.text = ingredient.ingredientDisplay;
+
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView proseTextCellForIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"ProseTextPrototypeCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    // Configure shared values.
+    cell.textLabel.text = @""; // Trick the layout into ignoring this label entirely.
+    cell.detailTextLabel.numberOfLines = 0;
+    cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+
     // Reset some stuff.
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.userInteractionEnabled = NO;
-    
-    // Configure!
-    if (indexPath.section < [self.sectionIngredients count]) {
-        MeasuredIngredientItem *ingredient = [self tableView:tableView ingredientAtIndexPath:indexPath];
-        if (ingredient.measurementDisplay) {
-            cell.textLabel.text = ingredient.measurementDisplay;
-        } else {
-            cell.textLabel.text = @" "; // Trick the layout into lining up the ingredient without a measure.
-        }
-        cell.detailTextLabel.text = ingredient.ingredientDisplay;
-        cell.detailTextLabel.numberOfLines = 1;
-        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-    } else {
-        cell.textLabel.text = @""; // DON'T trick the layout as above.
-        cell.detailTextLabel.numberOfLines = 0;
-        cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
-            case INGREDIENT:
-                NSAssert(NO, @"Ingredient case should already be handled.");
-                break;
-            case SOURCE:
-                cell.detailTextLabel.text = self.recipeResult.recipe.sourceName;
-                if (self.recipeResult.recipe.sourceUrl) {
-                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-                    cell.userInteractionEnabled = YES;
-                }
-                break;
-            case INSTRUCTIONS:
-                cell.detailTextLabel.text = self.recipeResult.recipe.instructions;
-                break;
-            case NOTES:
-                cell.detailTextLabel.text = self.recipeResult.recipe.notes;
-                break;
-        }
+
+    // Configure according to what cell it actually is.
+    switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
+        case INGREDIENT:
+            NSAssert(NO, @"Ingredient case should be handled elsewhere.");
+            break;
+        case BUTTONS:
+            NSAssert(NO, @"Buttons case should be handled elsewhere.");
+            break;
+        case SOURCE:
+            cell.detailTextLabel.text = self.recipeResult.recipe.sourceName;
+            if (self.recipeResult.recipe.sourceUrl) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+                cell.userInteractionEnabled = YES;
+            }
+            break;
+        case INSTRUCTIONS:
+            cell.detailTextLabel.text = self.recipeResult.recipe.instructions;
+            break;
+        case NOTES:
+            cell.detailTextLabel.text = self.recipeResult.recipe.notes;
+            break;
     }
     return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView buttonCellForIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"ButtonPrototypeCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"Edit Recipe";
+        cell.textLabel.textColor = [UIColor blueColor]; // Wrong color...
+    } else if (indexPath.row == 1) {
+        cell.textLabel.text = @"Delete Recipe";
+        cell.textLabel.textColor = [UIColor redColor];
+    } else {
+        NSAssert(NO, @"Too many buttons in button section.");
+    }
+
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section < self.ingredientSectionCount) {
+        return [self tableView:tableView measuredIngredientCellForIndexPath:indexPath];
+    } else if (indexPath.section < self.ingredientSectionCount + self.proseSectionCount){
+        return [self tableView:tableView proseTextCellForIndexPath:indexPath];
+    } else {
+        return [self tableView:tableView buttonCellForIndexPath:indexPath];
+    }
 }
 
 # pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [self performSegueWithIdentifier:@"sourceSiteSegue" sender:nil];
+    switch ([self tableView:tableView rowTypeForIndexPath:indexPath]) {
+        case SOURCE:
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+            [self performSegueWithIdentifier:@"sourceSiteSegue" sender:nil];
+            break;
+        case BUTTONS:
+            [tableView deselectRowAtIndexPath:indexPath animated:NO];
+            break;
+        default:
+            NSAssert(NO, @"Cell type does not support selection.");
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

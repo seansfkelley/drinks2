@@ -202,6 +202,10 @@
     "display" : "Whiskey"
   },
   {
+    "display" : "Irish Whiskey",
+    "generic" : "whiskey"
+  },
+  {
     "display" : "Rum (white)",
     "tag"     : "white rum",
     "generic" : "rum"
@@ -220,5 +224,9 @@
   },
   {
     "display" : "Orange Juice"
+  },
+  {
+    "display" : "Pimm's No. 1",
+    "tag"     : "pimms"
   }
 ]

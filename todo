@@ -1,7 +1,8 @@
 drink images in list
 less ugly title for detail view
 move away from JSON because it's too verbose (yml would be easy and already much better)
-stylize notes text
+stylize notes text?
+plaintext search for ingredients?
 
 code improvements
 - eventing for when things like the indices change
@@ -13,9 +14,12 @@ garnish -- should these be treated separately from regular ingredients?
 profile -- save sets of ingredients so you don't have to re-enter them all the time
 
 custom stuff
+- editing of a drink that's already saved
 - taking a picture of the drink
 - more fine-tuned editing of the ingredient
 - "deleting" of built-in drinks (with ability to restore from some settings page)
 
 polish
 - return button should be more useful for custom field
+- swipe to navigate through recipes (alternate to buttons)
+- image for drink in detail view

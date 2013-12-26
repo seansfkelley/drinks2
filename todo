@@ -5,13 +5,19 @@ stylize notes text
 
 code improvements
 - eventing for when things like the indices change
-- more efficient ways to compute groupings, etc.
-
+- more efficient ways to compute groupings, search (incremental)
+- separate indices for in-memory, custom, web, etc.?
 
 glasses -- what's a good way to include them as a reference
 garnish -- should these be treated separately from regular ingredients?
+profile -- save sets of ingredients so you don't have to re-enter them all the time
 
 custom stuff
 - taking a picture of the drink
 - more fine-tuned editing of the ingredient
 - "deleting" of built-in drinks (with ability to restore from some settings page)
+
+polish
+- clear button on custom-drink-name field
+- auto-captialize drink name field
+- return button should be more useful for custom field

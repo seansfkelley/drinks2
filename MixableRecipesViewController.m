@@ -93,7 +93,9 @@ const CGFloat ROW_HEIGHT = 88.0f;
 }
 
 - (void)scrollToHideSearch {
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    if (self.sections && [self.sections sectionCount] > 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
 }
 
 #pragma mark - UITableViewDataSource

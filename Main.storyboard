@@ -616,7 +616,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ShakerSilhouette.png" width="19" height="25"/>
+        <image name="ShakerSilhouette.png" width="24" height="24"/>
         <image name="UITabBarSearchTemplateSelected.png" width="24" height="24"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

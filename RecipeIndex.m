@@ -206,20 +206,23 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     self.allIngredientTags = [[NSSet alloc] initWithArray:[self.tagToIngredient allKeys]];
 }
 
-
+// TODO: Add eventing to this or something so managers know to update their indices (and hopefully efficiently, too).
 - (void)addRecipe:(RecipeItem *)recipe {
     [self._internalRecipes addObject:recipe];
     [self indexRecipe:recipe];
 }
 
+- (void)removeRecipe:(RecipeItem *)recipe {
+    [self._internalRecipes removeObject:recipe];
+    [self unindexRecipe:recipe];
+}
+
 - (void)indexRecipe:(RecipeItem *)recipe {
-    NSMutableArray *ingredients = [[NSMutableArray alloc] init];
-    for (MeasuredIngredientItem *m in recipe.measuredIngredients) {
-        if (m.ingredient) {
-            [ingredients addObject:m.ingredient];
-        }
-    }
-    [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:ingredients] forKey:recipe.name];
+    [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:recipe.rawIngredients] forKey:recipe.name];
+}
+
+- (void)unindexRecipe:(RecipeItem *)recipe {
+    [self.recipeNameToGenericTags removeObjectForKey:recipe.name];
 }
 
 - (RecipeSearchResultItem *)generateRecipeSearchResult:(RecipeItem *)recipe withIngredientTags:(NSSet *)allTags {

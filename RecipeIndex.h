@@ -24,6 +24,7 @@
 - (void)savePermanentState;
 - (void)loadTransientState;
 - (void)addRecipe:(RecipeItem *)recipe;
+- (void)removeRecipe:(RecipeItem *)recipe;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients;
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients withSearchString:(NSString *)searchString;
 - (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe;

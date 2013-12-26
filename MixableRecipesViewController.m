@@ -55,8 +55,6 @@ const CGFloat ROW_HEIGHT = 88.0f;
     self.searchedSections = [[MixableRecipeTableSectionManager alloc] initWithRecipes:[self.index groupByMissingIngredients:self.availableIngredients withSearchString:searchString]];
 }
 
-# pragma mark
-
 - (void)recomputeMixableRecipes {
     [self recomputeAvailableIngredients];
     
@@ -98,7 +96,7 @@ const CGFloat ROW_HEIGHT = 88.0f;
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (MixableRecipeTableSectionManager *)managerForTableView:(UITableView *)tableView {
     if (tableView == self.tableView) {
@@ -106,6 +104,24 @@ const CGFloat ROW_HEIGHT = 88.0f;
     } else {
         return self.searchedSections;
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.tableView) {
+        return [[self managerForTableView:tableView] recipeResultForIndexPath:indexPath].recipe.isCustom;
+    } else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSAssert(editingStyle == UITableViewCellEditingStyleDelete, @"Mixable view only allows deletion of rows.");
+    NSAssert(tableView == self.tableView, @"Can only delete from the primary table view (not search).");
+    RecipeItem *r = [[self managerForTableView:tableView] recipeResultForIndexPath:indexPath].recipe;
+    NSAssert(r.isCustom, @"Only custom drinks are deletable.");
+    [self.index removeRecipe:r];
+    [self recomputeMixableRecipes];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

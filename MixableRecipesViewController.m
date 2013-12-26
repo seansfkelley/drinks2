@@ -86,11 +86,11 @@ const CGFloat ROW_HEIGHT = 88.0f;
     if (self.sections && [self.sections sectionCount] > 0) {
         self.tableView.backgroundView = nil;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        self.tableView.scrollEnabled = YES;
+        self.searchController.searchBar.hidden = NO;
     } else {
         self.tableView.backgroundView = self.tableBackground;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        self.tableView.scrollEnabled = NO;
+        self.searchController.searchBar.hidden = YES;
     }
 }
 

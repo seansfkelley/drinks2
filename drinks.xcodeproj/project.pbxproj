@@ -20,6 +20,7 @@
 		785CBC0D184C377D00EB2D57 /* todo in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC0C184C377D00EB2D57 /* todo */; };
 		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		785CBC12184C4E9C00EB2D57 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC11184C4E9C00EB2D57 /* README.md */; };
+		7865DF84186CF8E000D8FD00 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF83186CF8E000D8FD00 /* arrow.png */; };
 		78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */; };
 		78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C09186678D600C76E3A /* SourceSiteViewController.m */; };
 		78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */; };
@@ -91,6 +92,7 @@
 		785CBC0E184C38AC00EB2D57 /* BrowseAllRecipesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseAllRecipesViewController.h; sourceTree = "<group>"; };
 		785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseAllRecipesViewController.m; sourceTree = "<group>"; };
 		785CBC11184C4E9C00EB2D57 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		7865DF83186CF8E000D8FD00 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		78850C001864002700C76E3A /* MixableRecipeTableSectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixableRecipeTableSectionManager.h; sourceTree = "<group>"; };
 		78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixableRecipeTableSectionManager.m; sourceTree = "<group>"; };
 		78850C08186678D600C76E3A /* SourceSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSiteViewController.h; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			children = (
 				78F9B6E618602A660020B604 /* martini-glass.psd */,
 				7808E996186BA29900922CA4 /* shaker-outline.psd */,
+				7865DF83186CF8E000D8FD00 /* arrow.png */,
 				7890449E18556CBF00A39B3C /* UIButtonBarArrowDown.png */,
 				7890449F18556CBF00A39B3C /* UIButtonBarArrowDown@2x.png */,
 				789044A018556CBF00A39B3C /* UIButtonBarArrowUp.png */,
@@ -489,6 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				789044A418556CBF00A39B3C /* UIButtonBarArrowUp.png in Resources */,
+				7865DF84186CF8E000D8FD00 /* arrow.png in Resources */,
 				7808E994186BA27600922CA4 /* ShakerSilhouette.png in Resources */,
 				785CBC0D184C377D00EB2D57 /* todo in Resources */,
 				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,

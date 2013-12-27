@@ -21,6 +21,16 @@
 		785CBC10184C38AC00EB2D57 /* BrowseAllRecipesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */; };
 		785CBC12184C4E9C00EB2D57 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 785CBC11184C4E9C00EB2D57 /* README.md */; };
 		7865DF84186CF8E000D8FD00 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF83186CF8E000D8FD00 /* arrow.png */; };
+		7865DF86186D0A2900D8FD00 /* b-52.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF85186D0A2900D8FD00 /* b-52.png */; };
+		7865DF88186D0AAD00D8FD00 /* bees-knees.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF87186D0AAD00D8FD00 /* bees-knees.png */; };
+		7865DF8A186D0C6700D8FD00 /* brooklyn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF89186D0C6700D8FD00 /* brooklyn.png */; };
+		7865DF8C186D0D1800D8FD00 /* caipirinha.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF8B186D0D1800D8FD00 /* caipirinha.png */; };
+		7865DF8E186D0DA100D8FD00 /* chateau-romani.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF8D186D0DA100D8FD00 /* chateau-romani.png */; };
+		7865DF90186D10B700D8FD00 /* chysanthemum.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF8F186D10B700D8FD00 /* chysanthemum.png */; };
+		7865DF92186D115D00D8FD00 /* corpse-reviver-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF91186D115D00D8FD00 /* corpse-reviver-2.png */; };
+		7865DF94186D122F00D8FD00 /* diamondback.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF93186D122F00D8FD00 /* diamondback.png */; };
+		7865DF96186D125F00D8FD00 /* el-presidente.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF95186D125F00D8FD00 /* el-presidente.png */; };
+		7865DF98186D132500D8FD00 /* ginger-gold-rush.png in Resources */ = {isa = PBXBuildFile; fileRef = 7865DF97186D132500D8FD00 /* ginger-gold-rush.png */; };
 		78850C021864002700C76E3A /* MixableRecipeTableSectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */; };
 		78850C0A186678D600C76E3A /* SourceSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C09186678D600C76E3A /* SourceSiteViewController.m */; };
 		78850C101866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78850C0F1866D6DC00C76E3A /* PoppingTabBarControllerDelegate.m */; };
@@ -93,6 +103,16 @@
 		785CBC0F184C38AC00EB2D57 /* BrowseAllRecipesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseAllRecipesViewController.m; sourceTree = "<group>"; };
 		785CBC11184C4E9C00EB2D57 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		7865DF83186CF8E000D8FD00 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		7865DF85186D0A2900D8FD00 /* b-52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b-52.png"; sourceTree = "<group>"; };
+		7865DF87186D0AAD00D8FD00 /* bees-knees.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bees-knees.png"; sourceTree = "<group>"; };
+		7865DF89186D0C6700D8FD00 /* brooklyn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brooklyn.png; sourceTree = "<group>"; };
+		7865DF8B186D0D1800D8FD00 /* caipirinha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = caipirinha.png; sourceTree = "<group>"; };
+		7865DF8D186D0DA100D8FD00 /* chateau-romani.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chateau-romani.png"; sourceTree = "<group>"; };
+		7865DF8F186D10B700D8FD00 /* chysanthemum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chysanthemum.png; sourceTree = "<group>"; };
+		7865DF91186D115D00D8FD00 /* corpse-reviver-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corpse-reviver-2.png"; sourceTree = "<group>"; };
+		7865DF93186D122F00D8FD00 /* diamondback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamondback.png; sourceTree = "<group>"; };
+		7865DF95186D125F00D8FD00 /* el-presidente.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "el-presidente.png"; sourceTree = "<group>"; };
+		7865DF97186D132500D8FD00 /* ginger-gold-rush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ginger-gold-rush.png"; sourceTree = "<group>"; };
 		78850C001864002700C76E3A /* MixableRecipeTableSectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MixableRecipeTableSectionManager.h; sourceTree = "<group>"; };
 		78850C011864002700C76E3A /* MixableRecipeTableSectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MixableRecipeTableSectionManager.m; sourceTree = "<group>"; };
 		78850C08186678D600C76E3A /* SourceSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourceSiteViewController.h; sourceTree = "<group>"; };
@@ -290,8 +310,18 @@
 			isa = PBXGroup;
 			children = (
 				788D1FF9185848D40020898F /* alamagoozlum.png */,
+				7865DF85186D0A2900D8FD00 /* b-52.png */,
+				7865DF87186D0AAD00D8FD00 /* bees-knees.png */,
+				7865DF89186D0C6700D8FD00 /* brooklyn.png */,
+				7865DF8B186D0D1800D8FD00 /* caipirinha.png */,
+				7865DF8D186D0DA100D8FD00 /* chateau-romani.png */,
 				78F9B6E418602A4B0020B604 /* chartreuse-smash.png */,
+				7865DF8F186D10B700D8FD00 /* chysanthemum.png */,
+				7865DF91186D115D00D8FD00 /* corpse-reviver-2.png */,
 				78F9B6E718602BD60020B604 /* death-in-the-afternoon.png */,
+				7865DF95186D125F00D8FD00 /* el-presidente.png */,
+				7865DF93186D122F00D8FD00 /* diamondback.png */,
+				7865DF97186D132500D8FD00 /* ginger-gold-rush.png */,
 				78F9B6E918602C600020B604 /* revolver.png */,
 			);
 			name = drinks;
@@ -498,6 +528,7 @@
 				78A9398B1847CB9C00B6784B /* Main.storyboard in Resources */,
 				7808E995186BA27600922CA4 /* ShakerSilhouette@2x.png in Resources */,
 				785CBBF8184BF12600EB2D57 /* EmptyRecipeResultsView.xib in Resources */,
+				7865DF88186D0AAD00D8FD00 /* bees-knees.png in Resources */,
 				7808E984186B93DC00922CA4 /* ingredients.json in Resources */,
 				7808E988186BA09800922CA4 /* UITabBarSearchTemplateSelected.png in Resources */,
 				789044A218556CBF00A39B3C /* UIButtonBarArrowDown.png in Resources */,
@@ -508,12 +539,21 @@
 				7808E989186BA09800922CA4 /* UITabBarSearchTemplateSelected@2x.png in Resources */,
 				788D1FF418583D720020898F /* DefaultRecipeImage.png in Resources */,
 				788D1FF518583D720020898F /* DefaultRecipeImage@2x.png in Resources */,
+				7865DF86186D0A2900D8FD00 /* b-52.png in Resources */,
 				78F9B6E818602BD60020B604 /* death-in-the-afternoon.png in Resources */,
 				7808E985186B93DC00922CA4 /* recipes.json in Resources */,
+				7865DF96186D125F00D8FD00 /* el-presidente.png in Resources */,
+				7865DF90186D10B700D8FD00 /* chysanthemum.png in Resources */,
 				788D1FFA185848D40020898F /* alamagoozlum.png in Resources */,
 				78F9B6EA18602C600020B604 /* revolver.png in Resources */,
+				7865DF94186D122F00D8FD00 /* diamondback.png in Resources */,
+				7865DF8E186D0DA100D8FD00 /* chateau-romani.png in Resources */,
 				785CBC12184C4E9C00EB2D57 /* README.md in Resources */,
+				7865DF92186D115D00D8FD00 /* corpse-reviver-2.png in Resources */,
 				789044A518556CBF00A39B3C /* UIButtonBarArrowUp@2x.png in Resources */,
+				7865DF8A186D0C6700D8FD00 /* brooklyn.png in Resources */,
+				7865DF98186D132500D8FD00 /* ginger-gold-rush.png in Resources */,
+				7865DF8C186D0D1800D8FD00 /* caipirinha.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

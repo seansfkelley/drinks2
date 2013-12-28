@@ -273,7 +273,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d0S-NC-DI9">
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0S-NC-DI9">
                                             <rect key="frame" x="20" y="5" width="280" height="33"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -285,8 +285,10 @@
                                         </textView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="d0S-NC-DI9" firstAttribute="leading" secondItem="efK-iw-B93" secondAttribute="leading" constant="20" symbolic="YES" id="Bna-YB-q6B"/>
                                         <constraint firstAttribute="bottom" secondItem="d0S-NC-DI9" secondAttribute="bottom" constant="5" id="TWB-cr-74o"/>
                                         <constraint firstItem="d0S-NC-DI9" firstAttribute="top" secondItem="efK-iw-B93" secondAttribute="top" constant="5" id="Upl-TK-33Y"/>
+                                        <constraint firstAttribute="trailing" secondItem="d0S-NC-DI9" secondAttribute="trailing" constant="20" symbolic="YES" id="p3I-JL-CsD"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

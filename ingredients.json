@@ -132,8 +132,23 @@
     "display" : "Maraschino Liqueur"
   },
   {
+    "display" : "Mezcal (blanco)",
+    "tag"     : "blanco mezcal",
+    "generic" : "mezcal"
+  },
+  {
+    "display" : "Mezcal (reposado)",
+    "tag"     : "reposado mezcal",
+    "generic" : "mezcal"
+  },
+  {
+    "display" : "Mezcal (a\u00f1ejo)",
+    "tag"     : "anejo mezcal",
+    "generic" : "mezcal"
+  },
+  {
     "display" : "Mezcal",
-    "generic" : "tequila"
+    "hidden"  : true
   },
   {
     "display" : "Milk"

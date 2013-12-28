@@ -282,7 +282,8 @@
       },
       {
         "tag": "absinthe",
-        "displayIngredient": "dash of absinthe"
+        "displayMeasure": "a dash",
+        "displayIngredient": "absinthe"
       }
     ],
     "instructions": "Shake ingredients together in a mixer with ice. Strain into chilled cocktail glass."

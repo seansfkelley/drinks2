@@ -3,17 +3,20 @@ less ugly title for detail view
 move away from JSON because it's too verbose (yml would be easy and already much better)
 stylize notes text?
 plaintext search for ingredients?
+clickable ingredients to see what they are
 
 code improvements
 - eventing for when things like the indices change
 - more efficient ways to compute groupings, search (incremental)
 - separate indices for in-memory, custom, web, etc.?
 
-glasses -- what's a good way to include them as a reference
-garnish -- should these be treated separately from regular ingredients?
-profile -- save sets of ingredients so you don't have to re-enter them all the time
-mood    -- what subjective properties does the drink have that you want?
-gimmick -- shake the phone to pop up a random mixable drink (name = Shaken?)
+glasses  -- what's a good way to include them as a reference
+garnish  -- should these be treated separately from regular ingredients?
+profile  -- save sets of ingredients so you don't have to re-enter them all the time
+mood     -- what subjective properties does the drink have that you want?
+gimmick  -- shake the phone to pop up a random mixable drink (name = Shaken?)
+variants -- show lists of variants on drinks
+similar  -- display suggestions for similar drinks
 
 custom stuff
 - editing of a drink that's already saved
@@ -25,3 +28,6 @@ polish
 - return button should be more useful for custom field
 - swipe to navigate through recipes (alternate to buttons)
 - image for drink in detail view
+
+BUGS:
+- drinks don't always deselect when looking at details view

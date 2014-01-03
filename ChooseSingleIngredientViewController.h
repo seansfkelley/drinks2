@@ -10,9 +10,15 @@
 #import "RecipeIndex.h"
 #import "IngredientItem.h"
 
+typedef NSString *(^NameFormatterBlock)(IngredientItem *);
+
 @interface ChooseSingleIngredientViewController : UITableViewController
 
-@property RecipeIndex *index;
-@property IngredientItem *selectedIngredient;
+// Input
+@property NSArray *ingredients;
+@property (strong) NameFormatterBlock formatter; // (strong) to appease ARC.
+
+// Output
+@property (readonly) IngredientItem *selectedIngredient;
 
 @end

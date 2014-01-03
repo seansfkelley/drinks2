@@ -12,9 +12,15 @@
 
 @interface ChooseSingleIngredientViewController ()
 
+@property (readwrite) IngredientItem *selectedIngredient;
+
 @property SortedTableSectionManager *sections;
 
 @end
+
+const NameFormatterBlock DEFAULT_NAME_FORMATTER = ^NSString *(IngredientItem *ingredient){
+    return ingredient.displayName;
+};
 
 @implementation ChooseSingleIngredientViewController
 
@@ -22,14 +28,11 @@
 {
     [super viewDidLoad];
 
-    // filteredArrayWithPredicate
-    NSMutableArray *ingredients = [[NSMutableArray alloc] init];
-    for (IngredientItem *i in self.index.ingredients) {
-        if (!i.hidden) {
-            [ingredients addObject:i];
-        }
-    }
-    self.sections = [[SortedTableSectionManager alloc] initWithArray:ingredients sortedByProperty:@"displayName"];
+    self.sections = [[SortedTableSectionManager alloc] initWithArray:self.ingredients sortedByProperty:@"displayName"];
+}
+
+- (NameFormatterBlock)resolveFormatter {
+    return self.formatter ? self.formatter : DEFAULT_NAME_FORMATTER;
 }
 
 #pragma mark - Table view data source
@@ -49,7 +52,7 @@
     static NSString *CellIdentifier = @"IngredientPrototypeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     IngredientItem *ingredient = [self.sections objectForIndexPath:indexPath];
-    cell.textLabel.text = ingredient.displayName;
+    cell.textLabel.text = [self resolveFormatter](ingredient);
     return cell;
 }
 
@@ -67,6 +70,8 @@
 {
     return [self.sections sectionForSectionIndexTitle:title];
 }
+
+#pragma mark - UIViewController overrides
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([sender isKindOfClass:[UITableViewCell class]]) {

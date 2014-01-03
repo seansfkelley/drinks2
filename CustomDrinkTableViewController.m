@@ -231,7 +231,14 @@ typedef enum rowTypeEnum {
         [self createAndIndexNewRecipe];
     } else if ([controller isKindOfClass:[ChooseSingleIngredientViewController class]]) {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
-        choose.index = self.index;
+        choose.ingredients = self.index.ingredients; // Everything.
+        choose.formatter = ^NSString*(IngredientItem *i) {
+            if (i.hidden) {
+                return [NSString stringWithFormat:@"%@ (any)", i.displayName]; // Proxy for generics.
+            } else {
+                return i.displayName;
+            }
+        };
 
         UITableViewCell *cell = [UIUtils nearestSuperview:sender ofType:[UITableViewCell class]];
         self.currentIngredientRowItemIndex = [self.tableView indexPathForCell:cell];

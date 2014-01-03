@@ -190,21 +190,60 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     return parsedIngredients;
 }
 
-# pragma mark - Public functions for searching
-
+#pragma mark - Indexing and private search functions
 - (void)index {
     self.tagToIngredient = [[NSMutableDictionary alloc] init];
     for (IngredientItem *i in self.ingredients) {
         [self.tagToIngredient setObject:i forKey:i.tag];
     }
-    
+
     self.recipeNameToGenericTags = [[NSMutableDictionary alloc] init];
     for (RecipeItem *r in self.recipes) {
         [self indexRecipe:r];
     }
-    
+
     self.allIngredientTags = [[NSSet alloc] initWithArray:[self.tagToIngredient allKeys]];
+
+    for (IngredientItem *i in self.ingredients) {
+        if (i.genericTag) {
+            IngredientItem *g = [self.tagToIngredient objectForKey:i.genericTag];
+            g.generic = true;
+        }
+    }
 }
+
+- (void)indexRecipe:(RecipeItem *)recipe {
+    [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:recipe.rawIngredients] forKey:recipe.name];
+}
+
+- (void)unindexRecipe:(RecipeItem *)recipe {
+    [self.recipeNameToGenericTags removeObjectForKey:recipe.name];
+}
+
+- (NSMutableArray *)_internalGroupByMissingIngredients:(NSArray *)ingredients {
+    NSSet *genericIngredients = [RecipeIndex pluckGenericTags:ingredients];
+    NSSet *allTags = [RecipeIndex pluckAllTags:ingredients];
+
+    NSMutableArray *grouped = [[NSMutableArray alloc] init];
+    for (int i = 0; i < self.fudgeFactor; ++i) {
+        [grouped addObject:[[NSMutableArray alloc] init]];
+    }
+    for (RecipeItem *r in self.recipes) {
+        int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
+        // Exclude recipes for which we have no significant ingredients, even if it's technically only "with two more".
+        if (missing < self.fudgeFactor && missing != [[self.recipeNameToGenericTags objectForKey:r.name] count]) {
+            [[grouped objectAtIndex:missing] addObject:[self generateRecipeSearchResult:r withIngredientTags:allTags]];
+        }
+    }
+    for (int i = 0; i < self.fudgeFactor; ++i) {
+        [(NSMutableArray *)[grouped objectAtIndex:i] sortUsingComparator:^NSComparisonResult(RecipeSearchResultItem *one, RecipeSearchResultItem *two) {
+            return [one.recipe.name caseInsensitiveCompare:two.recipe.name];
+        }];
+    }
+    return grouped;
+}
+
+#pragma mark - Public functions for searching
 
 // TODO: Add eventing to this or something so managers know to update their indices (and hopefully efficiently, too).
 - (void)addRecipe:(RecipeItem *)recipe {
@@ -217,12 +256,8 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     [self unindexRecipe:recipe];
 }
 
-- (void)indexRecipe:(RecipeItem *)recipe {
-    [self.recipeNameToGenericTags setObject:[RecipeIndex pluckGenericTags:recipe.rawIngredients] forKey:recipe.name];
-}
-
-- (void)unindexRecipe:(RecipeItem *)recipe {
-    [self.recipeNameToGenericTags removeObjectForKey:recipe.name];
+- (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe {
+    return [self generateRecipeSearchResult:recipe withIngredientTags:self.allIngredientTags];
 }
 
 - (RecipeSearchResultItem *)generateRecipeSearchResult:(RecipeItem *)recipe withIngredientTags:(NSSet *)allTags {
@@ -247,34 +282,6 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
     result.substituteIngredients = [[NSArray alloc] initWithArray:substituteIngredients];
     result.availableIngredients = [[NSArray alloc] initWithArray:availableIngredients];
     return result;
-}
-
-- (RecipeSearchResultItem *)generateDummySearchResultFor:(RecipeItem *)recipe {
-    return [self generateRecipeSearchResult:recipe withIngredientTags:self.allIngredientTags];
-}
-
-
-- (NSMutableArray *)_internalGroupByMissingIngredients:(NSArray *)ingredients {
-    NSSet *genericIngredients = [RecipeIndex pluckGenericTags:ingredients];
-    NSSet *allTags = [RecipeIndex pluckAllTags:ingredients];
-    
-    NSMutableArray *grouped = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self.fudgeFactor; ++i) {
-        [grouped addObject:[[NSMutableArray alloc] init]];
-    }
-    for (RecipeItem *r in self.recipes) {
-        int missing = [RecipeIndex missingCount:genericIngredients forRecipe:[self.recipeNameToGenericTags objectForKey:r.name]];
-        // Exclude recipes for which we have no significant ingredients, even if it's technically only "with two more".
-        if (missing < self.fudgeFactor && missing != [[self.recipeNameToGenericTags objectForKey:r.name] count]) {
-            [[grouped objectAtIndex:missing] addObject:[self generateRecipeSearchResult:r withIngredientTags:allTags]];
-        }
-    }
-    for (int i = 0; i < self.fudgeFactor; ++i) {
-        [(NSMutableArray *)[grouped objectAtIndex:i] sortUsingComparator:^NSComparisonResult(RecipeSearchResultItem *one, RecipeSearchResultItem *two) {
-            return [one.recipe.name caseInsensitiveCompare:two.recipe.name];
-        }];
-    }
-    return grouped;
 }
 
 - (NSArray *)groupByMissingIngredients:(NSArray *)ingredients {

@@ -69,7 +69,7 @@
     "name": "Ivy",
     "ingredients": [
       {
-        "tag": "dry gin",
+        "tag": "gin",
         "displayMeasure": "1.5 oz",
         "displayIngredient": "dry gin"
       },
@@ -521,7 +521,7 @@
     "name": "White Lady",
     "ingredients": [
       {
-        "tag": "dry gin",
+        "tag": "gin",
         "displayMeasure": "2 oz",
         "displayIngredient": "London dry gin"
       },

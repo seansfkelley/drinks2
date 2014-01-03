@@ -15,7 +15,8 @@
 @property (readonly) NSString *displayName;
 @property (readonly) NSString *tag;
 @property (readonly) NSString *genericTag;
-@property (readonly) BOOL hidden;
+@property (readonly) BOOL hidden; // Should be hidden in list views.
+@property BOOL generic; // Target of another ingredient's generic tag.
 @property BOOL selected;
 
 @end

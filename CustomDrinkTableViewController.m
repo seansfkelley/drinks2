@@ -233,8 +233,8 @@ typedef enum rowTypeEnum {
         ChooseSingleIngredientViewController *choose = (ChooseSingleIngredientViewController *)controller;
         choose.ingredients = self.index.ingredients; // Everything.
         choose.formatter = ^NSString*(IngredientItem *i) {
-            if (i.hidden) {
-                return [NSString stringWithFormat:@"%@ (any)", i.displayName]; // Proxy for generics.
+            if (i.generic) {
+                return [NSString stringWithFormat:@"%@ (any)", i.displayName];
             } else {
                 return i.displayName;
             }

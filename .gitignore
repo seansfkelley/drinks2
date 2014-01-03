@@ -10,3 +10,6 @@ build/
 *.perspectivev3
 
 xcuserdata
+
+Podfile.lock
+Pods

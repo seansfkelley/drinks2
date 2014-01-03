@@ -1,3 +1,8 @@
+# Setup
+
+1. Install [cocoapods](http://cocoapods.org)
+2. `pod install`
+
 # A Note on Formats
 
 ## `ingredients.json`

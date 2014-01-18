@@ -82,6 +82,11 @@ const CGFloat ROW_HEIGHT = 88.0f;
     [self scrollToHideSearch];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    // http://stackoverflow.com/questions/19379510/uitableviewcell-doesnt-get-deselected-when-swiping-back-quickly
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+}
+
 - (void)showEmptyViewIfNecessary {
     if (self.sections && [self.sections sectionCount] > 0) {
         self.tableView.backgroundView = nil;

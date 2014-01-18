@@ -35,7 +35,12 @@
     for (RecipeItem *r in self.index.recipes) {
         [recipeResults addObject:[self.index generateDummySearchResultFor:r]];
     }
-    self.sections = [[SortedTableSectionManager alloc] initWithArray:recipeResults sortedByProperty:@"name"];    
+    self.sections = [[SortedTableSectionManager alloc] initWithArray:recipeResults sortedByProperty:@"name"];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    // http://stackoverflow.com/questions/19379510/uitableviewcell-doesnt-get-deselected-when-swiping-back-quickly
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
 }
 
 #pragma mark - Table view data source

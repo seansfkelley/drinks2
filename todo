@@ -28,6 +28,3 @@ polish
 - return button should be more useful for custom field
 - swipe to navigate through recipes (alternate to buttons)
 - image for drink in detail view
-
-BUGS:
-- drinks don't always deselect when looking at details view

@@ -951,8 +951,8 @@
     "url": "http:\/\/sloshed.hyperkinetic.org\/2011\/10\/21\/diamondback\/"
   },
   {
-    "name" : "Vieux Carr\u00e9",
-    "ingredients" : [
+    "name": "Vieux Carr\u00e9",
+    "ingredients": [
       {
         "tag": "benedictine",
         "displayMeasure": "1\/2 tsp",
@@ -985,5 +985,29 @@
     "instructions" : "Combine all ingredients in a mixing glass and fill with ice; stir well for 20 seconds and strain into an ice-filled old fashioned glass. Garnish with a cherry.",
     "source": "Serious Eats",
     "url" : "http:\/\/www.seriouseats.com\/recipes\/2008\/07\/vieux-carre-recipe.html"
+  },
+  {
+    "name": "Sazerac",
+    "ingredients": [
+      {
+        "tag": "rye whiskey",
+        "displayMeasure": "1 1\/2 oz",
+        "displayIngredient": "rye whiskey"
+      },
+      {
+        "displayMeasure": "2-3 dashes",
+        "displayIngredient": "Peychaud's bitters"
+      },
+      {
+        "tag": "sugar",
+        "displayIngredient": "sugar cube"
+      },
+      {
+        "tag": "absinthe",
+        "displayIngredient": "absinthe"
+      }
+    ],
+    "instructions": "Fill an Old Fashioned glass with ice and water and set aside. In another old Fashioned glass, muddle sugar cube with bitters and then add the rye. Pour out the ice from the first glass, swirl absinthe around it and toss the extra. Pour the rye mixture in and serve.",
+    "notes": "Along with the Old Fashioned, the Sazerac is one of the earliest cocktails, and one of few that adheres to the classic definition of \"cocktail\": spirits, bitters, sugar and water."
   }
 ]

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RecipeIndex.h"
 #import "IngredientItem.h"
 
 typedef NSString *(^NameFormatterBlock)(IngredientItem *);

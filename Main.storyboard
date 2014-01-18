@@ -525,7 +525,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <outlet property="delegate" destination="bKI-ea-Yy1" id="WPE-KR-zVM"/>
+                        <outlet property="delegate" destination="bKI-ea-Yy1" id="C10-xU-QPx"/>
                         <segue destination="ztg-tk-JKT" kind="relationship" relationship="viewControllers" id="VGU-Zd-se5"/>
                         <segue destination="i8C-30-O0P" kind="relationship" relationship="viewControllers" id="OE3-v0-4l7"/>
                     </connections>

@@ -42,28 +42,28 @@
     "ingredients": [
       {
         "tag": "gin",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "gin"
       },
       {
         "tag": "green chartreuse",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "green Chartreuse"
       },
       {
         "tag": "maraschino liqueur",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "maraschino liqueur"
       },
       {
         "tag": "lime juice",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "lime juice"
       }
     ],
     "instructions": "Shake vigorously with ice. Strain into a cocktail glass and garnish with a twist of lime.",
     "source": "Saveur",
-    "url": "http:\/\/www.saveur.com\/article\/Recipes\/The-Last-Word-Cocktail"
+    "url": "http://www.saveur.com/article/Recipes/The-Last-Word-Cocktail"
   },
   {
     "name": "Ivy",
@@ -198,7 +198,7 @@
     ],
     "instructions": "Pour alcohol in a shaker with ice and shake vigorously. Strain into a small glass and fill with milk.",
     "source": "The Drunken Moogle",
-    "url": "http:\/\/www.thedrunkenmoogle.com\/post\/28337609182\/expbaronline-chateau-romani-the-legend-of-zelda"
+    "url": "http://www.thedrunkenmoogle.com/post/28337609182/expbaronline-chateau-romani-the-legend-of-zelda"
   },
   {
     "name": "Brinstar",
@@ -220,7 +220,7 @@
       },
       {
         "tag": "lime",
-        "displayMeasure": "1\/2",
+        "displayMeasure": "1/2",
         "displayIngredient": "lime, cut into quarters"
       },
       {
@@ -230,7 +230,7 @@
     "instructions": "Muddle the lime, simple syrup, and mint together in a shaker. Add ice and the alcohol and shake well. Pour the mixture into a lowball glass.",
     "notes": "Brinstar is a zone overgrown with vegetation. Having very recently been introduced to a lime-y cocktail known as a caipirinha, I decided to try combining it with another leafy drink - namely, a mojito. The resulting combination, plus a little extra, wound up being a tasty creation that I\u2019m rather proud of.",
     "source": "The Drunken Moogle",
-    "url": "http:\/\/www.thedrunkenmoogle.com\/post\/36070643600\/drinks-brinstar"
+    "url": "http://www.thedrunkenmoogle.com/post/36070643600/drinks-brinstar"
   },
   {
     "name": "Vesper Martini",
@@ -247,7 +247,7 @@
       },
       {
         "tag": "lillet",
-        "displayMeasure": "1\/2 part",
+        "displayMeasure": "1/2 part",
         "displayIngredient": "Lillet"
       },
       {
@@ -262,22 +262,22 @@
     "ingredients": [
       {
         "tag": "gin",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "gin"
       },
       {
         "tag": "lemon juice",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "lemon juice"
       },
       {
         "tag": "cointreau",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "Cointreau"
       },
       {
         "tag": "lillet",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "Lillet"
       },
       {
@@ -303,7 +303,7 @@
       },
       {
         "tag": "maraschino liqueur",
-        "displayMeasure": "1\/2 tsp",
+        "displayMeasure": "1/2 tsp",
         "displayIngredient": "maraschino liqueur"
       },
       {
@@ -318,7 +318,7 @@
     ],
     "instructions": "Combine liquid ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled cocktail glass. Cut a thin slice of lemon zest over the surface of the drink and drop it into the glass.",
     "source": "Cocktailia",
-    "url": "http:\/\/www.cocktailia.com\/cocktail-recipes\/improved-whiskey-cocktail"
+    "url": "http://www.cocktailia.com/cocktail-recipes/improved-whiskey-cocktail"
   },
   {
     "name": "Mudslide",
@@ -361,12 +361,12 @@
       },
       {
         "tag": "lime juice",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "fresh lime juice"
       },
       {
         "tag": "green chartreuse",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "green Chartreuse"
       },
       {
@@ -376,7 +376,7 @@
     ],
     "instructions": "Combine all ingredients in a large glass filled with ice. Stir thoroughly and strain the mixture into a coupe. Garnish with a lime twist.",
     "source": "Saveur",
-    "url": "http:\/\/www.saveur.com\/article\/Recipes\/The-Lumiere"
+    "url": "http://www.saveur.com/article/Recipes/The-Lumiere"
   },
   {
     "name": "Margarita",
@@ -398,7 +398,7 @@
       },
       {
         "tag": "simple syrup",
-        "displayMeasure": "1\/2 part",
+        "displayMeasure": "1/2 part",
         "displayIngredient": "simple syrup"
       },
       {
@@ -412,17 +412,17 @@
     "ingredients": [
       {
         "tag": "gin",
-        "displayMeasure": "1 1\/2 oz",
+        "displayMeasure": "1 1/2 oz",
         "displayIngredient": "gin"
       },
       {
         "tag": "lemon juice",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "lemon juice"
       },
       {
         "tag": "honey syrup",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "honey syrup"
       }
     ],
@@ -453,12 +453,12 @@
       },
       {
         "tag": "angostura bitters",
-        "displayMeasure": "1 1\/2 oz",
+        "displayMeasure": "1 1/2 oz",
         "displayIngredient": "Angostura bitters"
       },
       {
         "tag": "lime juice",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "lime juice"
       },
       {
@@ -469,14 +469,14 @@
     ],
     "instructions": "Pour the egg white and lime juice into a cocktail shaker and shake for 30 seconds. Add the bitters and syrup, fill with ice and shake hard for another 30 seconds. Strain into a chilled cocktail glass.",
     "source": "NY Times",
-    "url": "http:\/\/www.nytimes.com\/2010\/12\/01\/dining\/01partiesrex3.html"
+    "url": "http://www.nytimes.com/2010/12/01/dining/01partiesrex3.html"
   },
   {
     "name": "Manhattan",
     "ingredients": [
       {
         "tag": "whiskey",
-        "displayMeasure": "2 1\/2 oz",
+        "displayMeasure": "2 1/2 oz",
         "displayIngredient": "whiskey"
       },
       {
@@ -506,7 +506,7 @@
       },
       {
         "tag": "maraschino liqueur",
-        "displayMeasure": "1\/4 oz",
+        "displayMeasure": "1/4 oz",
         "displayIngredient": "Maraschino liqueur"
       },
       {
@@ -515,7 +515,7 @@
       }
     ],
     "instructions": "Stir gently over ice. Strain into a chilled cocktail glass.",
-    "notes": "The bitters may be replaced with 1\/4oz Amer Picon, a French version of Italy's Amaro."
+    "notes": "The bitters may be replaced with 1/4oz Amer Picon, a French version of Italy's Amaro."
   },
   {
     "name": "White Lady",
@@ -527,12 +527,12 @@
       },
       {
         "tag": "cointreau",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "Cointreau"
       },
       {
         "tag": "lemon juice",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "lemon juice"
       },
       {
@@ -574,7 +574,7 @@
       },
       {
         "tag": "green chartreuse",
-        "displayMeasure": "1 1\/4 oz",
+        "displayMeasure": "1 1/4 oz",
         "displayIngredient": "green Chartreuse"
       },
       {
@@ -584,14 +584,14 @@
       },
       {
         "tag": "lime juice",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "lime juice"
       }
     ],
     "instructions": "Shake ingredients with ice, then strain into a cocktail glass.",
     "notes": "A variant on the Last Word.",
     "source": "Serious Eats",
-    "url": "http:\/\/www.seriouseats.com\/recipes\/2011\/07\/la-palabra-no-9-park-cocktail-recipe.html"
+    "url": "http://www.seriouseats.com/recipes/2011/07/la-palabra-no-9-park-cocktail-recipe.html"
   },
   {
     "name": "Revolver",
@@ -603,7 +603,7 @@
       },
       {
         "tag": "coffee liqueur",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "coffee liqueur"
       },
       {
@@ -614,7 +614,7 @@
     "instructions": "Combine bourbon, coffee liqueur, and orange bitters in a mixing glass and fill with ice. Stir well until chilled, about 30 seconds. Strain into chilled cocktail glass. Twist orange peel to express oils over drink and use as garnish.",
     "notes": "A rye-heavy bourbon such as Bulleit, Buffalo Trace or Basil Hayden is recommended.",
     "source": "Serious Eats",
-    "url": "http:\/\/www.seriouseats.com\/recipes\/2011\/03\/time-for-a-drink-the-revolver-bourbon-cocktail-tia-maria-kahlua-orange.html"
+    "url": "http://www.seriouseats.com/recipes/2011/03/time-for-a-drink-the-revolver-bourbon-cocktail-tia-maria-kahlua-orange.html"
   },
   {
     "name": "Geek Squad",
@@ -675,7 +675,7 @@
     "ingredients": [
       {
         "tag": "white rum",
-        "displayMeasure": "1 1\/2 oz",
+        "displayMeasure": "1 1/2 oz",
         "displayIngredient": "white rum"
       },
       {
@@ -685,7 +685,7 @@
       },
       {
         "tag": "triple sec",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "orange cura\u00e7ao"
       },
       {
@@ -699,9 +699,9 @@
       }
     ],
     "instructions": "Combine ingredients in an ice-filled mixing glass and stir until cold. Strain into a chilled cocktail glass. Optionally garnish with an orange zest and piece of pineapple.",
-    "notes": "Dry vermouth also works. When using dry vermouth, the drink benefits from increasing the amount of rum by 1\/4 ounce or so, but it works well either way.",
+    "notes": "Dry vermouth also works. When using dry vermouth, the drink benefits from increasing the amount of rum by 1/4 ounce or so, but it works well either way.",
     "source": "Cocktailia",
-    "url": "http:\/\/www.cocktailia.com\/cocktail-recipes\/el-presidente"
+    "url": "http://www.cocktailia.com/cocktail-recipes/el-presidente"
   },
   {
     "name": "Derby",
@@ -713,23 +713,23 @@
       },
       {
         "tag": "lime juice",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "lime juice"
       },
       {
         "tag": "sweet vermouth",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "sweet vermouth"
       },
       {
         "tag": "grand marnier",
-        "displayMeasure": "1\/2 oz",
+        "displayMeasure": "1/2 oz",
         "displayIngredient": "Grand Marnier"
       }
     ],
     "instructions": "Shake ingredients over ice and strain into a chilled cocktail glass. Garnish with lime wedge or mint leaf.",
     "source": "Serious Eats",
-    "url": "http:\/\/www.seriouseats.com\/recipes\/2011\/10\/derby-cocktail-bourbon-vermouth-grand-marnier-lime-recipe.html"
+    "url": "http://www.seriouseats.com/recipes/2011/10/derby-cocktail-bourbon-vermouth-grand-marnier-lime-recipe.html"
   },
   {
     "name": "Ginger Gold Rush",
@@ -753,7 +753,7 @@
     "instructions": "Put a brandied cherry in the bottom of a martini glass. Combine all ingredients in a cocktail shaker filled with ice. Shake vigorously and strain over the cherry into the glass.",
     "notes": "The original recipe has the reverse proportions for the ginger and bourbon, which makes for a significantly sweeter drink.",
     "source": "Saveur",
-    "url": "http:\/\/www.saveur.com\/article\/Recipes\/Ginger-Gold-Rush-Cocktail"
+    "url": "http://www.saveur.com/article/Recipes/Ginger-Gold-Rush-Cocktail"
   },
   {
     "name": "Alamagoozlum",
@@ -769,38 +769,38 @@
       },
       {
         "tag": "rum",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "Jamacian rum"
       },
       {
         "tag": "chartreuse",
-        "displayMeasure": "3\/4 oz",
-        "displayIngredient": "yellow\/green Chartreuse"
+        "displayMeasure": "3/4 oz",
+        "displayIngredient": "yellow/green Chartreuse"
       },
       {
         "tag": "simple syrup",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "simple syrup"
       },
       {
         "tag": "triple sec",
-        "displayMeasure": "1\/4 oz",
+        "displayMeasure": "1/4 oz",
         "displayIngredient": "orange cura\u00e7ao"
       },
       {
         "tag": "angostura bitters",
-        "displayMeasure": "1\/4 oz",
+        "displayMeasure": "1/4 oz",
         "displayIngredient": "Angostura bitters"
       },
       {
         "tag": "egg white",
-        "displayMeasure": "1\/4",
+        "displayMeasure": "1/4",
         "displayIngredient": "egg white"
       }
     ],
     "instructions": "Shake very hard over ice and strain into a chilled cocktail glass.",
     "source": "Sloshed!",
-    "url": "http:\/\/sloshed.hyperkinetic.org\/2009\/10\/23\/alamagoozlum-cocktail\/"
+    "url": "http://sloshed.hyperkinetic.org/2009/10/23/alamagoozlum-cocktail/"
   },
   {
     "name": "Martinez",
@@ -854,7 +854,7 @@
     ],
     "instructions": "Place mint, lemon and sugar in a cocktail shaker and muddle. Add Chartreuse and fill with ice. Shake thoroughly, and strain into a glass filled with crushed ice. Garnish with mint sprig.",
     "source": "Saveur",
-    "url": "http:\/\/www.saveur.com\/article\/Recipes\/Chartreuse-Smash"
+    "url": "http://www.saveur.com/article/Recipes/Chartreuse-Smash"
   },
   {
     "name": "Perfect Margarita",
@@ -905,17 +905,17 @@
       },
       {
         "tag": "absinthe",
-        "displayMeasure": "1\/8 tsp",
+        "displayMeasure": "1/8 tsp",
         "displayIngredient": "absinthe"
       },
       {
         "tag": "simple syrup",
-        "displayMeasure": "1\/4 oz",
+        "displayMeasure": "1/4 oz",
         "displayIngredient": "simple syrup"
       },
       {
         "tag": "maraschino liqueur",
-        "displayMeasure": "1\/4 oz",
+        "displayMeasure": "1/4 oz",
         "displayIngredient": "maraschino liqueur"
       },
       {
@@ -925,7 +925,7 @@
     ],
     "instructions": "Combine ingredients in bar glass, add good solid ice and stir until well chilled. Strain the mixture over a 2\" square ice cube in a frosted old fashioned glass. Garnish with fresh lemon peel.",
     "source": "Loungerati",
-    "url": "http:\/\/loungerati.blogspot.com\/2010\/10\/what-were-drinking-do-dutch-with-bols.html"
+    "url": "http://loungerati.blogspot.com/2010/10/what-were-drinking-do-dutch-with-bols.html"
   },
   {
     "name": "Diamondback",
@@ -948,29 +948,29 @@
     ],
     "instructions": "Add all ingredients to a mixing glass filled with ice. Stir well, strain into a chilled cocktail glass and serve.",
     "source": "Sloshed!",
-    "url": "http:\/\/sloshed.hyperkinetic.org\/2011\/10\/21\/diamondback\/"
+    "url": "http://sloshed.hyperkinetic.org/2011/10/21/diamondback/"
   },
   {
     "name": "Vieux Carr\u00e9",
     "ingredients": [
       {
         "tag": "benedictine",
-        "displayMeasure": "1\/2 tsp",
+        "displayMeasure": "1/2 tsp",
         "displayIngredient": "B\u00e9n\u00e9dictine"
       },
       {
         "tag": "rye whiskey",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "rye whiskey"
       },
       {
         "tag": "cognac",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "cognac"
       },
       {
         "tag": "sweet vermouth",
-        "displayMeasure": "3\/4 oz",
+        "displayMeasure": "3/4 oz",
         "displayIngredient": "sweet vermouth"
       },
       {
@@ -984,14 +984,14 @@
     ],
     "instructions" : "Combine all ingredients in a mixing glass and fill with ice; stir well for 20 seconds and strain into an ice-filled old fashioned glass. Garnish with a cherry.",
     "source": "Serious Eats",
-    "url" : "http:\/\/www.seriouseats.com\/recipes\/2008\/07\/vieux-carre-recipe.html"
+    "url" : "http://www.seriouseats.com/recipes/2008/07/vieux-carre-recipe.html"
   },
   {
     "name": "Sazerac",
     "ingredients": [
       {
         "tag": "rye whiskey",
-        "displayMeasure": "1 1\/2 oz",
+        "displayMeasure": "1 1/2 oz",
         "displayIngredient": "rye whiskey"
       },
       {

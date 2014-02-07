@@ -108,12 +108,10 @@ NSString * const SELECTED_KEY = @"selected-ingredients";
 + (id)loadJsonFromFile:(NSString *)path {
     NSError *error;
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
-    
-    id object = [NSJSONSerialization
-                 JSONObjectWithData:data
-                 options:0
-                 error:&error];
-    
+
+    id object = [YAMLSerialization objectWithYAMLData:data
+                                              options:kYAMLReadOptionStringScalars
+                                                error:&error];
     if (error) {
         NSLog(@"Error loading '%@': %@", path, error);
         return nil;

@@ -10,6 +10,12 @@ code improvements
 - more efficient ways to compute groupings, search (incremental)
 - separate indices for in-memory, custom, web, etc.?
 
+make it less painful and more obvious how to add recipes
+- ingredients should have a default display
+- perhaps some mini-language for specifying drinks?
+- YAML is so much easier to write
+- validate recipe sanity on program start for testing purposes
+
 glasses  -- what's a good way to include them as a reference
 garnish  -- should these be treated separately from regular ingredients?
 profile  -- save sets of ingredients so you don't have to re-enter them all the time
@@ -28,3 +34,6 @@ polish
 - return button should be more useful for custom field
 - swipe to navigate through recipes (alternate to buttons)
 - image for drink in detail view
+- should be able to search all by ingredient or drink name
+- separate garnish ingredient from main ingredients
+- allow list or other formatting (Markdown?) for instructions?

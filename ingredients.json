@@ -237,5 +237,25 @@
   {
     "display" : "Pimm's No. 1",
     "tag"     : "pimms"
+  },
+  {
+    "display" : "Rosemary",
+    "tag"     : "rosemary"
+  },
+  {
+    "display" : "Basil",
+    "tag"     : "basil"
+  },
+  {
+    "display" : "Shiso",
+    "tag"     : "shiso"
+  },
+  {
+    "display" : "Cucumber",
+    "tag"     : "cucumber"
+  },
+  {
+    "display" : "Thyme",
+    "tag"     : "thyme"
   }
 ]

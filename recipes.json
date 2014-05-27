@@ -1009,5 +1009,37 @@
     ],
     "instructions": "Fill an Old Fashioned glass with ice and water and set aside. In another old Fashioned glass, muddle sugar cube with bitters and then add the rye. Pour out the ice from the first glass, swirl absinthe around it and toss the extra. Pour the rye mixture in and serve.",
     "notes": "Along with the Old Fashioned, the Sazerac is one of the earliest cocktails, and one of few that adheres to the classic definition of \"cocktail\": spirits, bitters, sugar and water."
+  },
+  {
+    "name": "Rubicon",
+    "ingredients": [
+      {
+        "tag": "green chartreuse",
+        "displayMeasure": "1/2 oz",
+        "displayIngredient": "green Chartreuse"
+      },
+      {
+        "tag": "gin",
+        "displayMeasure": "1 1/2 oz",
+        "displayIngredient": "Plymouth gin"
+      },
+      {
+        "tag": "maraschino liqueur",
+        "displayMeasure": "1/2 oz",
+        "displayIngredient": "Maraschino liqueur"
+      },
+      {
+        "tag": "lemon juice",
+        "displayMeasure": "1/2 oz",
+        "displayIngredient": "lemon juice"
+      },
+      {
+        "tag": "rosemary",
+        "displayMeasure": "1",
+        "displayIngredient": "sprig rosemary"
+      }
+    ],
+    "instructions": "Arrange rosemary into a wreath at the bottom of a rocks glass and add Chartreuse. Shake remaining ingredients with ice. Flame misted Chartreuse into the glass and \"cook\" the rosemary slightly. Pour the shaker over the rosemary to douse the flames and top with crushed ice. Garnish with a sprig of rosemary.",
+    "url": "http://www.smallscreennetwork.com/video/499/raising_the_bar_rubicon"
   }
 ]
